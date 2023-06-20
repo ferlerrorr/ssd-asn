@@ -13,7 +13,7 @@ Step 1: Create a new Laravel project
 
 Step 2: Run `git init`
 
-Step 3: Pull this repo `git pull https://github.com/emad-zaamout/laravel-docker-nginx-php-fpm-opcache`
+Step 3: Pull this repo `git pull https://github.com/ferlerrorr/laravel-nginx-php-fpm-opcache.git`
 
 Step 4: Adjust your env variables. Make sure you set your database env vars. Add any values as the database will be created per your env var values.
 ```
