@@ -8,9 +8,15 @@ ENV PHP_OPCACHE_REVALIDATE_FREQ=1
 RUN usermod -u 1000 www-data
 
 RUN apt-get update -y
-RUN apt-get install -y unzip libpq-dev libcurl4-gnutls-dev nginx
-RUN docker-php-ext-install pdo pdo_mysql bcmath curl opcache
-# RUN docker-php-ext-enable opcache
+RUN apt-get install -y unzip git zip libpq-dev libcurl4-gnutls-dev nginx libzip-dev
+RUN docker-php-ext-install pdo pdo_mysql bcmath curl opcache zip
+RUN docker-php-ext-enable opcache pdo_mysql 
+
+RUN apt-get install unixodbc unixodbc-dev -y 
+RUN docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr 
+RUN docker-php-ext-install pdo_odbc
+
+
 
 WORKDIR /var/www
 

@@ -1,9 +1,8 @@
 version: "3.8"
 services:
-
     # PHP Service
     php:
-        container_name: php
+        container_name: asn-app
         build:
             context: .
             target: php
@@ -16,16 +15,18 @@ services:
         volumes:
             - ./:/var/www
         ports:
-            - 8000:8000
+            - 8800:8800
         depends_on:
-            - database
+            - asn-db
+        networks:
+            - asn-net
 
     # Database Server
-    database:
-        container_name: database
+    asn-db:
+        container_name: asn-db
         image: mysql:8.0
         ports:
-            -   3306:3306
+            - 3310:3310
         environment:
             - MYSQL_DATABASE=${DB_DATABASE}
             - MYSQL_USER=${DB_USERNAME}
@@ -33,6 +34,26 @@ services:
             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
         volumes:
             - db-data:/var/lib/mysql
+        networks:
+            - asn-net
+
+        # PHPmyAdmin
+    phpmyadmin:
+        image: phpmyadmin:5.2.0-apache
+        container_name: asn-phpmyadmin
+        restart: unless-stopped
+        tty: true
+        ports:
+            - 8101:80
+        networks:
+            - asn-net
+        environment:
+            - PMA_ARBITRARY=1
+            - UPLOAD_LIMIT=10000M
+
+networks:
+    asn-net:
+        driver: bridge
 
 volumes:
     db-data: ~
