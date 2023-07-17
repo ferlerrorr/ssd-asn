@@ -19,4 +19,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/ssd/asn', 'App\Http\Controllers\JdaController@index');
+Route::get('/ssd/asn', 'App\Http\Controllers\TestController@index');
+
+
+Route::post('/manual-soa', [App\Http\Controllers\TestController::class, 'store']);
