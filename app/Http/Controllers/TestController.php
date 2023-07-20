@@ -119,7 +119,7 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ponumber()
+    public function Po()
     {
 
         $data = DB::connection(env('DB2_CONNECTION'))
@@ -130,11 +130,13 @@ class TestController extends Controller
             ->get();
 
 
-        $data = $data->map(function ($item) {
+        $data = &$data->map(function (&$item) {
             return (array) $item;
         });
 
-        $data->transform(function ($row) {
+        $rowCount = $data->count();
+
+        $data->transform(function (&$row) {
             foreach ($row as &$value) {
                 $value = trim($value);
                 if ($value === '') {
@@ -143,6 +145,7 @@ class TestController extends Controller
             }
             return $row;
         });
+
 
         // Prepare the data for mass insertion
         $insertData = [];
@@ -157,9 +160,63 @@ class TestController extends Controller
         }
 
         // Use the query builder to insert the data and ignore duplicates
-        DB::table('jda_pomhdr')->insertOrIgnore($insertData);
+        foreach (array_chunk($insertData, 1000) as &$data) {
+            DB::table('jda_pomhdr')->insertOrIgnore($data);
+        }
+
+
+        return response()->json([
+            'count' => $rowCount,
+            'data' => $data,
+        ], 200);
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function Sku()
+    {
+
+        $data = DB::connection(env('DB2_CONNECTION'))
+            ->table('MM770SSL.INVMST')
+            ->select('INUMBR', 'IVNDPN')
+            ->get();
+
+
+        $data = &$data->map(function (&$item) {
+            return (array) $item;
+        });
+
+        $data->transform(function (&$row) {
+            foreach ($row as &$value) {
+                $value = trim($value);
+                if ($value === '') {
+                    $value = null;
+                }
+            }
+            return $row;
+        });
 
         $rowCount = $data->count();
+        // Prepare the data for mass insertion
+        $insertData = [];
+        foreach ($data as &$data_record) {
+            $insertData[] = [
+                'ji_INUMBR' => $data_record["inumbr"],
+                'ji_IMFGNO' => $data_record["ivndpn"],
+                // If needed, add more columns and their corresponding values here
+            ];
+        }
+
+        // Use the upsert method with the ignore option to achieve upsert-or-ignore behavior
+        foreach (array_chunk($insertData, 1000) as &$data) {
+            DB::table('jda_invmst')->upsert($data, ['ji_INUMBR']);
+        }
+
 
         return response()->json([
             'count' => $rowCount,

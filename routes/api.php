@@ -20,8 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/ssd/asn', 'App\Http\Controllers\TestController@index');
-
-
-Route::get('/ssd/ponumber', 'App\Http\Controllers\TestController@ponumber');
-
 Route::post('/manual-soa', [App\Http\Controllers\TestController::class, 'store']);
+
+Route::get('/ssd/po-number', 'App\Http\Controllers\TestController@Po');
+Route::get('/ssd/sku-number', 'App\Http\Controllers\TestController@Sku');
