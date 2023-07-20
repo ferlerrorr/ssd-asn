@@ -113,4 +113,57 @@ class TestController extends Controller
             }
         }
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ponumber()
+    {
+
+        $data = DB::connection(env('DB2_CONNECTION'))
+            ->table('MM770SSL.POMHDR')
+            ->select('PONUMB', 'POSTAT', 'PONOT1', 'POVNUM', 'POEDAT')
+            ->where('POEDAT', '>=', 230717)
+            ->orderByDesc('PONUMB')
+            ->get();
+
+
+        $data = $data->map(function ($item) {
+            return (array) $item;
+        });
+
+        $data->transform(function ($row) {
+            foreach ($row as &$value) {
+                $value = trim($value);
+                if ($value === '') {
+                    $value = null;
+                }
+            }
+            return $row;
+        });
+
+        // Prepare the data for mass insertion
+        $insertData = [];
+        foreach ($data as &$data_record) {
+            $insertData[] = [
+                'jp_POSTAT' => $data_record["postat"],
+                'jp_PONOT1' => $data_record["ponot1"],
+                'jp_POVNUM' => $data_record["povnum"],
+                'jp_PONUMB' => $data_record["ponumb"],
+                // If needed, add more columns and their corresponding values here
+            ];
+        }
+
+        // Use the query builder to insert the data and ignore duplicates
+        DB::table('jda_pomhdr')->insertOrIgnore($insertData);
+
+        $rowCount = $data->count();
+
+        return response()->json([
+            'count' => $rowCount,
+            'data' => $data,
+        ], 200);
+    }
 }

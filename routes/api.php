@@ -22,4 +22,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/ssd/asn', 'App\Http\Controllers\TestController@index');
 
 
+Route::get('/ssd/ponumber', 'App\Http\Controllers\TestController@ponumber');
+
 Route::post('/manual-soa', [App\Http\Controllers\TestController::class, 'store']);
