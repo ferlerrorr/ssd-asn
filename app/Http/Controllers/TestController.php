@@ -122,6 +122,9 @@ class TestController extends Controller
     public function Po()
     {
 
+        //Delimiter for PO
+        // string varDate = DateTime.Now.AddDays(-60).ToString("yyMMdd");
+
         $data = DB::connection(env('DB2_CONNECTION'))
             ->table('MM770SSL.POMHDR')
             ->select('PONUMB', 'POSTAT', 'PONOT1', 'POVNUM', 'POEDAT')
