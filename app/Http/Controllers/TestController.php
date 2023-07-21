@@ -128,7 +128,7 @@ class TestController extends Controller
         $data = DB::connection(env('DB2_CONNECTION'))
             ->table('MM770SSL.POMHDR')
             ->select('PONUMB', 'POSTAT', 'PONOT1', 'POVNUM', 'POEDAT')
-            ->where('POEDAT', '>=', 230717)
+            // ->where('POEDAT', '>=', 230717)
             ->orderByDesc('PONUMB')
             ->get();
 
@@ -184,10 +184,21 @@ class TestController extends Controller
     public function Sku()
     {
 
+        // $data = DB::connection(env('DB2_CONNECTION'))
+        //     ->table('MM770SSL.INVMST')
+        //     ->select('INUMBR', 'IVNDPN')
+        //     ->distinct()
+        //     ->get();
+
+
         $data = DB::connection(env('DB2_CONNECTION'))
-            ->table('MM770SSL.INVMST')
-            ->select('INUMBR', 'IVNDPN')
+            ->table('MM770SSL.INVMST AS M')
+            ->select('M.INUMBR', 'M.IVNDPN', 'V.IVVNDN')
+            ->leftJoin('MM770SSL.INVVEN AS V', 'M.INUMBR', '=', 'V.INUMBR')
+            ->distinct()
             ->get();
+
+
 
 
         $data = &$data->map(function (&$item) {
@@ -205,20 +216,20 @@ class TestController extends Controller
         });
 
         $rowCount = $data->count();
-        // Prepare the data for mass insertion
-        $insertData = [];
-        foreach ($data as &$data_record) {
-            $insertData[] = [
-                'ji_INUMBR' => $data_record["inumbr"],
-                'ji_IMFGNO' => $data_record["ivndpn"],
-                // If needed, add more columns and their corresponding values here
-            ];
-        }
+        // // Prepare the data for mass insertion
+        // $insertData = [];
+        // foreach ($data as &$data_record) {
+        //     $insertData[] = [
+        //         'ji_INUMBR' => $data_record["inumbr"],
+        //         'ji_IMFGNO' => $data_record["ivndpn"],
+        //         // If needed, add more columns and their corresponding values here
+        //     ];
+        // }
 
-        // Use the upsert method with the ignore option to achieve upsert-or-ignore behavior
-        foreach (array_chunk($insertData, 1000) as &$data) {
-            DB::table('jda_invmst')->upsert($data, ['ji_INUMBR']);
-        }
+        // // Use the upsert method with the ignore option to achieve upsert-or-ignore behavior
+        // foreach (array_chunk($insertData, 1000) as &$data) {
+        //     DB::table('jda_invmst')->upsert($data, ['ji_INUMBR']);
+        // }
 
 
         return response()->json([
