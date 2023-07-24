@@ -133,7 +133,7 @@ class TestController extends Controller
             ->get();
 
 
-        $data = &$data->map(function (&$item) {
+        $data = $data->map(function (&$item) {
             return (array) $item;
         });
 

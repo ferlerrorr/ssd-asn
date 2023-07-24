@@ -30,6 +30,9 @@ return new class extends Migration
             $table->string('D_PldAmt', 155);
             $table->string('D_NetAmt', 155);
             $table->string('D_SupCode', 155);
+
+            // Add an index on 'D_vendor' column
+            $table->index('D_vendor');
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('inv_hdr', function (Blueprint $table) {
             $table->id('idi');
-            $table->string('InvNo', 50)->nullable();
+            $table->string('InvNo', 50);
             $table->string('InvDate', 50)->nullable();
             $table->string('InvAmt', 50)->nullable();
             $table->string('DiscAmt', 50)->nullable();

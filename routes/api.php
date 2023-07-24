@@ -24,3 +24,8 @@ Route::post('/manual-soa', [App\Http\Controllers\TestController::class, 'store']
 
 Route::get('/ssd/po-number', 'App\Http\Controllers\TestController@Po');
 Route::get('/ssd/sku-number', 'App\Http\Controllers\TestController@Sku');
+
+
+
+
+Route::get('/ssd/file-import/{slug}', 'App\Http\Controllers\FileImportController@index');

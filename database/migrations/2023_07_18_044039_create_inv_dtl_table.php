@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('inv_dtl', function (Blueprint $table) {
-            $table->string('InvNo', 50)->nullable();
+            $table->string('InvNo', 50);
             $table->string('ItemCode', 50)->nullable();
             $table->string('ItemName', 50)->nullable();
             $table->string('ConvFact2', 50)->nullable();
