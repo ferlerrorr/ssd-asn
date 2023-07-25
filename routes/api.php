@@ -28,4 +28,4 @@ Route::get('/ssd/sku-number', 'App\Http\Controllers\TestController@Sku');
 
 
 
-Route::get('/ssd/file-import/{slug}', 'App\Http\Controllers\FileImportController@index');
+Route::post('/ssd/file-import/{slug}', 'App\Http\Controllers\FileImportController@index');
