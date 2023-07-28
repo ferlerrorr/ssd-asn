@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('inv_lot', function (Blueprint $table) {
+            $table->id();
             $table->string('InvNo', 50);
             $table->string('ItemCode', 50)->nullable();
             $table->string('LotNo', 50)->nullable();
@@ -21,8 +22,9 @@ return new class extends Migration
             $table->string('ExpiryDD', 50)->nullable();
             $table->string('ExpiryYYYY', 50)->nullable();
             $table->string('Qty', 50)->nullable();
+            $table->timestamp('tStamp')->useCurrent();
             $table->string('SupCode', 50)->nullable();
-            $table->dateTime('tStamp');
+            $table->string('InvTransCode', 50)->unique();
             $table->string('remarks', 50)->nullable();
         });
     }

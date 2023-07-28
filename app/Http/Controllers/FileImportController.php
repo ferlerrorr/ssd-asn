@@ -32,17 +32,6 @@ class FileImportController extends Controller
             ->where('L_vendor', 'LIKE', $slug)
             ->first();
 
-        $flattenedData = [];
-
-
-        // Combine the data objects directly without using array_merge
-        $flattenedData = (array)$data_D + (array)$data_H + (array)$data_L;
-
-        // Skip the first three items using array_slice with offset
-        $flattenedData = array_slice($flattenedData, 3);
-
-        // Convert all elements to integers using array_map
-        $flattenedData = array_map('intval', $flattenedData);
 
 
         if ($_FILES["import_excel"]["name"] != '') {
@@ -67,8 +56,7 @@ class FileImportController extends Controller
 
 
 
-                if ($file_extension === 'txt') {
-
+                if ($file_extension === 'txt' && $slug == 'UNILAB') {
 
                     $converted_data = [];
 
@@ -80,13 +68,6 @@ class FileImportController extends Controller
                     }
 
                     $excel_data = $converted_data;
-
-
-
-
-
-
-
                     $result = [];
                     $H = [];
 
@@ -102,16 +83,6 @@ class FileImportController extends Controller
                                 break;
                             case 'L':
                                 $L[] = $item;
-                                $l_data_array = [
-                                    'L_InvNo' => $item[1],
-                                    'L_ItemCode' => $item[3],
-                                    'L_LotNo' => $item[4],
-                                    'L_ExpiryDD' => $item[5],
-                                    'L_ExpiryMM' => $item[5],
-                                    'L_ExpiryYYYY' => $item[6],
-                                    'L_Qty' => $item[7]
-                                ];
-
                                 break;
                         }
                     }
@@ -159,9 +130,10 @@ class FileImportController extends Controller
                         $L_ExpiryYYYY = $item[6];
                         $L_Qty = $item[7];
 
-
+                        $dotPosition = strpos($item[7], '.');
+                        $L_Qty = $dotPosition !== false ? substr($item[7], 0, $dotPosition) : $item[7];
                         // Create a new associative array with the extracted values
-                        $filteredItem = array(
+                        $data = array(
                             'L_InvNo' => $L_InvNo,
                             'L_ItemCode' =>  $L_ItemCode,
                             'L_LotNo' => $L_LotNo,
@@ -171,17 +143,61 @@ class FileImportController extends Controller
                             'L_Qty' =>   $L_Qty
                         );
 
+
                         // Add the filteredItem array to the $result
-                        $result[] = $filteredItem;
+                        $result_l[] = $data;
                     }
 
 
+                    // Prepare the data for mass insertion
+                    $insertData = [];
+                    foreach ($result_l as &$data_record) {
+                        $insertData[] = [
+                            'InvNo' => $data_record["L_InvNo"],
+                            'ItemCode' => $data_record["L_ItemCode"],
+                            'LotNo' => $data_record["L_LotNo"],
+                            'ExpiryMM' => $data_record["L_ExpiryMM"],
+                            'ExpiryDD' => "01",
+                            'ExpiryYYYY' => $data_record["L_ExpiryYYYY"],
+                            'Qty' => $data_record["L_Qty"],
+                            'InvTransCode' => ($data_record["L_InvNo"] . $data_record["L_ItemCode"] . $data_record["L_LotNo"] . $data_record["L_ExpiryMM"] . "01" . $data_record["L_ExpiryYYYY"] . $data_record["L_Qty"])
+                            // If needed, add more columns and their corresponding values here
+                        ];
+                    }
+                    $itemCount = count($insertData);
+                    // // Use the query builder to insert the data and ignore duplicates
+                    foreach (array_chunk($insertData, 1000) as &$data) {
+                        DB::table('inv_lot')->insertOrIgnore($data);
+                    }
+
+
+                    $res = [
+                        'Item count' => $itemCount,
+                        'data' => $insertData
+                    ];
+
+
+                    return response()->json($res, 200);
+                } elseif ($file_extension !== 'txt' && $slug != 'UNILAB') {
 
 
 
 
-                    return response()->json($result, 200);
-                } else {
+
+
+
+                    $flattenedData = [];
+
+                    // Combine the data objects directly without using array_merge
+                    $flattenedData = (array)$data_D + (array)$data_H + (array)$data_L;
+
+                    // Skip the first three items using array_slice with offset
+                    $flattenedData = array_slice($flattenedData, 3);
+
+                    // Convert all elements to integers using array_map
+                    $flattenedData = array_map('intval', $flattenedData);
+
+
 
 
                     $data_array = [
@@ -219,19 +235,36 @@ class FileImportController extends Controller
 
 
                     array_shift($excel_data);
+                    $result = [];
 
+
+                    // $preserve_keys = ["H_InvNo", "D_InvNo", "L_InvNo"];
+
+
+                    // // Loop through each item (sub-array)
+                    // foreach ($excel_data as $item) {
+                    //     // Filter out elements with value 0, except for the preserved keys
+                    //     $import = array_filter($data_array, function ($value, $key) use ($item, $preserve_keys) {
+                    //         return ($value !== 0 || in_array($key, $preserve_keys)) && isset($item[$value]);
+                    //     }, ARRAY_FILTER_USE_BOTH);
+                    //     $result[] = array_values($import); // Re-index the array and add to the result
+                    // }
                     $preserve_keys = ["H_InvNo", "D_InvNo", "L_InvNo"];
                     $result = [];
 
                     // Loop through each item (sub-array)
                     foreach ($excel_data as $item) {
-                        // Filter out elements with value 0, except for the preserved keys
-                        $import = array_filter($data_array, function ($value, $key) use ($item, $preserve_keys) {
-                            return ($value !== 0 || in_array($key, $preserve_keys)) && isset($item[$value]);
-                        }, ARRAY_FILTER_USE_BOTH);
-                        $result[] = array_values($import); // Re-index the array and add to the result
-                    }
+                        $import = [];
 
+                        // Filter out elements with value 0, except for the preserved keys
+                        foreach ($data_array as $key => $value) {
+                            if (($value !== 0 || in_array($key, $preserve_keys)) && isset($item[$value])) {
+                                $import[] = $item[$value];
+                            }
+                        }
+
+                        $result[] = $import;
+                    }
 
                     $preserve_keys = ["H_InvNo", "D_InvNo", "L_InvNo"];
 
@@ -260,6 +293,14 @@ class FileImportController extends Controller
                     }
 
                     return response()->json($result, 200);
+                } else {
+                    $msg = [
+
+                        'message' => 'Please input the correct file or settings'
+
+                    ];
+
+                    return response()->json($msg, 403);
                 }
             }
         }
