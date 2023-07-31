@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('Qty', 50)->nullable();
             $table->timestamp('tStamp')->useCurrent();
             $table->string('SupCode', 50)->nullable();
-            $table->string('InvTransCode', 50)->unique();
+            $table->string('TransactionCode', 50)->unique();
             $table->string('remarks', 50)->nullable();
         });
     }

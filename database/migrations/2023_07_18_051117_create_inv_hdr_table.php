@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('PORef', 50)->nullable();
             $table->string('Duplicate_PO', 50)->nullable();
             $table->string('SupCode', 50)->nullable();
-            $table->dateTime('tStamp');
+            $table->timestamp('tStamp')->useCurrent();
+            $table->string('TransactionCode', 50)->unique();
         });
     }
 

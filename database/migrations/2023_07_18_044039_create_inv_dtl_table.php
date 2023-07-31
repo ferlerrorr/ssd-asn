@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('PldAmt', 50)->nullable();
             $table->string('NetAmt', 50)->nullable();
             $table->string('SupCode', 50)->nullable();
-            $table->dateTime('tStamp');
+            $table->string('TransactionCode', 50)->unique();
+            $table->timestamp('tStamp')->useCurrent();;
         });
     }
 
