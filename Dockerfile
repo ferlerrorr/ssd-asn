@@ -1,4 +1,4 @@
-FROM php:8.1-fpm as php
+FROM php:8.1.0-fpm as php
 
 ENV PHP_OPCACHE_ENABLE=1
 ENV PHP_OPCACHE_ENABLE_CLI=0
@@ -10,13 +10,20 @@ RUN usermod -u 1000 www-data
 RUN apt-get update -y
 RUN apt-get install -y unzip git zip libpq-dev libcurl4-gnutls-dev nginx libzip-dev
 RUN docker-php-ext-install pdo pdo_mysql bcmath curl opcache zip
-RUN docker-php-ext-enable opcache pdo_mysql 
 
-RUN apt-get install unixodbc unixodbc-dev -y 
-RUN docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr 
+# Install mbstring dependencies
+RUN apt-get install -y libonig-dev
+
+# Install mbstring extension
+RUN docker-php-ext-install mbstring
+
+RUN docker-php-ext-enable opcache pdo_mysql mbstring
+
+RUN apt-get install unixodbc unixodbc-dev -y
+RUN docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr
 RUN docker-php-ext-install pdo_odbc
 
-
+RUN apt update
 
 WORKDIR /var/www
 
