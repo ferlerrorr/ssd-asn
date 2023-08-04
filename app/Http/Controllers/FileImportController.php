@@ -223,7 +223,7 @@ class FileImportController extends Controller
                         $result_d[] = $data;
                     }
 
-                    $itemCountD = count($D);
+
                     $iCount = 0;
                     $insertData_D = [];
                     foreach ($result_d as &$data_record) {
