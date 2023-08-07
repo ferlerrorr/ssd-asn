@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('inv_hdr', function (Blueprint $table) {
             $table->id('idi');
-            $table->string('InvNo', 50);
+            $table->string('InvNo', 50)->unique();
             $table->string('InvDate', 50)->nullable();
             $table->string('InvAmt', 50)->nullable();
             $table->string('DiscAmt', 50)->nullable();
@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('Duplicate_PO', 50)->nullable();
             $table->string('SupCode', 50)->nullable();
             $table->timestamp('tStamp')->useCurrent();
-            $table->string('TransactionCode', 50)->unique();
         });
     }
 
