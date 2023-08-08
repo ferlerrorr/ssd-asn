@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Carbon\Carbon;
+use Exception;
 
 class Handler extends ExceptionHandler
 {
@@ -34,7 +36,52 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
+        $this->renderable(function (Exception $exception) {
+
+            if (get_class($exception) == "Illuminate\\Http\\Exceptions\\ThrottleRequestsException") {
+                return response()->json([
+
+                    "responseCode" => 500,
+                    "transactionId" => Carbon::now(),
+                    "timestamp" => Carbon::now(),
+                    "errorDetails" => [
+                        'type' => get_class($exception),
+                        'message' => "Throttle Limit has been reached wait for a while to request again"
+                    ]
+
+
+
+                ], 429);
+            } elseif (get_class($exception) == "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException") {
+                return response()->json([
+                    "responseCode" => 404,
+                    "transactionId" => Carbon::now(),
+                    "timestamp" => Carbon::now(),
+                    "errorDetails" => [
+                        'type' => get_class($exception),
+                        'message' => "Resource not found"
+                    ]
+                ], 404);
+            } else {
+
+                return response()->json([
+                    "responseCode" => 500,
+                    "transactionId" => Carbon::now(),
+                    "timestamp" => Carbon::now(),
+                    "errorDetails" => [
+                        'type' => get_class($exception),
+                        'message' => $exception->getMessage()
+                    ]
+
+                ], 500);
+            }
+
+
+            //! Error Type Getter
+            // return response()->json([
+            //     'type' => get_class($exception),
+            //     'message' => $exception->getMessage()
+            // ]);
             //
         });
     }

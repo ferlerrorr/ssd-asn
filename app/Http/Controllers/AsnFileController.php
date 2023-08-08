@@ -86,6 +86,16 @@ class AsnFileController extends Controller
         }));
 
 
+
+
+        //Todo data Validations -- 
+
+        // Todo  Remove Unilab Qty().) to right onli (UNILAB)
+
+        //! Todo after validation if (Qty_Free is not null Qty_free + Qty_shipped)  -- Logic Error Must be Address must be clear and communicated
+
+
+
         $data1 = (array) DB::table('d_column_setup')
             ->where('D_vid', $vid)
             ->first() ?? [];
@@ -95,6 +105,10 @@ class AsnFileController extends Controller
         $data3 = (array) DB::table('h_column_setup')
             ->where('H_vid', $vid)
             ->first() ?? [];
+
+
+
+
 
 
         $combinedArray = array_merge($data3, $data1, $data2);
