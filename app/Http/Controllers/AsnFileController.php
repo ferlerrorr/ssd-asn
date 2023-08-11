@@ -284,8 +284,6 @@ class AsnFileController extends Controller
                     }
                 }
 
-
-                //! working line
                 // Process the data with index 0 equal to "H"
                 $result_h = [];
 
@@ -439,6 +437,23 @@ class AsnFileController extends Controller
                 foreach (array_chunk($insertData_D, 1000) as &$data) {
                     DB::table('inv_dtl')->insertOrIgnore($data);
                 }
+
+
+
+
+
+
+                //Todo ($failedTtems) to be inserted to failed jobs table->
+                //Todo ($failedTtems) to be inserted to failed jobs table->
+                //Todo ($failedTtems) to be inserted to failed jobs table->
+                //Todo ($failedTtems) to be inserted to failed jobs table->
+                //Todo ($failedTtems) to be inserted to failed jobs table->
+
+
+
+
+
+
                 $response = [
                     // 'passed_items' =>  array_values($passedItems),
                     'message' => "transaction successful but has failing reocrds",
@@ -447,7 +462,6 @@ class AsnFileController extends Controller
                 return response()->json($response, 202);
             } else {
 
-                //! working line
                 // Process the data with index 0 equal to "H"
                 $result_h = [];
 
@@ -608,6 +622,14 @@ class AsnFileController extends Controller
                 return response()->json($response, 200);
             }
         } else {
+
+
+
+            //Todo Validations->
+            //Todo Validations->
+
+
+
             $result = [];
 
             // Loop through each item (sub-array)
