@@ -437,12 +437,6 @@ class AsnFileController extends Controller
                 foreach (array_chunk($insertData_D, 1000) as &$data) {
                     DB::table('inv_dtl')->insertOrIgnore($data);
                 }
-
-
-
-
-
-
                 //Todo ($failedTtems) to be inserted to failed jobs table->
                 //Todo ($failedTtems) to be inserted to failed jobs table->
                 //Todo ($failedTtems) to be inserted to failed jobs table->
@@ -648,7 +642,7 @@ class AsnFileController extends Controller
                     } else {
 
                         //! Validations->
-                        $passedItems = [];
+                        $passedItems_dd = [];
                         $failedItems_dd = [];
 
                         foreach ($result as $item) {
@@ -703,7 +697,7 @@ class AsnFileController extends Controller
                                         $itemErrors, // Error messages for this item
                                     ];
                                 } else {
-                                    $passedItems[] = $item;
+                                    $passedItems_dd[] = $item;
                                 }
                             }
                         }
@@ -714,7 +708,7 @@ class AsnFileController extends Controller
                             $insertData_H = [];
 
 
-                            foreach ($passedItems as &$data_record) {
+                            foreach ($passedItems_dd as &$data_record) {
                                 $insertData_H[] = [
                                     'InvNo' => isset($data_record["H_InvNo"]) ? $data_record["H_InvNo"] : null,
                                     'POref' => isset($data_record["H_PORef"]) ? $data_record["H_PORef"] : null,
@@ -740,7 +734,7 @@ class AsnFileController extends Controller
                             $L_Count = 0;
 
 
-                            foreach ($passedItems  as &$data_record) {
+                            foreach ($passedItems_dd  as &$data_record) {
                                 $insertData_L[] = [
                                     'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
                                     'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
@@ -771,7 +765,7 @@ class AsnFileController extends Controller
                             $insertData_D = [];
 
 
-                            foreach ($passedItems  as &$data_record) {
+                            foreach ($passedItems_dd  as &$data_record) {
                                 $insertData_D[] = [
                                     'InvNo' => isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null,
                                     'ItemCode' => isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null,
@@ -813,269 +807,368 @@ class AsnFileController extends Controller
                                 'failing_records' =>  $failedItems_dd
                             ];
                             return response()->json($response, 202);
-                        } elseif ($vid != 442 || 9470 || 200) {
-                            //! Validations->
-
-                            $passedItems_ss = [];
-                            $failedItems_ss = [];
-                            foreach ($result as $item) {
-                                $itemErrors = []; // Initialize error messages for each item
-
-                                if (isset($item['H_InvNo']) && isset($item['L_LotNo']) && isset($item['D_ItemCode'])) {
-                                    $itemValidator = Validator::make([
-                                        'H_InvNo' => $item['H_InvNo'],
-                                        'L_LotNo' => $item['L_LotNo'],
-                                        'D_ItemCode' => $item['D_ItemCode'],
-                                    ], [
-                                        'H_InvNo' => 'max:20|required|min:2|',
-                                        'L_LotNo' => 'max:10|required|min:1|',
-                                        'D_ItemCode' => 'max:20|required|min:2|',
-                                    ], [
-                                        'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
-                                        'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 10 characters.",
-                                        'D_ItemCode.max' => "{$item['L_ItemCode']} Item Code must not exceed :max characters.",
-                                        'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number must not be Null or Missing.",
-                                        'L_LotNo.required' => "{$item['L_LotNo']} Lot Number must not be Null or Missing.",
-                                        'D_ItemCode.required' => "{$item['L_ItemCode']} Item Code must not be Null or Missing.",
-                                        'H_InvNo.min' => "{$item['H_InvNo']} Invoice Number must not be Null or Missing.",
-                                        'L_LotNo.min' => "{$item['L_LotNo']} Lot Number must not be Null or Missing.",
-                                        'D_ItemCode.min' => "{$item['L_ItemCode']} Item Code must not be Null or Missing.",
-                                    ]);
-
-                                    if ($itemValidator->fails()) {
-                                        $errors = $itemValidator->errors();
-
-                                        // Collect error messages for this item
-                                        foreach ($errors->all() as $errorMessage) {
-                                            $itemErrors[] = $errorMessage;
-                                        }
-
-                                        // Exclude certain fields from the item data before adding to failedItems
-                                        $failedItemData = array_values($item);
-
-                                        unset($failedItemData['H_InvNo']);
-                                        unset($failedItemData['L_LotNo']);
-                                        unset($failedItemData['L_ItemCode']);
-
-                                        $failedItems_ss[] = [
-                                            $failedItemData, // Original item data without H_InvNo, L_LotNo, and D_ItemCode
-                                            $itemErrors, // Error messages for this item
-                                        ];
-                                    } else {
-                                        $passedItems_ss[] = $item;
-                                    }
-                                }
+                        } else {
+                            $insertData_H = [];
+                            foreach ($result as &$data_record) {
+                                $insertData_H[] = [
+                                    'InvNo' => isset($data_record["H_InvNo"]) ? $data_record["H_InvNo"] : null,
+                                    'POref' => isset($data_record["H_PORef"]) ? $data_record["H_PORef"] : null,
+                                    'InvDate' => isset($data_record["H_InvDate"]) ? $data_record["H_InvDate"] : null,
+                                    'InvAmt' => isset($data_record["H_InvAmt"]) ? $data_record["H_InvAmt"] : null,
+                                    'DiscAmt' => isset($data_record["H_DiscAmt"]) ? $data_record["H_DiscAmt"] : null,
+                                    'StkFlag' => isset($data_record["H_StkFlag"]) ? $data_record["H_StkFlag"] : null,
+                                    'VendorID' => isset($data_record["H_VendorID"]) ? $data_record["H_VendorID"] : null,
+                                    'VendorName' => isset($data_record["H_VendorName"]) ? $data_record["H_VendorName"] : null,
+                                    'SupCode' => isset($data_record["H_SupCode"]) ? $data_record["H_SupCode"] : null,
+                                ];
                             }
 
-                            if ($failedItems_ss == !null) {
-                                //! Validations->
-                                //! New Additions>
 
-                                $insertData_H = [];
-
-
-                                foreach ($passedItems_ss as &$data_record) {
-                                    $insertData_H[] = [
-                                        'InvNo' => isset($data_record["H_InvNo"]) ? $data_record["H_InvNo"] : null,
-                                        'POref' => isset($data_record["H_PORef"]) ? $data_record["H_PORef"] : null,
-                                        'InvDate' => isset($data_record["H_InvDate"]) ? $data_record["H_InvDate"] : null,
-                                        'InvAmt' => isset($data_record["H_InvAmt"]) ? $data_record["H_InvAmt"] : null,
-                                        'DiscAmt' => isset($data_record["H_DiscAmt"]) ? $data_record["H_DiscAmt"] : null,
-                                        'StkFlag' => isset($data_record["H_StkFlag"]) ? $data_record["H_StkFlag"] : null,
-                                        'VendorID' => isset($data_record["H_VendorID"]) ? $data_record["H_VendorID"] : null,
-                                        'VendorName' => isset($data_record["H_VendorName"]) ? $data_record["H_VendorName"] : null,
-                                        'SupCode' => isset($data_record["H_SupCode"]) ? $data_record["H_SupCode"] : null,
-                                    ];
-                                }
-
-
-                                // Use the query builder to insert the data and ignore duplicates
-                                foreach (array_chunk($insertData_H, 1000) as &$data) {
-                                    DB::table('inv_hdr')->insertOrIgnore($data);
-                                }
-
-
-
-                                $insertData_L = [];
-                                $L_Count = 0;
-
-
-                                foreach ($passedItems_ss as &$data_record) {
-                                    $insertData_L[] = [
-                                        'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
-                                        'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
-                                        'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
-                                        'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
-                                        'ExpiryDD' => "01",
-                                        'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
-                                        'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
-                                        'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
-                                        'TransactionCode' => (
-                                            (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
-                                            (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
-                                            (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
-                                            (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
-                                            (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
-                                            (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
-                                            $L_Count++
-                                        )
-                                    ];
-                                }
-
-                                // Use the query builder to insert the data and ignore duplicates
-                                foreach (array_chunk($insertData_L, 1000) as &$data) {
-                                    DB::table('inv_lot')->insertOrIgnore($data);
-                                }
-
-                                $D_Count = 0;
-                                $insertData_D = [];
-
-
-                                foreach ($passedItems_ss as &$data_record) {
-                                    $insertData_D[] = [
-                                        'InvNo' => isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null,
-                                        'ItemCode' => isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null,
-                                        'ItemName' => isset($data_record["D_ItemName"]) ? $data_record["D_ItemName"] : null,
-                                        'ConvFact2' => isset($data_record["D_ConvFact2"]) ? $data_record["D_ConvFact2"] : null,
-                                        'UOM' => isset($data_record["D_UOM"]) ? $data_record["D_UOM"] : null,
-                                        'UnitCost' => isset($data_record["D_UnitCost"]) ? $data_record["D_UnitCost"] : null,
-                                        'QtyShip' => isset($data_record["D_QtyShip"]) ? $data_record["D_QtyShip"] : null,
-                                        'QtyFree' => isset($data_record["D_QtyFree"]) ? $data_record["D_QtyFree"] : null,
-                                        'GrossAmt' => isset($data_record["D_GrossAmt"]) ? $data_record["D_GrossAmt"] : null,
-                                        'PldAmt' => isset($data_record["D_PldAmt"]) ? $data_record["D_PldAmt"] : null,
-                                        'NetAmt' => isset($data_record["D_NetAmt"]) ? $data_record["D_NetAmt"] : null,
-                                        'SupCode' => isset($data_record["D_SupCode"]) ? $data_record["D_SupCode"] : null,
-                                        'TransactionCode' => (
-                                            (isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null) .
-                                            (isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null) .
-                                            (isset($data_record["D_ItemName"]) ? $data_record["D_ItemName"] : null) .
-                                            (isset($data_record["D_ConvFact2"]) ? $data_record["D_ConvFact2"] : null) .
-                                            (isset($data_record["D_UOM"]) ? $data_record["D_UOM"] : null) .
-                                            (isset($data_record["D_UnitCost"]) ? $data_record["D_UnitCost"] : null) .
-                                            (isset($data_record["D_QtyShip"]) ? $data_record["D_QtyShip"] : null) .
-                                            (isset($data_record["D_QtyFree"]) ? $data_record["D_QtyFree"] : null) .
-                                            (isset($data_record["D_GrossAmt"]) ? $data_record["D_GrossAmt"] : null) .
-                                            (isset($data_record["D_PldAmt"]) ? $data_record["D_PldAmt"] : null) .
-                                            (isset($data_record["D_NetAmt"]) ? $data_record["D_NetAmt"] : null) .
-                                            (isset($data_record["D_SupCode"]) ? $data_record["D_SupCode"] : null) .
-                                            $D_Count++
-                                        ),
-                                    ];
-                                }
-                                // Use the query builder to insert the data and ignore duplicates
-                                foreach (array_chunk($insertData_D, 1000) as &$data) {
-                                    DB::table('inv_dtl')->insertOrIgnore($data);
-                                }
-
-                                // $response = [
-                                //     // 'passed_items' =>  array_values($passedItems),
-                                //     'message' => "transaction successful but has failing records",
-                                //     'failing_records' =>  $failedItems
-                                // ];
-                                // return response()->json($response, 202);
-                                return response()->json($result, 200);
-                            } else {
-                                $insertData_H = [];
-                                foreach ($result as &$data_record) {
-                                    $insertData_H[] = [
-                                        'InvNo' => isset($data_record["H_InvNo"]) ? $data_record["H_InvNo"] : null,
-                                        'POref' => isset($data_record["H_PORef"]) ? $data_record["H_PORef"] : null,
-                                        'InvDate' => isset($data_record["H_InvDate"]) ? $data_record["H_InvDate"] : null,
-                                        'InvAmt' => isset($data_record["H_InvAmt"]) ? $data_record["H_InvAmt"] : null,
-                                        'DiscAmt' => isset($data_record["H_DiscAmt"]) ? $data_record["H_DiscAmt"] : null,
-                                        'StkFlag' => isset($data_record["H_StkFlag"]) ? $data_record["H_StkFlag"] : null,
-                                        'VendorID' => isset($data_record["H_VendorID"]) ? $data_record["H_VendorID"] : null,
-                                        'VendorName' => isset($data_record["H_VendorName"]) ? $data_record["H_VendorName"] : null,
-                                        'SupCode' => isset($data_record["H_SupCode"]) ? $data_record["H_SupCode"] : null,
-                                    ];
-                                }
-
-
-                                // Use the query builder to insert the data and ignore duplicates
-                                foreach (array_chunk($insertData_H, 1000) as &$data) {
-                                    DB::table('inv_hdr')->insertOrIgnore($data);
-                                }
-
-
-
-                                $insertData_L = [];
-                                $L_Count = 0;
-
-
-                                foreach ($result as &$data_record) {
-                                    $insertData_L[] = [
-                                        'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
-                                        'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
-                                        'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
-                                        'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
-                                        'ExpiryDD' => "01",
-                                        'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
-                                        'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
-                                        'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
-                                        'TransactionCode' => (
-                                            (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
-                                            (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
-                                            (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
-                                            (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
-                                            (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
-                                            (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
-                                            $L_Count++
-                                        )
-                                    ];
-                                }
-
-                                // Use the query builder to insert the data and ignore duplicates
-                                foreach (array_chunk($insertData_L, 1000) as &$data) {
-                                    DB::table('inv_lot')->insertOrIgnore($data);
-                                }
-
-                                $D_Count = 0;
-                                $insertData_D = [];
-
-
-                                foreach ($result as &$data_record) {
-                                    $insertData_D[] = [
-                                        'InvNo' => isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null,
-                                        'ItemCode' => isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null,
-                                        'ItemName' => isset($data_record["D_ItemName"]) ? $data_record["D_ItemName"] : null,
-                                        'ConvFact2' => isset($data_record["D_ConvFact2"]) ? $data_record["D_ConvFact2"] : null,
-                                        'UOM' => isset($data_record["D_UOM"]) ? $data_record["D_UOM"] : null,
-                                        'UnitCost' => isset($data_record["D_UnitCost"]) ? $data_record["D_UnitCost"] : null,
-                                        'QtyShip' => isset($data_record["D_QtyShip"]) ? $data_record["D_QtyShip"] : null,
-                                        'QtyFree' => isset($data_record["D_QtyFree"]) ? $data_record["D_QtyFree"] : null,
-                                        'GrossAmt' => isset($data_record["D_GrossAmt"]) ? $data_record["D_GrossAmt"] : null,
-                                        'PldAmt' => isset($data_record["D_PldAmt"]) ? $data_record["D_PldAmt"] : null,
-                                        'NetAmt' => isset($data_record["D_NetAmt"]) ? $data_record["D_NetAmt"] : null,
-                                        'SupCode' => isset($data_record["D_SupCode"]) ? $data_record["D_SupCode"] : null,
-                                        'TransactionCode' => (
-                                            (isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null) .
-                                            (isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null) .
-                                            (isset($data_record["D_ItemName"]) ? $data_record["D_ItemName"] : null) .
-                                            (isset($data_record["D_ConvFact2"]) ? $data_record["D_ConvFact2"] : null) .
-                                            (isset($data_record["D_UOM"]) ? $data_record["D_UOM"] : null) .
-                                            (isset($data_record["D_UnitCost"]) ? $data_record["D_UnitCost"] : null) .
-                                            (isset($data_record["D_QtyShip"]) ? $data_record["D_QtyShip"] : null) .
-                                            (isset($data_record["D_QtyFree"]) ? $data_record["D_QtyFree"] : null) .
-                                            (isset($data_record["D_GrossAmt"]) ? $data_record["D_GrossAmt"] : null) .
-                                            (isset($data_record["D_PldAmt"]) ? $data_record["D_PldAmt"] : null) .
-                                            (isset($data_record["D_NetAmt"]) ? $data_record["D_NetAmt"] : null) .
-                                            (isset($data_record["D_SupCode"]) ? $data_record["D_SupCode"] : null) .
-                                            $D_Count++
-                                        ),
-                                    ];
-                                }
-                                // Use the query builder to insert the data and ignore duplicates
-                                foreach (array_chunk($insertData_D, 1000) as &$data) {
-                                    DB::table('inv_dtl')->insertOrIgnore($data);
-                                }
-
-                                // $response = [
-                                //     'message' => "transaction successful",
-                                // ];
-                                return response()->json($result, 200);
+                            // Use the query builder to insert the data and ignore duplicates
+                            foreach (array_chunk($insertData_H, 1000) as &$data) {
+                                DB::table('inv_hdr')->insertOrIgnore($data);
                             }
+
+
+
+                            $insertData_L = [];
+                            $L_Count = 0;
+
+
+                            foreach ($result as &$data_record) {
+                                $insertData_L[] = [
+                                    'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
+                                    'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
+                                    'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
+                                    'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
+                                    'ExpiryDD' => "01",
+                                    'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
+                                    'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
+                                    'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
+                                    'TransactionCode' => (
+                                        (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
+                                        (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
+                                        (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
+                                        (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
+                                        (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
+                                        (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
+                                        $L_Count++
+                                    )
+                                ];
+                            }
+
+                            // Use the query builder to insert the data and ignore duplicates
+                            foreach (array_chunk($insertData_L, 1000) as &$data) {
+                                DB::table('inv_lot')->insertOrIgnore($data);
+                            }
+
+                            $D_Count = 0;
+                            $insertData_D = [];
+
+
+                            foreach ($result as &$data_record) {
+                                $insertData_D[] = [
+                                    'InvNo' => isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null,
+                                    'ItemCode' => isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null,
+                                    'ItemName' => isset($data_record["D_ItemName"]) ? $data_record["D_ItemName"] : null,
+                                    'ConvFact2' => isset($data_record["D_ConvFact2"]) ? $data_record["D_ConvFact2"] : null,
+                                    'UOM' => isset($data_record["D_UOM"]) ? $data_record["D_UOM"] : null,
+                                    'UnitCost' => isset($data_record["D_UnitCost"]) ? $data_record["D_UnitCost"] : null,
+                                    'QtyShip' => isset($data_record["D_QtyShip"]) ? $data_record["D_QtyShip"] : null,
+                                    'QtyFree' => isset($data_record["D_QtyFree"]) ? $data_record["D_QtyFree"] : null,
+                                    'GrossAmt' => isset($data_record["D_GrossAmt"]) ? $data_record["D_GrossAmt"] : null,
+                                    'PldAmt' => isset($data_record["D_PldAmt"]) ? $data_record["D_PldAmt"] : null,
+                                    'NetAmt' => isset($data_record["D_NetAmt"]) ? $data_record["D_NetAmt"] : null,
+                                    'SupCode' => isset($data_record["D_SupCode"]) ? $data_record["D_SupCode"] : null,
+                                    'TransactionCode' => (
+                                        (isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null) .
+                                        (isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null) .
+                                        (isset($data_record["D_ItemName"]) ? $data_record["D_ItemName"] : null) .
+                                        (isset($data_record["D_ConvFact2"]) ? $data_record["D_ConvFact2"] : null) .
+                                        (isset($data_record["D_UOM"]) ? $data_record["D_UOM"] : null) .
+                                        (isset($data_record["D_UnitCost"]) ? $data_record["D_UnitCost"] : null) .
+                                        (isset($data_record["D_QtyShip"]) ? $data_record["D_QtyShip"] : null) .
+                                        (isset($data_record["D_QtyFree"]) ? $data_record["D_QtyFree"] : null) .
+                                        (isset($data_record["D_GrossAmt"]) ? $data_record["D_GrossAmt"] : null) .
+                                        (isset($data_record["D_PldAmt"]) ? $data_record["D_PldAmt"] : null) .
+                                        (isset($data_record["D_NetAmt"]) ? $data_record["D_NetAmt"] : null) .
+                                        (isset($data_record["D_SupCode"]) ? $data_record["D_SupCode"] : null) .
+                                        $D_Count++
+                                    ),
+                                ];
+                            }
+                            // Use the query builder to insert the data and ignore duplicates
+                            foreach (array_chunk($insertData_D, 1000) as &$data) {
+                                DB::table('inv_dtl')->insertOrIgnore($data);
+                            }
+
+                            $response = [
+                                'message' => "transaction successful",
+                            ];
+                            return response()->json($response, 200);
                         }
                     }
+                }
+            } else {
+                //     //! Validations->
+
+                $passedItems_ss = [];
+                $failedItems_ss = [];
+                foreach ($result as $item) {
+                    $itemErrors = []; // Initialize error messages for each item
+
+                    if (isset($item['H_InvNo']) && isset($item['L_LotNo']) && isset($item['D_ItemCode'])) {
+                        $itemValidator = Validator::make([
+                            'H_InvNo' => $item['H_InvNo'],
+                            'L_LotNo' => $item['L_LotNo'],
+                            'D_ItemCode' => $item['D_ItemCode'],
+                        ], [
+                            'H_InvNo' => 'max:20|required|min:2|',
+                            'L_LotNo' => 'max:10|required|min:1|',
+                            'D_ItemCode' => 'max:20|required|min:2|',
+                        ], [
+                            'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
+                            'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 10 characters.",
+                            'D_ItemCode.max' => "{$item['L_ItemCode']} Item Code must not exceed :max characters.",
+                            'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number must not be Null or Missing.",
+                            'L_LotNo.required' => "{$item['L_LotNo']} Lot Number must not be Null or Missing.",
+                            'D_ItemCode.required' => "{$item['L_ItemCode']} Item Code must not be Null or Missing.",
+                            'H_InvNo.min' => "{$item['H_InvNo']} Invoice Number must not be Null or Missing.",
+                            'L_LotNo.min' => "{$item['L_LotNo']} Lot Number must not be Null or Missing.",
+                            'D_ItemCode.min' => "{$item['L_ItemCode']} Item Code must not be Null or Missing.",
+                        ]);
+
+                        if ($itemValidator->fails()) {
+                            $errors = $itemValidator->errors();
+
+                            // Collect error messages for this item
+                            foreach ($errors->all() as $errorMessage) {
+                                $itemErrors[] = $errorMessage;
+                            }
+
+                            // Exclude certain fields from the item data before adding to failedItems
+                            $failedItemData = array_values($item);
+
+                            unset($failedItemData['H_InvNo']);
+                            unset($failedItemData['L_LotNo']);
+                            unset($failedItemData['L_ItemCode']);
+
+                            $failedItems_ss[] = [
+                                $failedItemData, // Original item data without H_InvNo, L_LotNo, and D_ItemCode
+                                $itemErrors, // Error messages for this item
+                            ];
+                        } else {
+                            $passedItems_ss[] = $item;
+                        }
+                    }
+                }
+
+                if ($failedItems_ss == !null) {
+                    //         //! Validations->
+                    //         //! New Additions>
+
+                    $insertData_H = [];
+
+
+                    foreach ($passedItems_ss as &$data_record) {
+                        $insertData_H[] = [
+                            'InvNo' => isset($data_record["H_InvNo"]) ? $data_record["H_InvNo"] : null,
+                            'POref' => isset($data_record["H_PORef"]) ? $data_record["H_PORef"] : null,
+                            'InvDate' => isset($data_record["H_InvDate"]) ? $data_record["H_InvDate"] : null,
+                            'InvAmt' => isset($data_record["H_InvAmt"]) ? $data_record["H_InvAmt"] : null,
+                            'DiscAmt' => isset($data_record["H_DiscAmt"]) ? $data_record["H_DiscAmt"] : null,
+                            'StkFlag' => isset($data_record["H_StkFlag"]) ? $data_record["H_StkFlag"] : null,
+                            'VendorID' => isset($data_record["H_VendorID"]) ? $data_record["H_VendorID"] : null,
+                            'VendorName' => isset($data_record["H_VendorName"]) ? $data_record["H_VendorName"] : null,
+                            'SupCode' => isset($data_record["H_SupCode"]) ? $data_record["H_SupCode"] : null,
+                        ];
+                    }
+
+
+                    // Use the query builder to insert the data and ignore duplicates
+                    foreach (array_chunk($insertData_H, 1000) as &$data) {
+                        DB::table('inv_hdr')->insertOrIgnore($data);
+                    }
+
+
+
+                    $insertData_L = [];
+                    $L_Count = 0;
+
+
+                    foreach ($passedItems_ss as &$data_record) {
+                        $insertData_L[] = [
+                            'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
+                            'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
+                            'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
+                            'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
+                            'ExpiryDD' => "01",
+                            'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
+                            'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
+                            'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
+                            'TransactionCode' => (
+                                (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
+                                (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
+                                (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
+                                (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
+                                (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
+                                (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
+                                $L_Count++
+                            )
+                        ];
+                    }
+
+                    // Use the query builder to insert the data and ignore duplicates
+                    foreach (array_chunk($insertData_L, 1000) as &$data) {
+                        DB::table('inv_lot')->insertOrIgnore($data);
+                    }
+
+                    $D_Count = 0;
+                    $insertData_D = [];
+
+
+                    foreach ($passedItems_ss as &$data_record) {
+                        $insertData_D[] = [
+                            'InvNo' => isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null,
+                            'ItemCode' => isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null,
+                            'ItemName' => isset($data_record["D_ItemName"]) ? $data_record["D_ItemName"] : null,
+                            'ConvFact2' => isset($data_record["D_ConvFact2"]) ? $data_record["D_ConvFact2"] : null,
+                            'UOM' => isset($data_record["D_UOM"]) ? $data_record["D_UOM"] : null,
+                            'UnitCost' => isset($data_record["D_UnitCost"]) ? $data_record["D_UnitCost"] : null,
+                            'QtyShip' => isset($data_record["D_QtyShip"]) ? $data_record["D_QtyShip"] : null,
+                            'QtyFree' => isset($data_record["D_QtyFree"]) ? $data_record["D_QtyFree"] : null,
+                            'GrossAmt' => isset($data_record["D_GrossAmt"]) ? $data_record["D_GrossAmt"] : null,
+                            'PldAmt' => isset($data_record["D_PldAmt"]) ? $data_record["D_PldAmt"] : null,
+                            'NetAmt' => isset($data_record["D_NetAmt"]) ? $data_record["D_NetAmt"] : null,
+                            'SupCode' => isset($data_record["D_SupCode"]) ? $data_record["D_SupCode"] : null,
+                            'TransactionCode' => (
+                                (isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null) .
+                                (isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null) .
+                                (isset($data_record["D_ItemName"]) ? $data_record["D_ItemName"] : null) .
+                                (isset($data_record["D_ConvFact2"]) ? $data_record["D_ConvFact2"] : null) .
+                                (isset($data_record["D_UOM"]) ? $data_record["D_UOM"] : null) .
+                                (isset($data_record["D_UnitCost"]) ? $data_record["D_UnitCost"] : null) .
+                                (isset($data_record["D_QtyShip"]) ? $data_record["D_QtyShip"] : null) .
+                                (isset($data_record["D_QtyFree"]) ? $data_record["D_QtyFree"] : null) .
+                                (isset($data_record["D_GrossAmt"]) ? $data_record["D_GrossAmt"] : null) .
+                                (isset($data_record["D_PldAmt"]) ? $data_record["D_PldAmt"] : null) .
+                                (isset($data_record["D_NetAmt"]) ? $data_record["D_NetAmt"] : null) .
+                                (isset($data_record["D_SupCode"]) ? $data_record["D_SupCode"] : null) .
+                                $D_Count++
+                            ),
+                        ];
+                    }
+                    // Use the query builder to insert the data and ignore duplicates
+                    foreach (array_chunk($insertData_D, 1000) as &$data) {
+                        DB::table('inv_dtl')->insertOrIgnore($data);
+                    }
+
+                    $response = [
+                        // 'passed_items' =>  array_values($passedItems),
+                        'message' => "transaction successful but has failing records",
+                        'failing_records' =>  $failedItems_ss
+                    ];
+                    return response()->json($response, 202);
+                    // return response()->json($result, 200);
+                } else {
+                    $insertData_H = [];
+                    foreach ($result as &$data_record) {
+                        $insertData_H[] = [
+                            'InvNo' => isset($data_record["H_InvNo"]) ? $data_record["H_InvNo"] : null,
+                            'POref' => isset($data_record["H_PORef"]) ? $data_record["H_PORef"] : null,
+                            'InvDate' => isset($data_record["H_InvDate"]) ? $data_record["H_InvDate"] : null,
+                            'InvAmt' => isset($data_record["H_InvAmt"]) ? $data_record["H_InvAmt"] : null,
+                            'DiscAmt' => isset($data_record["H_DiscAmt"]) ? $data_record["H_DiscAmt"] : null,
+                            'StkFlag' => isset($data_record["H_StkFlag"]) ? $data_record["H_StkFlag"] : null,
+                            'VendorID' => isset($data_record["H_VendorID"]) ? $data_record["H_VendorID"] : null,
+                            'VendorName' => isset($data_record["H_VendorName"]) ? $data_record["H_VendorName"] : null,
+                            'SupCode' => isset($data_record["H_SupCode"]) ? $data_record["H_SupCode"] : null,
+                        ];
+                    }
+
+
+                    // Use the query builder to insert the data and ignore duplicates
+                    foreach (array_chunk($insertData_H, 1000) as &$data) {
+                        DB::table('inv_hdr')->insertOrIgnore($data);
+                    }
+
+
+
+                    $insertData_L = [];
+                    $L_Count = 0;
+
+
+                    foreach ($result as &$data_record) {
+                        $insertData_L[] = [
+                            'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
+                            'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
+                            'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
+                            'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
+                            'ExpiryDD' => "01",
+                            'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
+                            'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
+                            'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
+                            'TransactionCode' => (
+                                (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
+                                (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
+                                (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
+                                (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
+                                (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
+                                (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
+                                $L_Count++
+                            )
+                        ];
+                    }
+
+                    // Use the query builder to insert the data and ignore duplicates
+                    foreach (array_chunk($insertData_L, 1000) as &$data) {
+                        DB::table('inv_lot')->insertOrIgnore($data);
+                    }
+
+                    $D_Count = 0;
+                    $insertData_D = [];
+
+
+                    foreach ($result as &$data_record) {
+                        $insertData_D[] = [
+                            'InvNo' => isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null,
+                            'ItemCode' => isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null,
+                            'ItemName' => isset($data_record["D_ItemName"]) ? $data_record["D_ItemName"] : null,
+                            'ConvFact2' => isset($data_record["D_ConvFact2"]) ? $data_record["D_ConvFact2"] : null,
+                            'UOM' => isset($data_record["D_UOM"]) ? $data_record["D_UOM"] : null,
+                            'UnitCost' => isset($data_record["D_UnitCost"]) ? $data_record["D_UnitCost"] : null,
+                            'QtyShip' => isset($data_record["D_QtyShip"]) ? $data_record["D_QtyShip"] : null,
+                            'QtyFree' => isset($data_record["D_QtyFree"]) ? $data_record["D_QtyFree"] : null,
+                            'GrossAmt' => isset($data_record["D_GrossAmt"]) ? $data_record["D_GrossAmt"] : null,
+                            'PldAmt' => isset($data_record["D_PldAmt"]) ? $data_record["D_PldAmt"] : null,
+                            'NetAmt' => isset($data_record["D_NetAmt"]) ? $data_record["D_NetAmt"] : null,
+                            'SupCode' => isset($data_record["D_SupCode"]) ? $data_record["D_SupCode"] : null,
+                            'TransactionCode' => (
+                                (isset($data_record["D_InvNo"]) ? $data_record["D_InvNo"] : null) .
+                                (isset($data_record["D_ItemCode"]) ? $data_record["D_ItemCode"] : null) .
+                                (isset($data_record["D_ItemName"]) ? $data_record["D_ItemName"] : null) .
+                                (isset($data_record["D_ConvFact2"]) ? $data_record["D_ConvFact2"] : null) .
+                                (isset($data_record["D_UOM"]) ? $data_record["D_UOM"] : null) .
+                                (isset($data_record["D_UnitCost"]) ? $data_record["D_UnitCost"] : null) .
+                                (isset($data_record["D_QtyShip"]) ? $data_record["D_QtyShip"] : null) .
+                                (isset($data_record["D_QtyFree"]) ? $data_record["D_QtyFree"] : null) .
+                                (isset($data_record["D_GrossAmt"]) ? $data_record["D_GrossAmt"] : null) .
+                                (isset($data_record["D_PldAmt"]) ? $data_record["D_PldAmt"] : null) .
+                                (isset($data_record["D_NetAmt"]) ? $data_record["D_NetAmt"] : null) .
+                                (isset($data_record["D_SupCode"]) ? $data_record["D_SupCode"] : null) .
+                                $D_Count++
+                            ),
+                        ];
+                    }
+                    // Use the query builder to insert the data and ignore duplicates
+                    foreach (array_chunk($insertData_D, 1000) as &$data) {
+                        DB::table('inv_dtl')->insertOrIgnore($data);
+                    }
+
+                    $response = [
+                        'message' => "transaction successful",
+                    ];
+                    return response()->json($response, 200);
                 }
             }
         }
