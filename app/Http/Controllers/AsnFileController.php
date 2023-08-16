@@ -109,7 +109,6 @@ class AsnFileController extends Controller
             ->where('H_vid', $vid)
             ->first() ?? [];
 
-        $vendor = $data3['H_vendor'];
 
 
         $combinedArray = array_merge($data3, $data1, $data2);
@@ -611,21 +610,19 @@ class AsnFileController extends Controller
             }
         } else {
 
+
+
             $result = [];
 
-            // Loop through each item (sub-array)
             foreach ($data as $item) {
-                $import = []; // Initialize the $import array
+                $import = [];
 
-                // Loop through each index name in $filteredData
                 foreach ($filteredData as $index => $index_name) {
-                    // Check if the value is not null before adding it to the $import array
-                    if (isset($item[$filteredData[$index]]) && $item[$filteredData[$index]] !== null) {
-                        $import[$index] = $item[$filteredData[$index]];
+                    if (isset($item[$index_name]) && $item[$index_name] !== null) {
+                        $import[$index] = $item[$index_name];
                     }
                 }
 
-                // Check if $import array is not empty before adding it to the $result array
                 if (!empty($import)) {
                     $result[] = $import;
                 }
@@ -635,47 +632,79 @@ class AsnFileController extends Controller
 
             //! New Additions>
             if ($vid == 442 || 9470) {
+
                 foreach ($result as $element) {
                     // Check if the element has more than three properties
                     if (count($element) <= 3) {
                         return response()->json("file is not valid");
                     } else {
 
-                        //! Validations->
+
                         $passedItems_dd = [];
                         $failedItems_dd = [];
 
                         foreach ($result as $item) {
                             $itemErrors = []; // Initialize error messages for each item
 
-                            if (isset($item['H_InvNo']) && isset($item['L_LotNo']) && isset($item['D_ItemCode']) && isset($item['H_PORef'])) {
+                            // Check for missing or null data in the specified fields
+                            $requiredFields = [
+                                'H_InvNo' => 'Invoice Number',
+                                'H_PORef' => 'PORef',
+                                'L_LotNo' => 'Lot Number',
+                                'L_Qty' => 'Quantity',
+                                'D_ItemCode' => 'Item Code',
+                            ];
+
+                            $fieldsMissing = false;
+
+                            foreach ($requiredFields as $fieldKey => $fieldLabel) {
+                                if (!isset($item[$fieldKey]) || is_null($item[$fieldKey])) {
+                                    $fieldsMissing = true;
+                                    $itemErrors[] = "{$fieldLabel} must not be Null or Missing.";
+                                }
+                            }
+
+                            if ($fieldsMissing) {
+                                // Exclude certain fields from the item data before adding to failedItems
+                                $failedItemData = array_values($item);
+                                unset($failedItemData[2]);
+                                unset($failedItemData[3]);
+                                unset($failedItemData[4]);
+
+                                $failedItems_dd[] = [
+                                    array_values($failedItemData), // Original item data without H_InvNo, L_LotNo, and D_ItemCode
+                                    $itemErrors, // Error messages for this item
+                                ];
+                            } else {
+                                // Fields exist, perform validation
                                 $itemValidator = Validator::make([
                                     'H_InvNo' => $item['H_InvNo'],
                                     'H_PORef' => $item['H_PORef'],
                                     'L_LotNo' => $item['L_LotNo'],
+                                    'L_Qty' => $item['L_Qty'],
                                     'D_ItemCode' => $item['D_ItemCode'],
                                 ], [
                                     'H_InvNo' => 'max:20|required|min:1|not_in:0',
                                     'H_PORef' => 'required|min:1|max:10|not_in:0',
-                                    'L_LotNo' => 'max:10|required|min:1|',
+                                    'L_Qty' => 'required|min:1|not_in:0',
+                                    'L_LotNo' => 'max:20|required|min:1',
                                     'D_ItemCode' => 'max:20|required|min:1',
-
-
                                 ], [
                                     'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
-                                    'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 10 characters.",
+                                    'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 20 characters.",
                                     'H_PORef.max' => "{$item['H_PORef']} PORef must not exceed 10 characters.",
-                                    'D_ItemCode.max' => "{$item['L_ItemCode']} Item Code must not exceed :max characters.",
-                                    'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number must not be Null or Missing.",
-                                    'H_PORef.required' => "{$item['H_PORef']} PORef must not be Null or Missing",
-                                    'L_LotNo.required' => "{$item['L_LotNo']} Lot Number must not be Null or Missing.",
-                                    'D_ItemCode.required' => "{$item['L_ItemCode']} Item Code must not be Null or Missing.",
-                                    'H_InvNo.min' => "{$item['H_InvNo']} Invoice Number must not be Null or Missing.",
-                                    'L_LotNo.min' => "{$item['L_LotNo']} Lot Number must not be Null or Missing.",
-                                    'D_ItemCode.min' => "{$item['L_ItemCode']} Item Code must not be Null or Missing.",
-                                    'H_PORef.min' => "{$item['L_ItemCode']} PORef must not be Null or Missing.",
-                                    'H_PORef.not_in' => "{$item['H_PORef']} PORef must not be Null or Missing.",
-                                    'H_InvNo.not_in' => "{$item['H_InvNo']} Invoice Number must not be Null or Missing.",
+                                    'D_ItemCode.max' => "{$item['D_ItemCode']} Item Code must not exceed :max characters.",
+                                    'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number is required.",
+                                    'H_PORef.required' => "{$item['H_PORef']} PORef is required.",
+                                    'L_LotNo.required' => "{$item['L_LotNo']} Lot Number is required.",
+                                    'D_ItemCode.required' => "{$item['D_ItemCode']} Item Code is required.",
+                                    'H_InvNo.min' => "{$item['H_InvNo']} Invoice Number must not be empty or 0.",
+                                    'L_LotNo.min' => "{$item['L_LotNo']} Lot Number must not be empty or 0.",
+                                    'D_ItemCode.min' => "{$item['D_ItemCode']} Item Code must not be empty or 0.",
+                                    'H_PORef.min' => "{$item['H_PORef']} PORef must not be empty or 0.",
+                                    'H_PORef.not_in' => "{$item['H_PORef']} PORef must not be empty or 0 .",
+                                    'H_InvNo.not_in' => "{$item['H_InvNo']} Invoice Number must not be empty or 0.",
+                                    'L_Qty.not_in' => "{$item['L_Qty']} Quantity must not be empty or 0.",
                                 ]);
 
                                 if ($itemValidator->fails()) {
@@ -701,7 +730,6 @@ class AsnFileController extends Controller
                                 }
                             }
                         }
-
                         //! Validations->
 
                         if ($failedItems_dd == !null) {
@@ -912,30 +940,72 @@ class AsnFileController extends Controller
             } else {
                 //     //! Validations->
 
+
                 $passedItems_ss = [];
                 $failedItems_ss = [];
+
                 foreach ($result as $item) {
                     $itemErrors = []; // Initialize error messages for each item
 
-                    if (isset($item['H_InvNo']) && isset($item['L_LotNo']) && isset($item['D_ItemCode'])) {
+                    // Check for missing or null data in the specified fields
+                    $requiredFields = [
+                        'H_InvNo' => 'Invoice Number',
+                        'H_PORef' => 'PORef',
+                        'L_LotNo' => 'Lot Number',
+                        'L_Qty' => 'Quantity',
+                        'D_ItemCode' => 'Item Code',
+                    ];
+
+                    $fieldsMissing = false;
+
+                    foreach ($requiredFields as $fieldKey => $fieldLabel) {
+                        if (!isset($item[$fieldKey]) || is_null($item[$fieldKey])) {
+                            $fieldsMissing = true;
+                            $itemErrors[] = "{$fieldLabel} must not be Null or Missing.";
+                        }
+                    }
+
+                    if ($fieldsMissing) {
+                        // Exclude certain fields from the item data before adding to failedItems
+                        $failedItemData = array_values($item);
+                        unset($failedItemData[2]);
+                        unset($failedItemData[3]);
+                        unset($failedItemData[4]);
+
+                        $failedItems_ss[] = [
+                            array_values($failedItemData), // Original item data without H_InvNo, L_LotNo, and D_ItemCode
+                            $itemErrors, // Error messages for this item
+                        ];
+                    } else {
+                        // Fields exist, perform validation
                         $itemValidator = Validator::make([
                             'H_InvNo' => $item['H_InvNo'],
+                            'H_PORef' => $item['H_PORef'],
                             'L_LotNo' => $item['L_LotNo'],
+                            'L_Qty' => $item['L_Qty'],
                             'D_ItemCode' => $item['D_ItemCode'],
                         ], [
-                            'H_InvNo' => 'max:20|required|min:2|',
-                            'L_LotNo' => 'max:10|required|min:1|',
-                            'D_ItemCode' => 'max:20|required|min:2|',
+                            'H_InvNo' => 'max:20|required|min:1|not_in:0',
+                            'H_PORef' => 'required|min:1|max:10|not_in:0',
+                            'L_Qty' => 'required|min:1|not_in:0',
+                            'L_LotNo' => 'max:20|required|min:1',
+                            'D_ItemCode' => 'max:20|required|min:1',
                         ], [
                             'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
-                            'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 10 characters.",
-                            'D_ItemCode.max' => "{$item['L_ItemCode']} Item Code must not exceed :max characters.",
-                            'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number must not be Null or Missing.",
-                            'L_LotNo.required' => "{$item['L_LotNo']} Lot Number must not be Null or Missing.",
-                            'D_ItemCode.required' => "{$item['L_ItemCode']} Item Code must not be Null or Missing.",
-                            'H_InvNo.min' => "{$item['H_InvNo']} Invoice Number must not be Null or Missing.",
-                            'L_LotNo.min' => "{$item['L_LotNo']} Lot Number must not be Null or Missing.",
-                            'D_ItemCode.min' => "{$item['L_ItemCode']} Item Code must not be Null or Missing.",
+                            'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 20 characters.",
+                            'H_PORef.max' => "{$item['H_PORef']} PORef must not exceed 10 characters.",
+                            'D_ItemCode.max' => "{$item['D_ItemCode']} Item Code must not exceed :max characters.",
+                            'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number is required.",
+                            'H_PORef.required' => "{$item['H_PORef']} PORef is required.",
+                            'L_LotNo.required' => "{$item['L_LotNo']} Lot Number is required.",
+                            'D_ItemCode.required' => "{$item['D_ItemCode']} Item Code is required.",
+                            'H_InvNo.min' => "{$item['H_InvNo']} Invoice Number must not be empty or 0.",
+                            'L_LotNo.min' => "{$item['L_LotNo']} Lot Number must not be empty or 0.",
+                            'D_ItemCode.min' => "{$item['D_ItemCode']} Item Code must not be empty or 0.",
+                            'H_PORef.min' => "{$item['H_PORef']} PORef must not be empty or 0.",
+                            'H_PORef.not_in' => "{$item['H_PORef']} PORef must not be empty or 0 .",
+                            'H_InvNo.not_in' => "{$item['H_InvNo']} Invoice Number must not be empty or 0.",
+                            'L_Qty.not_in' => "{$item['L_Qty']} Quantity must not be empty or 0.",
                         ]);
 
                         if ($itemValidator->fails()) {
@@ -948,13 +1018,12 @@ class AsnFileController extends Controller
 
                             // Exclude certain fields from the item data before adding to failedItems
                             $failedItemData = array_values($item);
-
-                            unset($failedItemData['H_InvNo']);
-                            unset($failedItemData['L_LotNo']);
-                            unset($failedItemData['L_ItemCode']);
+                            unset($failedItemData[2]);
+                            unset($failedItemData[3]);
+                            unset($failedItemData[4]);
 
                             $failedItems_ss[] = [
-                                $failedItemData, // Original item data without H_InvNo, L_LotNo, and D_ItemCode
+                                array_values($failedItemData), // Original item data without H_InvNo, L_LotNo, and D_ItemCode
                                 $itemErrors, // Error messages for this item
                             ];
                         } else {
@@ -962,7 +1031,6 @@ class AsnFileController extends Controller
                         }
                     }
                 }
-
                 if ($failedItems_ss == !null) {
                     //         //! Validations->
                     //         //! New Additions>
