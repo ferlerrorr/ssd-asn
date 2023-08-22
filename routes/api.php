@@ -22,11 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/ssd/asn', 'App\Http\Controllers\TestController@index');
 
 
-Route::get('/ssd/po-number', 'App\Http\Controllers\TestController@Po');
-Route::get('/ssd/sku-number', 'App\Http\Controllers\TestController@Sku');
+// Route::get('/ssd/po-number', 'App\Http\Controllers\TestController@Po');
+// Route::get('/ssd/sku-number', 'App\Http\Controllers\TestController@Sku');
+Route::get('/ssd/asn/headers', 'App\Http\Controllers\AsnFileController@headers');
 
-
-Route::post('/ssd/file-import/{slug}', 'App\Http\Controllers\FileImportController@index');
 
 Route::get('/ssd/asn/vendors', 'App\Http\Controllers\AsnFileController@vendors');
 
@@ -34,4 +33,7 @@ Route::post('/ssd/asn/upload/{vid}', 'App\Http\Controllers\AsnFileController@sto
 
 
 
-Route::get('/ssd/asn/headers', 'App\Http\Controllers\AsnFileController@headers');
+
+
+Route::get('/ssd/asn/jda/po', 'App\Http\Controllers\JdaController@Po');
+Route::get('/ssd/asn/jda/sku', 'App\Http\Controllers\JdaController@Sku');
