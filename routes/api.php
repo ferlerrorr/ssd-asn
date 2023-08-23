@@ -26,14 +26,13 @@ Route::get('/ssd/asn', 'App\Http\Controllers\TestController@index');
 // Route::get('/ssd/sku-number', 'App\Http\Controllers\TestController@Sku');
 // Route::get('/ssd/asn/headers', 'App\Http\Controllers\AsnFileController@headers');
 
-
+//?ASN Routes
 Route::get('/ssd/asn/vendors', 'App\Http\Controllers\AsnFileController@vendors');
-
 Route::post('/ssd/asn/upload/{vid}', 'App\Http\Controllers\AsnFileController@store');
+Route::get('/ssd/asn/export', 'App\Http\Controllers\AsnFileController@export');
 
 
 
-
-
+//?JDA Routes
 Route::get('/ssd/asn/jda/po', 'App\Http\Controllers\JdaController@Po');
 Route::get('/ssd/asn/jda/sku', 'App\Http\Controllers\JdaController@Sku');

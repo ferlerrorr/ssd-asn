@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -116,6 +116,7 @@ class AsnFileController extends Controller
             }
 
 
+
             $validate = [
                 $data_h,
                 $data_d,
@@ -185,9 +186,41 @@ class AsnFileController extends Controller
                     ];
                     $failedItems[] = $failedItem;
                 } else {
-                    $passedItems[0][] = $item;
+                    $passedItems[1][] = $item;
                 }
             }
+
+
+            // foreach ($validate[2] as $index => $item) {
+            //     $itemValidator = Validator::make(['item_2' => $item], [
+            //         'item_2.1' => 'max:20|required',
+            //         'item_2.3' => 'max:10|required',
+            //         'item_2.4' => 'max:20|required',
+            //     ], [
+            //         'item_2.1.max' => " Invoice Number must not exceed :max characters.",
+            //         'item_2.3.max' => " Item Code must not exceed 10 characters.",
+            //         'item_2.4.max' => " Lot Number must not exceed :max characters.",
+            //         'item_2.1.required' => " Invoice Number must not be Null or Missing.",
+            //         'item_2.3.required' => " Item Code must not be Null or Missing.",
+            //         'item_2.4.required' => " Lot Number must not be Null or Missing.",
+            //     ]);
+
+            //     if ($itemValidator->fails()) {
+            //         $errors = $itemValidator->errors();
+            //         $failedAttributes = array_keys($errors->messages());
+            //         $errorMessages = $errors->all();
+
+            //         $failedItem = [
+            //             $item,
+            //             array_map(function ($attribute, $error) use ($item) {
+            //                 $attributeName = substr($attribute, 7);
+            //                 return "$item[$attributeName]" . $error;
+            //             }, $failedAttributes, $errorMessages),
+            //         ];
+            //         $failedItems[] = $failedItem;
+            //     } else {
+            //         $passedItems[2][] = $item;
+            //     }
 
             foreach ($validate[2] as $index => $item) {
                 $itemValidator = Validator::make(['item_2' => $item], [
@@ -222,25 +255,15 @@ class AsnFileController extends Controller
             }
 
 
+
             if ($failedItems == !null) {
 
-                $data_dd = array_values($passedItems[0]);
-
                 // Initialize arrays to store items based on index 0 values
-                $data_h = array(); // Array to store items with index 0 equal to "H"
-                $data_d = array(); // Array to store items with index 0 equal to "D"
-                $data_l = array(); // Array to store items with index 0 equal to "L"
+                $data_h = array_values($passedItems[0]); // Array to store items with index 0 equal to "H"
+                $data_d = array_values($passedItems[1]); // Array to store items with index 0 equal to "D"
+                $data_l = array_values($passedItems[2]); // Array to store items with index 0 equal to "L"
 
-                // Loop through the original data and categorize items based on index 0 value
-                foreach ($data_dd as $item) {
-                    if ($item[0] == "H") {
-                        $data_h[] = $item; // Add item to $data_h array
-                    } elseif ($item[0] == "D") {
-                        $data_d[] = $item; // Add item to $data_d array
-                    } elseif ($item[0] == "L") {
-                        $data_l[] = $item; // Add item to $data_l array
-                    }
-                }
+
 
                 // Process the data with index 0 equal to "H"
                 $result_h = [];
@@ -286,7 +309,7 @@ class AsnFileController extends Controller
                     DB::table('inv_hdr')->insertOrIgnore($data);
                 }
 
-                $result_l = [];        // Initialize an empty array $result_d to store the filtered data
+                $result_l = []; // Initialize an empty array $result_d to store the filtered data
                 // Loop through each item (sub-array) in the original data
                 foreach ($data_l as $item) {
                     $import = []; // Initialize the $import array to store filtered data for each item
@@ -308,14 +331,18 @@ class AsnFileController extends Controller
                 $insertData_L = [];
                 $L_Count = 0;
 
+
+
                 foreach ($result_l as &$data_record) {
+                    $ExpiryYYYY = isset($data_record["L_ExpiryYYYY"]) ? substr($data_record["L_ExpiryYYYY"], -2) : null;
+
                     $insertData_L[] = [
                         'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
                         'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
                         'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
                         'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
                         'ExpiryDD' => "01",
-                        'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
+                        'ExpiryYYYY' => $ExpiryYYYY,
                         'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
                         'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
                         'TransactionCode' => (
@@ -328,9 +355,9 @@ class AsnFileController extends Controller
                             $L_Count
                         )
                     ];
+
                     $L_Count++; // Increment the $L_Count after creating the TransactionCode for each record
                 }
-
                 // Use the query builder to insert the data and ignore duplicates
                 foreach (array_chunk($insertData_L, 1000) as &$data) {
                     DB::table('inv_lot')->insertOrIgnore($data);
@@ -475,13 +502,15 @@ class AsnFileController extends Controller
                 $L_Count = 0;
 
                 foreach ($result_l as &$data_record) {
+                    $ExpiryYYYY = isset($data_record["L_ExpiryYYYY"]) ? substr($data_record["L_ExpiryYYYY"], -2) : null;
+
                     $insertData_L[] = [
                         'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
                         'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
                         'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
                         'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
                         'ExpiryDD' => "01",
-                        'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
+                        'ExpiryYYYY' => $ExpiryYYYY,
                         'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
                         'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
                         'TransactionCode' => (
@@ -494,6 +523,7 @@ class AsnFileController extends Controller
                             $L_Count
                         )
                     ];
+
                     $L_Count++; // Increment the $L_Count after creating the TransactionCode for each record
                 }
 
@@ -721,27 +751,59 @@ class AsnFileController extends Controller
                             $L_Count = 0;
 
 
-                            foreach ($passedItems_dd  as &$data_record) {
+                            //! date format 
+                            // foreach ($passedItems_dd  as &$data_record) {
+                            //     $insertData_L[] = [
+                            //         'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
+                            //         'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
+                            //         'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
+                            //         'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
+                            //         'ExpiryDD' => "01",
+                            //         'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
+                            //         'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
+                            //         'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
+                            //         'TransactionCode' => (
+                            //             (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
+                            //             (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
+                            //             (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
+                            //             (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
+                            //             (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
+                            //             (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
+                            //             $L_Count++
+                            //         )
+                            //     ];
+                            // }
+
+
+                            foreach ($passedItems_dd as &$data_record) {
+                                $ExpiryMM = isset($data_record["L_ExpiryMM"]) ? substr($data_record["L_ExpiryMM"], -4, 2) : null;
+                                $ExpiryDD = isset($data_record["L_ExpiryMM"]) ? substr($data_record["L_ExpiryMM"], -2) : null;
+                                $ExpiryYYYY = isset($data_record["L_ExpiryMM"]) ? substr($data_record["L_ExpiryMM"], -6, 2) : null;
+
+                                $TransactionCode = (
+                                    (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
+                                    (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
+                                    (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
+                                    (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
+                                    (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
+                                    (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
+                                    $L_Count++
+                                );
+
                                 $insertData_L[] = [
                                     'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
                                     'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
                                     'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
-                                    'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
-                                    'ExpiryDD' => "01",
-                                    'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
+                                    'ExpiryMM' => $ExpiryMM,
+                                    'ExpiryDD' => $ExpiryDD,
+                                    'ExpiryYYYY' => $ExpiryYYYY,
                                     'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
                                     'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
-                                    'TransactionCode' => (
-                                        (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
-                                        (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
-                                        (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
-                                        (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
-                                        (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
-                                        (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
-                                        $L_Count++
-                                    )
+                                    'TransactionCode' => $TransactionCode,
                                 ];
                             }
+
+
 
                             // Use the query builder to insert the data and ignore duplicates
                             foreach (array_chunk($insertData_L, 1000) as &$data) {
@@ -822,27 +884,56 @@ class AsnFileController extends Controller
                             $L_Count = 0;
 
 
+                            // foreach ($result as &$data_record) {
+                            //     $insertData_L[] = [
+                            //         'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
+                            //         'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
+                            //         'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
+                            //         'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
+                            //         'ExpiryDD' => "01",
+                            //         'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
+                            //         'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
+                            //         'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
+                            //         'TransactionCode' => (
+                            //             (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
+                            //             (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
+                            //             (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
+                            //             (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
+                            //             (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
+                            //             (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
+                            //             $L_Count++
+                            //         )
+                            //     ];
+                            // }
+
                             foreach ($result as &$data_record) {
+                                $ExpiryMM = isset($data_record["L_ExpiryMM"]) ? substr($data_record["L_ExpiryMM"], -4, 2) : null;
+                                $ExpiryDD = isset($data_record["L_ExpiryMM"]) ? substr($data_record["L_ExpiryMM"], -2) : null;
+                                $ExpiryYYYY = isset($data_record["L_ExpiryMM"]) ? substr($data_record["L_ExpiryMM"], -6, 2) : null;
+
+                                $TransactionCode = (
+                                    (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
+                                    (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
+                                    (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
+                                    (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
+                                    (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
+                                    (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
+                                    $L_Count++
+                                );
+
                                 $insertData_L[] = [
                                     'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
                                     'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
                                     'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
-                                    'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
-                                    'ExpiryDD' => "01",
-                                    'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
+                                    'ExpiryMM' => $ExpiryMM,
+                                    'ExpiryDD' => $ExpiryDD,
+                                    'ExpiryYYYY' => $ExpiryYYYY,
                                     'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
                                     'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
-                                    'TransactionCode' => (
-                                        (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
-                                        (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
-                                        (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
-                                        (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
-                                        (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
-                                        (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
-                                        $L_Count++
-                                    )
+                                    'TransactionCode' => $TransactionCode,
                                 ];
                             }
+
 
                             // Use the query builder to insert the data and ignore duplicates
                             foreach (array_chunk($insertData_L, 1000) as &$data) {
@@ -1251,5 +1342,52 @@ class AsnFileController extends Controller
      */
     public function export()
     {
+
+        //? Method Post
+
+        $PORefs = [5810166, 5811301]; // Array of PORef values
+        $dataArray = DB::table('inv_hdr')
+            ->whereIn('PORef', $PORefs)
+            ->leftJoin('inv_lot', 'inv_hdr.InvNo', '=', 'inv_lot.InvNo')
+            ->leftJoin('inv_dtl', 'inv_hdr.InvNo', '=', 'inv_dtl.InvNo')
+            ->leftJoin('jda_invmst', 'inv_dtl.ItemCode', '=', 'jda_invmst.ji_INUMBR')
+            ->leftJoin('jda_invmst as jda_invmst_imfgno', 'inv_dtl.ItemCode', '=', 'jda_invmst_imfgno.ji_IMFGNO')
+            ->leftJoin('jda_pomhdr', 'inv_hdr.PORef', '=', 'jda_pomhdr.jp_PONUMB') // Joining jda_pomhdr
+            ->select(
+                'inv_hdr.PORef as jp_PONUMB',
+                'jda_pomhdr.jp_POVNUM', // Selecting jp_POVNUM from jda_pomhdr
+                'inv_dtl.ItemCode',
+                'inv_lot.Qty',
+                'inv_lot.LotNo',
+                DB::raw("CONCAT(inv_lot.ExpiryMM, inv_lot.ExpiryDD, inv_lot.ExpiryYYYY) as Expiry"),
+                DB::raw("COALESCE(jda_invmst.ji_INUMBR, jda_invmst_imfgno.ji_INUMBR) as ji_INUMBR")
+            )
+            ->get()
+            ->map(function ($item) {
+                $ji_INUMBR = $item->ji_INUMBR ?: DB::table('jda_invmst')->where('ji_IVVNDN', $item->ItemCode)->value('ji_INUMBR');
+                return [
+                    'jp_POVNUM' => $item->jp_POVNUM,
+                    'jp_PONUMB' => $item->jp_PONUMB,
+                    'ji_INUMBR' => $ji_INUMBR,
+                    'Qty' => $item->Qty,
+                    'LotNo' => $item->LotNo,
+                    'Expiry' => $item->Expiry,
+                ];
+            })
+            ->toArray();
+        // return response()->json($dataArray);
+
+        $csvData = [];
+        foreach ($dataArray as $row) {
+            $csvData[] = implode(',', $row);
+        }
+        $csvContent = implode("\n", $csvData);
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="MSSASN1.csv"',
+        ];
+
+        return Response::make($csvContent, 200, $headers);
     }
 }

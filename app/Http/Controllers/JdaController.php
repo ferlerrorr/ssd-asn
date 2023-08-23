@@ -17,7 +17,7 @@ class JdaController extends Controller
     {
 
 
-        $date = Carbon::now()->subDays(15)->toDateString('Y-m-d');
+        $date = Carbon::now()->subDays(90)->toDateString('Y-m-d');
         $modifiedDate = substr(str_replace("-", "", $date), 2);
 
         //Delimiter for PO
@@ -92,6 +92,29 @@ class JdaController extends Controller
 
 
 
+        $rowCount = $data->count();
+
+        //!->>
+
+        // Count the occurrences of each value
+        $valueCounts = array_count_values($data->pluck('inumbr')->toArray());
+
+        // Filter values that are duplicated
+        $duplicates = array_filter($valueCounts, function ($count) {
+            return $count > 1;
+        });
+
+        // Create an array to store duplicated values and their counts
+        $duplicatedArray = [];
+
+        foreach ($duplicates as $value => $count) {
+            $duplicatedArray[] = [
+                'sku' => $value,
+                'count' => $count
+            ];
+        }
+
+        //!->>
 
         $data = $data->map(function ($item) {
             return (array) $item;
@@ -108,28 +131,29 @@ class JdaController extends Controller
         });
 
 
-        //! Add Table Colomn and Insert for "ivvndn"
 
-        // $rowCount = $data->count();
-        // // Prepare the data for mass insertion
-        // $insertData = [];
-        // foreach ($data as &$data_record) {
-        //     $insertData[] = [
-        //         'ji_INUMBR' => $data_record["inumbr"],
-        //         'ji_IMFGNO' => $data_record["ivndpn"],
-        //         // If needed, add more columns and their corresponding values here
-        //     ];
-        // }
+        // Prepare the data for mass insertion
+        $insertData = [];
+        foreach ($data as &$data_record) {
+            $insertData[] = [
+                'ji_INUMBR' => $data_record["inumbr"],
+                'ji_IMFGNO' => $data_record["ivndpn"],
+                'ji_IVVNDN' => $data_record["ivvndn"],
+                // If needed, add more columns and their corresponding values here
+            ];
+        }
 
-        // // Use the upsert method with the ignore option to achieve upsert-or-ignore behavior
-        // foreach (array_chunk($insertData, 1000) as &$data) {
-        //     DB::table('jda_invmst')->upsert($data, ['ji_INUMBR']);
-        // }
+        // Use the upsert method with the ignore option to achieve upsert-or-ignore behavior
+        foreach (array_chunk($insertData, 1000) as &$data) {
+            DB::table('jda_invmst')->upsert($data, ['ji_INUMBR']);
+        }
 
 
         return response()->json([
-            // 'count' => $rowCount,
+            'count' => $rowCount,
+            'duplicated_sku' => $duplicatedArray,
             'data' => $data,
+
         ], 200);
     }
 }
