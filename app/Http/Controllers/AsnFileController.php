@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use PhpParser\Node\Stmt\Return_;
 
 class AsnFileController extends Controller
 {
@@ -14,7 +13,7 @@ class AsnFileController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * ? All Vendor Controller
      *
      * @return \Illuminate\Http\Response
      */
@@ -24,58 +23,15 @@ class AsnFileController extends Controller
         $data = DB::connection(env('DB_CONNECTION'))
             ->table('h_column_setup')
             ->select('H_vendor', 'H_vid')
+            ->orderBy('H_vendor', 'asc')
             ->get();
 
         return response()->json($data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function headers()
-    {
-
-        $data1 = (array) DB::table('d_column_setup')
-            ->where('D_vid', 200)
-            ->first() ?? [];
-        $data2 = (array) DB::table('l_column_setup')
-            ->where('L_vid', 200)
-            ->first() ?? [];
-        $data3 = (array) DB::table('h_column_setup')
-            ->where('H_vid', 200)
-            ->first() ?? [];
-
-
-        $combinedArray = array_merge($data3, $data1, $data2);
-
-        $filteredData = array_filter((array) $combinedArray, function ($value, $key) {
-            return !is_null($value) && $key !== 'D_id' && $key !== 'L_id' && $key !== 'H_id' && $key !== 'H_file_type' && $key !== 'D_file_type' && $key !== 'L_file_type' && $key !== 'L_vid' && $key !== 'L_vendor' && $key !== 'D_vid' && $key !== 'D_vendor';
-        }, ARRAY_FILTER_USE_BOTH);
-
-
-
-        $insertData_L = [];
-        foreach ($filteredData as &$data_record) {
-            $I_Count = 0;
-            $insertData_L[] = [
-                'InvNo' => $data_record["L_InvNo"],
-                'ItemCode' => $data_record["L_ItemCode"],
-                'LotNo' => $data_record["L_LotNo"],
-                'ExpiryMM' => $data_record["L_ExpiryMM"],
-                'ExpiryDD' => "01",
-                'ExpiryYYYY' => $data_record["L_ExpiryYYYY"],
-                'Qty' => $data_record["L_Qty"],
-                'TransactionCode' => ($data_record["L_InvNo"] . $data_record["L_ItemCode"] . $data_record["L_LotNo"] . $data_record["L_ExpiryMM"] . $data_record["L_ExpiryYYYY"] . $data_record["L_Qty"] . $I_Count++)
-            ];
-        }
-    }
-
-
 
     /**
-     * Store a newly created resource in storage.
+     * ? Insert ASN FILE Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -1243,5 +1199,57 @@ class AsnFileController extends Controller
                 }
             }
         }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    // public function headers()
+    // {
+
+    //     $data1 = (array) DB::table('d_column_setup')
+    //         ->where('D_vid', 200)
+    //         ->first() ?? [];
+    //     $data2 = (array) DB::table('l_column_setup')
+    //         ->where('L_vid', 200)
+    //         ->first() ?? [];
+    //     $data3 = (array) DB::table('h_column_setup')
+    //         ->where('H_vid', 200)
+    //         ->first() ?? [];
+
+
+    //     $combinedArray = array_merge($data3, $data1, $data2);
+
+    //     $filteredData = array_filter((array) $combinedArray, function ($value, $key) {
+    //         return !is_null($value) && $key !== 'D_id' && $key !== 'L_id' && $key !== 'H_id' && $key !== 'H_file_type' && $key !== 'D_file_type' && $key !== 'L_file_type' && $key !== 'L_vid' && $key !== 'L_vendor' && $key !== 'D_vid' && $key !== 'D_vendor';
+    //     }, ARRAY_FILTER_USE_BOTH);
+
+
+
+    //     $insertData_L = [];
+    //     foreach ($filteredData as &$data_record) {
+    //         $I_Count = 0;
+    //         $insertData_L[] = [
+    //             'InvNo' => $data_record["L_InvNo"],
+    //             'ItemCode' => $data_record["L_ItemCode"],
+    //             'LotNo' => $data_record["L_LotNo"],
+    //             'ExpiryMM' => $data_record["L_ExpiryMM"],
+    //             'ExpiryDD' => "01",
+    //             'ExpiryYYYY' => $data_record["L_ExpiryYYYY"],
+    //             'Qty' => $data_record["L_Qty"],
+    //             'TransactionCode' => ($data_record["L_InvNo"] . $data_record["L_ItemCode"] . $data_record["L_LotNo"] . $data_record["L_ExpiryMM"] . $data_record["L_ExpiryYYYY"] . $data_record["L_Qty"] . $I_Count++)
+    //         ];
+    //     }
+    // }
+
+    /**
+     *  ? Export ASN File
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function export()
+    {
     }
 }

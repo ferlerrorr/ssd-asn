@@ -24,7 +24,7 @@ Route::get('/ssd/asn', 'App\Http\Controllers\TestController@index');
 
 // Route::get('/ssd/po-number', 'App\Http\Controllers\TestController@Po');
 // Route::get('/ssd/sku-number', 'App\Http\Controllers\TestController@Sku');
-Route::get('/ssd/asn/headers', 'App\Http\Controllers\AsnFileController@headers');
+// Route::get('/ssd/asn/headers', 'App\Http\Controllers\AsnFileController@headers');
 
 
 Route::get('/ssd/asn/vendors', 'App\Http\Controllers\AsnFileController@vendors');

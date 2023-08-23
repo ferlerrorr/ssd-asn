@@ -48,22 +48,22 @@ class JdaController extends Controller
         });
 
 
-        // // Prepare the data for mass insertion
-        // $insertData = [];
-        // foreach ($data as &$data_record) {
-        //     $insertData[] = [
-        //         'jp_POSTAT' => $data_record["postat"],
-        //         'jp_PONOT1' => $data_record["ponot1"],
-        //         'jp_POVNUM' => $data_record["povnum"],
-        //         'jp_PONUMB' => $data_record["ponumb"],
-        //         // If needed, add more columns and their corresponding values here
-        //     ];
-        // }
+        // Prepare the data for mass insertion
+        $insertData = [];
+        foreach ($data as &$data_record) {
+            $insertData[] = [
+                'jp_POSTAT' => $data_record["postat"],
+                'jp_PONOT1' => $data_record["ponot1"],
+                'jp_POVNUM' => $data_record["povnum"],
+                'jp_PONUMB' => $data_record["ponumb"],
+                // If needed, add more columns and their corresponding values here
+            ];
+        }
 
-        // // Use the query builder to insert the data and ignore duplicates
-        // foreach (array_chunk($insertData, 1000) as &$data) {
-        //     DB::table('jda_pomhdr')->insertOrIgnore($data);
-        // }
+        // Use the query builder to insert the data and ignore duplicates
+        foreach (array_chunk($insertData, 1000) as &$data) {
+            DB::table('jda_pomhdr')->insertOrIgnore($data);
+        }
 
 
         return response()->json([
@@ -107,7 +107,10 @@ class JdaController extends Controller
             return $row;
         });
 
-        $rowCount = $data->count();
+
+        //! Add Table Colomn and Insert for "ivvndn"
+
+        // $rowCount = $data->count();
         // // Prepare the data for mass insertion
         // $insertData = [];
         // foreach ($data as &$data_record) {
@@ -125,7 +128,7 @@ class JdaController extends Controller
 
 
         return response()->json([
-            'count' => $rowCount,
+            // 'count' => $rowCount,
             'data' => $data,
         ], 200);
     }
