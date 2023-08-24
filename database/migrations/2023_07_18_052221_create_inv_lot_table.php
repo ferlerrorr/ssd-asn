@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('inv_lot', function (Blueprint $table) {
             $table->id();
-            $table->string('InvNo', 50);
+            $table->string('InvNo', 50)->index();
             $table->string('ItemCode', 50)->nullable();
             $table->string('LotNo', 50)->nullable();
             $table->string('ExpiryMM', 50)->nullable();

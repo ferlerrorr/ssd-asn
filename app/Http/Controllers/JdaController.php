@@ -60,10 +60,10 @@ class JdaController extends Controller
             ];
         }
 
-        // Use the query builder to insert the data and ignore duplicates
-        foreach (array_chunk($insertData, 1000) as &$data) {
-            DB::table('jda_pomhdr')->insertOrIgnore($data);
-        }
+        // // Use the query builder to insert the data and ignore duplicates
+        // foreach (array_chunk($insertData, 1000) as &$data) {
+        //     DB::table('jda_pomhdr')->insert($data);
+        // }
 
 
         return response()->json([
