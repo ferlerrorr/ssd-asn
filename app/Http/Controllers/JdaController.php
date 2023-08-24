@@ -15,9 +15,7 @@ class JdaController extends Controller
      */
     public function Po()
     {
-
-
-        $date = Carbon::now()->subDays(90)->toDateString('Y-m-d');
+        $date = Carbon::now()->subDays(30)->toDateString('Y-m-d');
         $modifiedDate = substr(str_replace("-", "", $date), 2);
 
         //Delimiter for PO
@@ -60,10 +58,10 @@ class JdaController extends Controller
             ];
         }
 
-        // // Use the query builder to insert the data and ignore duplicates
-        // foreach (array_chunk($insertData, 1000) as &$data) {
-        //     DB::table('jda_pomhdr')->insert($data);
-        // }
+        // Use the query builder to insert the data and ignore duplicates
+        foreach (array_chunk($insertData, 1000) as &$data) {
+            DB::table('jda_pomhdr')->upsert($data, ['jp_PONUMB']);
+        }
 
 
         return response()->json([

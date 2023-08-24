@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('jda_pomhdr', function (Blueprint $table) {
             $table->id('jp_id');
-            $table->string('jp_PONUMB', 155)->index();
+            $table->string('jp_PONUMB', 155)->index()->unique();
             $table->string('jp_POVNUM', 155);
             $table->string('jp_PONOT1', 155)->nullable();
             $table->string('jp_POSTAT', 155);
