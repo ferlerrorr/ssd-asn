@@ -1395,41 +1395,120 @@ class AsnFileController extends Controller
 
         ];
 
+        // $invNumbers = DB::table('inv_hdr')
+        //     ->whereIn('PORef', $PORefs)
+        //     ->pluck('InvNo')
+        //     ->toArray();
+
+        // $dataArray = [];
+
+        // foreach ($invNumbers as &$invNo) {
+        //     $invDetails = DB::table('inv_dtl')
+        //         ->where('InvNo', $invNo)
+        //         ->pluck('ItemCode')
+        //         ->toArray();
+
+        //     $invLots = DB::table('inv_lot')
+        //         ->where('InvNo', $invNo)
+        //         ->whereIn('ItemCode', $invDetails)
+        //         ->get();
+
+        //     foreach ($invLots as &$invLot) {
+        //         $invHdr = DB::table('inv_hdr')
+        //             ->where('InvNo', $invNo)
+        //             ->first();
+
+        //         $poRef = $invHdr->PORef;
+
+        //         $jp_POVNUM = DB::table('jda_pomhdr')
+        //             ->where('jp_PONUMB', $poRef)
+        //             ->value('jp_POVNUM');
+
+        //         $itemCode = $invLot->ItemCode;
+
+        //         $ji_INUMBR = DB::table('jda_invmst')
+        //             ->where('ji_IMFGNO', $itemCode)
+        //             ->orWhere('ji_IVVNDN', $itemCode)
+        //             ->value('ji_INUMBR');
+
+        //         $item = [
+        //             $jp_POVNUM,
+        //             $poRef,
+        //             $ji_INUMBR,
+        //             $invLot->Qty,
+        //             $invLot->LotNo,
+        //             $invLot->ExpiryMM . $invLot->ExpiryDD . $invLot->ExpiryYYYY,
+        //             // 'InvNo' => $invNo,
+        //             // 'itemCode' => $itemCode,
+        //         ];
+
+        //         $dataArray[] = $item;
+        //     }
+        // }
+
+
+        //! Eager loaded
         $invNumbers = DB::table('inv_hdr')
             ->whereIn('PORef', $PORefs)
             ->pluck('InvNo')
             ->toArray();
 
+        $invDetailsMap = [];
+        $invLotsMap = [];
+        $invHdrsMap = [];
+        $jp_POVNUMMap = [];
+        $ji_INUMBRMap = [];
+
+        // Fetch invDetails and invLots using eager loading
+        $invLots = DB::table('inv_lot')
+            ->whereIn('InvNo', $invNumbers)
+            ->get()
+            ->groupBy('InvNo');
+
+        foreach ($invLots as $invNo => $lots) {
+            $invDetailsMap[$invNo] = $lots->pluck('ItemCode')->toArray();
+            $invLotsMap[$invNo] = $lots;
+        }
+
+        // Fetch invHdrs using eager loading
+        $invHdrs = DB::table('inv_hdr')
+            ->whereIn('InvNo', $invNumbers)
+            ->get()
+            ->keyBy('InvNo');
+
+        foreach ($invHdrs as $invNo => $invHdr) {
+            $invHdrsMap[$invNo] = $invHdr;
+        }
+
         $dataArray = [];
 
         foreach ($invNumbers as $invNo) {
-            $invDetails = DB::table('inv_dtl')
-                ->where('InvNo', $invNo)
-                ->pluck('ItemCode')
-                ->toArray();
+            $invLots = $invLotsMap[$invNo];
+            $invDetails = $invDetailsMap[$invNo];
+            $invHdr = $invHdrsMap[$invNo];
+            $poRef = $invHdr->PORef;
 
-            $invLots = DB::table('inv_lot')
-                ->where('InvNo', $invNo)
-                ->whereIn('ItemCode', $invDetails)
-                ->get();
-
-            foreach ($invLots as $invLot) {
-                $invHdr = DB::table('inv_hdr')
-                    ->where('InvNo', $invNo)
-                    ->first();
-
-                $poRef = $invHdr->PORef;
-
-                $jp_POVNUM = DB::table('jda_pomhdr')
+            if (!isset($jp_POVNUMMap[$poRef])) {
+                $jp_POVNUMMap[$poRef] = DB::table('jda_pomhdr')
                     ->where('jp_PONUMB', $poRef)
                     ->value('jp_POVNUM');
+            }
 
+            $jp_POVNUM = $jp_POVNUMMap[$poRef];
+
+            $itemArray = [];
+
+            foreach ($invLots as $invLot) {
                 $itemCode = $invLot->ItemCode;
 
-                $ji_INUMBR = DB::table('jda_invmst')
-                    ->where('ji_IMFGNO', $itemCode)
-                    ->orWhere('ji_IVVNDN', $itemCode)
-                    ->value('ji_INUMBR');
+                if (!isset($ji_INUMBRMap[$itemCode])) {
+                    $ji_INUMBRMap[$itemCode] = DB::table('jda_invmst')
+                        ->where('ji_IMFGNO', $itemCode)
+                        ->orWhere('ji_IVVNDN', $itemCode)
+                        ->value('ji_INUMBR');
+                }
+
+                $ji_INUMBR = $ji_INUMBRMap[$itemCode];
 
                 $item = [
                     $jp_POVNUM,
@@ -1438,26 +1517,25 @@ class AsnFileController extends Controller
                     $invLot->Qty,
                     $invLot->LotNo,
                     $invLot->ExpiryMM . $invLot->ExpiryDD . $invLot->ExpiryYYYY,
-                    // 'InvNo' => $invNo,
-                    // 'itemCode' => $itemCode,
                 ];
 
-                $dataArray[] = $item;
+                $itemArray[] = $item;
             }
-        }
 
-        usort($dataArray, function ($a, $b) {
-            return $a[0] <=> $b[0]; // Compare the first element of each subarray
-        });
+            $dataArray = array_merge($dataArray, $itemArray);
+        }
+        //!
+
 
         // $dd = count($dataArray);
-
         // return response()->json([$dd, $dataArray]);
 
-        foreach ($dataArray as $row) {
+
+        $csvData = [];
+        foreach ($dataArray as &$row) {
             $csvData[] = implode(',', $row);
         }
-        $csvContent = implode("\n", $csvData);
+        $csvContent = implode("\r\n", $csvData);
 
         $headers = [
             'Content-Type' => 'text/csv',
