@@ -1,0 +1,996 @@
+
+   INFO  Running scheduled tasks every minute.  
+
+  2023-08-29 05:13:00 Running ['artisan' jda:po] .................. 236ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:14:00 Running ['artisan' jda:sku] ................. 573ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:14:01 Running ['artisan' jda:po] .................. 379ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:15:00 Running ['artisan' jda:po] .................. 111ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:16:00 Running ['artisan' jda:sku] .................. 98ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:16:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:17:00 Running ['artisan' jda:po] .................. 107ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:18:00 Running ['artisan' jda:sku] ................. 164ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:18:00 Running ['artisan' jda:po] .................. 142ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:19:00 Running ['artisan' jda:po] .................. 131ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:20:00 Running ['artisan' jda:sku] .................. 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:20:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:21:00 Running ['artisan' jda:po] .................. 106ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:22:00 Running ['artisan' jda:sku] ................. 136ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:22:00 Running ['artisan' jda:po] .................. 135ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:23:00 Running ['artisan' jda:po] ................... 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:24:00 Running ['artisan' jda:sku] ................. 104ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:24:00 Running ['artisan' jda:po] ................... 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:25:00 Running ['artisan' jda:po] .................. 142ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:26:00 Running ['artisan' jda:sku] ................. 101ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:26:00 Running ['artisan' jda:po] ................... 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:27:00 Running ['artisan' jda:po] .................. 101ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:28:00 Running ['artisan' jda:sku] .................. 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:28:00 Running ['artisan' jda:po] ................... 83ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:29:00 Running ['artisan' jda:po] .................. 106ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:30:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:30:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:31:00 Running ['artisan' jda:po] .................. 494ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:32:00 Running ['artisan' jda:sku] ................. 255ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:32:00 Running ['artisan' jda:po] .................. 316ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:33:00 Running ['artisan' jda:po] .................. 197ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:34:00 Running ['artisan' jda:sku] .................. 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:34:00 Running ['artisan' jda:po] ................... 81ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:35:00 Running ['artisan' jda:po] .................. 136ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:36:00 Running ['artisan' jda:sku] .................. 97ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:36:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:37:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:38:00 Running ['artisan' jda:sku] ................. 265ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:38:00 Running ['artisan' jda:po] .................. 237ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:39:00 Running ['artisan' jda:po] .................. 118ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:40:00 Running ['artisan' jda:sku] .................. 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:40:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:41:00 Running ['artisan' jda:po] .................. 105ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:42:00 Running ['artisan' jda:sku] .................. 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:42:00 Running ['artisan' jda:po] ................... 80ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:43:00 Running ['artisan' jda:po] .................. 103ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:44:00 Running ['artisan' jda:sku] ................. 267ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:44:00 Running ['artisan' jda:po] .................. 100ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:45:00 Running ['artisan' jda:po] .................. 256ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:46:00 Running ['artisan' jda:sku] ................. 132ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:46:00 Running ['artisan' jda:po] .................. 104ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:47:00 Running ['artisan' jda:po] .................. 155ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:48:00 Running ['artisan' jda:sku] ................. 128ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:48:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:49:00 Running ['artisan' jda:po] .................. 100ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:50:00 Running ['artisan' jda:sku] .................. 97ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:50:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:51:00 Running ['artisan' jda:po] ................... 96ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:52:00 Running ['artisan' jda:sku] .................. 95ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:52:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:53:00 Running ['artisan' jda:po] ................... 97ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:54:00 Running ['artisan' jda:sku] .................. 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:54:00 Running ['artisan' jda:po] ................... 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:55:00 Running ['artisan' jda:po] ................... 99ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:56:00 Running ['artisan' jda:sku] ................. 264ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:56:00 Running ['artisan' jda:po] .................. 290ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:57:00 Running ['artisan' jda:po] .................. 104ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:58:00 Running ['artisan' jda:sku] .................. 83ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 05:58:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 05:59:00 Running ['artisan' jda:po] .................. 124ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:00:00 Running ['artisan' jda:sku] .................. 98ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:00:00 Running ['artisan' jda:po] .................. 133ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:01:00 Running ['artisan' jda:po] ................... 83ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:02:00 Running ['artisan' jda:sku] ................. 130ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:02:00 Running ['artisan' jda:po] .................. 135ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:03:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:04:00 Running ['artisan' jda:sku] ................. 167ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:04:00 Running ['artisan' jda:po] .................. 169ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:05:00 Running ['artisan' jda:po] ................... 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+   ParseError 
+
+  syntax error, unexpected token "++"
+
+  at app/Console/Commands/JdaPo.php:38
+     34▕         $envFilePath = base_path('.env');
+     35▕         $currentContent = File::get($envFilePath);
+     36▕ 
+     37▕         // Update the ENVCRON variable with a new value
+  ➜  38▕         $newValue = 'new_value_here'++;
+     39▕         $updatedContent = preg_replace('/(ENVCRON=)(.*)/', '$1' . $newValue, $currentContent);
+     40▕ 
+     41▕         // Write the updated content back to the .env file
+     42▕         File::put($envFilePath, $updatedContent);
+
+      [2m+1 vendor frames [22m
+  2   [internal]:0
+      Composer\Autoload\ClassLoader::loadClass()
+
+      [2m+1 vendor frames [22m
+  4   app/Console/Kernel.php:35
+      Illuminate\Foundation\Console\Kernel::load()
+  2023-08-29 06:07:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:08:00 Running ['artisan' jda:sku] ................. 107ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:08:00 Running ['artisan' jda:po] .................. 100ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:09:00 Running ['artisan' jda:po] .................. 102ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:10:00 Running ['artisan' jda:sku] ................. 371ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:10:00 Running ['artisan' jda:po] .................. 120ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:11:00 Running ['artisan' jda:po] .................. 134ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:12:00 Running ['artisan' jda:sku] ................. 101ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:12:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:13:00 Running ['artisan' jda:po] .................. 103ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:14:00 Running ['artisan' jda:sku] ................. 143ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:14:00 Running ['artisan' jda:po] .................. 145ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:15:00 Running ['artisan' jda:po] .................. 138ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:16:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:16:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:17:00 Running ['artisan' jda:po] .................. 886ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:18:00 Running ['artisan' jda:sku] ................. 192ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:18:00 Running ['artisan' jda:po] .................. 345ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:19:00 Running ['artisan' jda:po] .................. 139ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:20:00 Running ['artisan' jda:sku] ................. 127ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:20:00 Running ['artisan' jda:po] .................. 122ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:21:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:22:00 Running ['artisan' jda:sku] ................. 251ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:22:00 Running ['artisan' jda:po] .................. 268ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:23:00 Running ['artisan' jda:po] .................. 139ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:24:00 Running ['artisan' jda:sku] ................. 159ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:24:00 Running ['artisan' jda:po] .................. 190ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:25:00 Running ['artisan' jda:po] .................. 214ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:26:00 Running ['artisan' jda:sku] ................. 273ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:26:00 Running ['artisan' jda:po] .................. 400ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:27:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:28:00 Running ['artisan' jda:sku] .................. 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:28:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:29:00 Running ['artisan' jda:po] .................. 102ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:30:00 Running ['artisan' jda:sku] .................. 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:30:00 Running ['artisan' jda:po] ................... 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:31:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:32:00 Running ['artisan' jda:sku] ................. 104ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:32:00 Running ['artisan' jda:po] .................. 175ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:33:00 Running ['artisan' jda:po] .................. 150ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:34:00 Running ['artisan' jda:sku] ................. 116ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:34:00 Running ['artisan' jda:po] .................. 127ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:35:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:36:00 Running ['artisan' jda:sku] .................. 83ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:36:00 Running ['artisan' jda:po] .................. 140ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:37:00 Running ['artisan' jda:po] .................. 197ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:38:00 Running ['artisan' jda:sku] ................. 124ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:38:00 Running ['artisan' jda:po] .................. 116ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:39:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:40:00 Running ['artisan' jda:sku] ................. 648ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:40:01 Running ['artisan' jda:po] .................. 131ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:41:00 Running ['artisan' jda:po] .................. 105ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:42:00 Running ['artisan' jda:sku] .................. 99ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:42:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:43:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:44:00 Running ['artisan' jda:sku] .................. 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:44:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:45:00 Running ['artisan' jda:po] ................... 85ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:46:00 Running ['artisan' jda:sku] .................. 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:46:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:47:00 Running ['artisan' jda:po] ................... 99ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:48:00 Running ['artisan' jda:sku] .................. 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:48:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:49:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:50:00 Running ['artisan' jda:sku] .................. 85ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:50:00 Running ['artisan' jda:po] .................. 101ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:51:00 Running ['artisan' jda:po] ................... 99ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:52:00 Running ['artisan' jda:sku] ................. 103ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:52:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:53:00 Running ['artisan' jda:po] .................. 101ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:54:00 Running ['artisan' jda:sku] ............... 1,500ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:54:02 Running ['artisan' jda:po] .................. 848ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:55:00 Running ['artisan' jda:po] .................. 592ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:56:00 Running ['artisan' jda:sku] ................. 211ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:56:00 Running ['artisan' jda:po] .................. 179ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:57:00 Running ['artisan' jda:po] .................. 153ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:58:00 Running ['artisan' jda:sku] ................. 104ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 06:58:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 06:59:00 Running ['artisan' jda:po] .................. 126ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:00:00 Running ['artisan' jda:sku] ................. 127ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:00:00 Running ['artisan' jda:po] .................. 110ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:01:00 Running ['artisan' jda:po] .................. 109ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:02:00 Running ['artisan' jda:sku] ................. 100ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:02:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:03:01 Running ['artisan' jda:po] ................ 1,083ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:04:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:04:00 Running ['artisan' jda:po] ................... 81ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:05:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:06:00 Running ['artisan' jda:sku] .................. 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:06:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:07:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:08:00 Running ['artisan' jda:sku] .................. 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:08:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:09:00 Running ['artisan' jda:po] ................... 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:10:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:10:00 Running ['artisan' jda:po] ................... 83ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:11:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:12:00 Running ['artisan' jda:sku] .................. 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:12:00 Running ['artisan' jda:po] ................... 83ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:13:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:14:00 Running ['artisan' jda:sku] .................. 85ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:14:00 Running ['artisan' jda:po] ................... 83ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:15:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:16:00 Running ['artisan' jda:sku] .................. 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:16:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:17:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:18:00 Running ['artisan' jda:sku] .................. 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:18:00 Running ['artisan' jda:po] ................... 82ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:19:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:20:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:20:00 Running ['artisan' jda:po] ................... 83ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:21:00 Running ['artisan' jda:po] .................. 160ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:22:00 Running ['artisan' jda:sku] .................. 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:22:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:23:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:24:00 Running ['artisan' jda:sku] ................. 131ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:24:00 Running ['artisan' jda:po] ................... 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:25:00 Running ['artisan' jda:po] ................... 98ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:26:00 Running ['artisan' jda:sku] .................. 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:26:00 Running ['artisan' jda:po] ................... 85ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:27:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:28:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:28:00 Running ['artisan' jda:po] ................... 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:29:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:30:00 Running ['artisan' jda:sku] .................. 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:30:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:31:00 Running ['artisan' jda:po] ................... 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:32:00 Running ['artisan' jda:sku] ................. 105ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:32:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:33:00 Running ['artisan' jda:po] ................... 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:34:00 Running ['artisan' jda:sku] .................. 99ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:34:00 Running ['artisan' jda:po] ................... 95ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:35:00 Running ['artisan' jda:po] ................... 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:36:00 Running ['artisan' jda:sku] .................. 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:36:00 Running ['artisan' jda:po] ................... 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:37:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:38:00 Running ['artisan' jda:sku] .................. 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:38:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:39:00 Running ['artisan' jda:po] ................... 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:40:00 Running ['artisan' jda:sku] ................. 104ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:40:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:41:00 Running ['artisan' jda:po] ................... 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:42:00 Running ['artisan' jda:sku] ................. 108ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:42:00 Running ['artisan' jda:po] .................. 103ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:43:00 Running ['artisan' jda:po] ................... 98ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:44:00 Running ['artisan' jda:sku] .................. 95ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:44:00 Running ['artisan' jda:po] ................... 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:45:00 Running ['artisan' jda:po] ................... 95ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:46:00 Running ['artisan' jda:sku] .................. 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:46:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:47:00 Running ['artisan' jda:po] .................. 115ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:48:00 Running ['artisan' jda:sku] .................. 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:48:00 Running ['artisan' jda:po] ................... 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:49:00 Running ['artisan' jda:po] ................... 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:50:00 Running ['artisan' jda:sku] .................. 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:50:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:51:00 Running ['artisan' jda:po] ................... 96ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:52:00 Running ['artisan' jda:sku] .................. 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:52:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:53:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:54:00 Running ['artisan' jda:sku] .................. 97ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:54:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:55:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:56:00 Running ['artisan' jda:sku] .................. 99ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:56:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:57:00 Running ['artisan' jda:po] ................... 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:58:00 Running ['artisan' jda:sku] .................. 96ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 07:58:00 Running ['artisan' jda:po] ................... 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 07:59:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:00:00 Running ['artisan' jda:sku] .................. 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:00:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:01:00 Running ['artisan' jda:po] .................. 111ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:02:00 Running ['artisan' jda:sku] .................. 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:02:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:03:00 Running ['artisan' jda:po] ................... 95ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:04:00 Running ['artisan' jda:sku] ................. 101ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:04:00 Running ['artisan' jda:po] .................. 101ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:05:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:06:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:06:00 Running ['artisan' jda:po] ................... 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:07:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:08:00 Running ['artisan' jda:sku] .................. 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:08:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:09:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:10:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:10:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:11:00 Running ['artisan' jda:po] ................... 98ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:12:00 Running ['artisan' jda:sku] .................. 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:12:00 Running ['artisan' jda:po] ................... 95ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:13:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:14:00 Running ['artisan' jda:sku] .................. 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:14:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:15:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:16:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:16:00 Running ['artisan' jda:po] ................... 85ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:17:00 Running ['artisan' jda:po] ................... 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:18:00 Running ['artisan' jda:sku] .................. 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:18:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:19:00 Running ['artisan' jda:po] ................... 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:20:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:20:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:21:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:22:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:22:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:23:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:24:00 Running ['artisan' jda:sku] .................. 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:24:00 Running ['artisan' jda:po] ................... 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:25:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:26:00 Running ['artisan' jda:sku] .................. 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:26:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:27:00 Running ['artisan' jda:po] ................... 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:28:00 Running ['artisan' jda:sku] .................. 98ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:28:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:29:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:30:00 Running ['artisan' jda:sku] .................. 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:30:00 Running ['artisan' jda:po] ................... 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:31:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:32:00 Running ['artisan' jda:sku] .................. 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:32:00 Running ['artisan' jda:po] ................... 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:33:00 Running ['artisan' jda:po] ................... 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:34:00 Running ['artisan' jda:sku] .................. 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:34:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:35:00 Running ['artisan' jda:po] ................... 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:36:00 Running ['artisan' jda:sku] .................. 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:36:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:37:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:38:00 Running ['artisan' jda:sku] .................. 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:38:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:39:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:40:00 Running ['artisan' jda:sku] .................. 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:40:00 Running ['artisan' jda:po] ................... 85ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:41:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:42:00 Running ['artisan' jda:sku] .................. 97ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:42:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:43:00 Running ['artisan' jda:po] ................... 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:44:00 Running ['artisan' jda:sku] .................. 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:44:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:45:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:46:00 Running ['artisan' jda:sku] .................. 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:46:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:47:00 Running ['artisan' jda:po] .................. 111ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:48:00 Running ['artisan' jda:sku] .................. 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:48:00 Running ['artisan' jda:po] ................... 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:49:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:50:00 Running ['artisan' jda:sku] .................. 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:50:00 Running ['artisan' jda:po] ................... 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:51:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:52:00 Running ['artisan' jda:sku] .................. 95ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:52:00 Running ['artisan' jda:po] ................... 86ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:53:00 Running ['artisan' jda:po] ................... 88ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:54:00 Running ['artisan' jda:sku] .................. 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:54:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:55:00 Running ['artisan' jda:po] ................... 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:56:00 Running ['artisan' jda:sku] .................. 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:56:00 Running ['artisan' jda:po] ................... 92ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:57:00 Running ['artisan' jda:po] .................. 105ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:58:00 Running ['artisan' jda:sku] .................. 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 08:58:00 Running ['artisan' jda:po] ................... 90ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 08:59:00 Running ['artisan' jda:po] ................... 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:00:00 Running ['artisan' jda:sku] .................. 91ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 09:00:00 Running ['artisan' jda:po] ................... 97ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:01:00 Running ['artisan' jda:po] ................... 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:02:00 Running ['artisan' jda:sku] ................. 100ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 09:02:00 Running ['artisan' jda:po] ................... 87ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:03:00 Running ['artisan' jda:po] ................... 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:04:00 Running ['artisan' jda:sku] ................. 198ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 09:04:00 Running ['artisan' jda:po] .................. 172ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:05:00 Running ['artisan' jda:po] ................... 93ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:06:00 Running ['artisan' jda:sku] ................. 105ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 09:06:00 Running ['artisan' jda:po] .................. 117ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:07:00 Running ['artisan' jda:po] .................. 102ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:08:00 Running ['artisan' jda:sku] .................. 94ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 09:08:00 Running ['artisan' jda:po] ................... 84ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:09:00 Running ['artisan' jda:po] .................. 117ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:10:00 Running ['artisan' jda:sku] ................. 182ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 09:10:00 Running ['artisan' jda:po] .................. 164ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:11:00 Running ['artisan' jda:po] ................... 96ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:12:00 Running ['artisan' jda:sku] .................. 98ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 09:12:00 Running ['artisan' jda:po] ................... 89ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:13:00 Running ['artisan' jda:po] ................... 99ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:14:02 Running ['artisan' jda:sku] ............... 4,414ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 09:14:06 Running ['artisan' jda:po] ................ 1,962ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:15:00 Running ['artisan' jda:po] .................. 145ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+
+  2023-08-29 09:16:00 Running ['artisan' jda:sku] .................. 95ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:sku > '/dev/null' 2>&1  
+  2023-08-29 09:16:00 Running ['artisan' jda:po] ................... 95ms DONE
+  ⇂ '/usr/bin/php8.1' 'artisan' jda:po > '/dev/null' 2>&1  
+

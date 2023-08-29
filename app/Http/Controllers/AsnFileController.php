@@ -191,37 +191,6 @@ class AsnFileController extends Controller
             }
 
 
-            // foreach ($validate[2] as $index => $item) {
-            //     $itemValidator = Validator::make(['item_2' => $item], [
-            //         'item_2.1' => 'max:20|required',
-            //         'item_2.3' => 'max:10|required',
-            //         'item_2.4' => 'max:20|required',
-            //     ], [
-            //         'item_2.1.max' => " Invoice Number must not exceed :max characters.",
-            //         'item_2.3.max' => " Item Code must not exceed 10 characters.",
-            //         'item_2.4.max' => " Lot Number must not exceed :max characters.",
-            //         'item_2.1.required' => " Invoice Number must not be Null or Missing.",
-            //         'item_2.3.required' => " Item Code must not be Null or Missing.",
-            //         'item_2.4.required' => " Lot Number must not be Null or Missing.",
-            //     ]);
-
-            //     if ($itemValidator->fails()) {
-            //         $errors = $itemValidator->errors();
-            //         $failedAttributes = array_keys($errors->messages());
-            //         $errorMessages = $errors->all();
-
-            //         $failedItem = [
-            //             $item,
-            //             array_map(function ($attribute, $error) use ($item) {
-            //                 $attributeName = substr($attribute, 7);
-            //                 return "$item[$attributeName]" . $error;
-            //             }, $failedAttributes, $errorMessages),
-            //         ];
-            //         $failedItems[] = $failedItem;
-            //     } else {
-            //         $passedItems[2][] = $item;
-            //     }
-
             foreach ($validate[2] as $index => $item) {
                 $itemValidator = Validator::make(['item_2' => $item], [
                     'item_2.1' => 'max:20|required',
@@ -627,8 +596,6 @@ class AsnFileController extends Controller
                     if (count($element) <= 3) {
                         return response()->json("file is not valid");
                     } else {
-
-
                         $passedItems_dd = [];
                         $failedItems_dd = [];
 
@@ -720,11 +687,8 @@ class AsnFileController extends Controller
                             }
                         }
                         //! Validations->
-
                         if ($failedItems_dd == !null) {
                             $insertData_H = [];
-
-
                             foreach ($passedItems_dd as &$data_record) {
                                 $insertData_H[] = [
                                     'InvNo' => isset($data_record["H_InvNo"]) ? $data_record["H_InvNo"] : null,
@@ -749,30 +713,6 @@ class AsnFileController extends Controller
 
                             $insertData_L = [];
                             $L_Count = 0;
-
-
-                            //! date format 
-                            // foreach ($passedItems_dd  as &$data_record) {
-                            //     $insertData_L[] = [
-                            //         'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
-                            //         'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
-                            //         'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
-                            //         'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
-                            //         'ExpiryDD' => "01",
-                            //         'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
-                            //         'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
-                            //         'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
-                            //         'TransactionCode' => (
-                            //             (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
-                            //             (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
-                            //             (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
-                            //             (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
-                            //             (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
-                            //             (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
-                            //             $L_Count++
-                            //         )
-                            //     ];
-                            // }
 
 
                             foreach ($passedItems_dd as &$data_record) {
@@ -884,27 +824,6 @@ class AsnFileController extends Controller
                             $L_Count = 0;
 
 
-                            // foreach ($result as &$data_record) {
-                            //     $insertData_L[] = [
-                            //         'InvNo' => isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null,
-                            //         'ItemCode' => isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null,
-                            //         'LotNo' => isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null,
-                            //         'ExpiryMM' => isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null,
-                            //         'ExpiryDD' => "01",
-                            //         'ExpiryYYYY' => isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null,
-                            //         'Qty' => isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null,
-                            //         'SupCode' => isset($data_record["L_SupCode"]) ? $data_record["L_SupCode"] : null,
-                            //         'TransactionCode' => (
-                            //             (isset($data_record["L_InvNo"]) ? $data_record["L_InvNo"] : null) .
-                            //             (isset($data_record["L_ItemCode"]) ? $data_record["L_ItemCode"] : null) .
-                            //             (isset($data_record["L_LotNo"]) ? $data_record["L_LotNo"] : null) .
-                            //             (isset($data_record["L_ExpiryMM"]) ? $data_record["L_ExpiryMM"] : null) .
-                            //             (isset($data_record["L_ExpiryYYYY"]) ? $data_record["L_ExpiryYYYY"] : null) .
-                            //             (isset($data_record["L_Qty"]) ? $data_record["L_Qty"] : null) .
-                            //             $L_Count++
-                            //         )
-                            //     ];
-                            // }
 
                             foreach ($result as &$data_record) {
                                 $ExpiryMM = isset($data_record["L_ExpiryMM"]) ? substr($data_record["L_ExpiryMM"], -4, 2) : null;
@@ -1292,49 +1211,7 @@ class AsnFileController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function headers()
-    // {
-
-    //     $data1 = (array) DB::table('d_column_setup')
-    //         ->where('D_vid', 200)
-    //         ->first() ?? [];
-    //     $data2 = (array) DB::table('l_column_setup')
-    //         ->where('L_vid', 200)
-    //         ->first() ?? [];
-    //     $data3 = (array) DB::table('h_column_setup')
-    //         ->where('H_vid', 200)
-    //         ->first() ?? [];
-
-
-    //     $combinedArray = array_merge($data3, $data1, $data2);
-
-    //     $filteredData = array_filter((array) $combinedArray, function ($value, $key) {
-    //         return !is_null($value) && $key !== 'D_id' && $key !== 'L_id' && $key !== 'H_id' && $key !== 'H_file_type' && $key !== 'D_file_type' && $key !== 'L_file_type' && $key !== 'L_vid' && $key !== 'L_vendor' && $key !== 'D_vid' && $key !== 'D_vendor';
-    //     }, ARRAY_FILTER_USE_BOTH);
-
-
-
-    //     $insertData_L = [];
-    //     foreach ($filteredData as &$data_record) {
-    //         $I_Count = 0;
-    //         $insertData_L[] = [
-    //             'InvNo' => $data_record["L_InvNo"],
-    //             'ItemCode' => $data_record["L_ItemCode"],
-    //             'LotNo' => $data_record["L_LotNo"],
-    //             'ExpiryMM' => $data_record["L_ExpiryMM"],
-    //             'ExpiryDD' => "01",
-    //             'ExpiryYYYY' => $data_record["L_ExpiryYYYY"],
-    //             'Qty' => $data_record["L_Qty"],
-    //             'TransactionCode' => ($data_record["L_InvNo"] . $data_record["L_ItemCode"] . $data_record["L_LotNo"] . $data_record["L_ExpiryMM"] . $data_record["L_ExpiryYYYY"] . $data_record["L_Qty"] . $I_Count++)
-    //         ];
-    //     }
-    // }
-
+    //! Export - --------------------------------------------------------------------------->
     /**
      *  ? Export ASN File
      *
