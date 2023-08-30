@@ -563,9 +563,13 @@ class ComposerStaticInit15131d1ff6119635cef8a50149ff156f
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\JdaPo' => __DIR__ . '/../..' . '/app/Console/Commands/JdaPo.php',
+        'App\\Console\\Commands\\JdaSku' => __DIR__ . '/../..' . '/app/Console/Commands/JdaSku.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AsnFileController' => __DIR__ . '/../..' . '/app/Http/Controllers/AsnFileController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\JdaController' => __DIR__ . '/../..' . '/app/Http/Controllers/JdaController.php',
         'App\\Http\\Controllers\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/TestController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -577,6 +581,7 @@ class ComposerStaticInit15131d1ff6119635cef8a50149ff156f
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\inv_lot' => __DIR__ . '/../..' . '/app/Models/inv_lot.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

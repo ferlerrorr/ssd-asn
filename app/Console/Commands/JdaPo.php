@@ -29,7 +29,6 @@ class JdaPo extends Command
      */
     public function handle()
     {
-
         // Get the current value of ENVCRON
         $currentValue = Env::get('ENVCRON');
         $incrementedValue = intval($currentValue) + 1;

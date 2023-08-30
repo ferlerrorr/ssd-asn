@@ -21,8 +21,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Use the command's signature (e.g., jda:sku) instead of the command name.
-        $schedule->command('jda:sku')->everyTwoMinutes();
-        $schedule->command('jda:po')->everyMinute();
+        $schedule->command('jda:sku')->everyFiveMinutes();
+        // $schedule->command('jda:po')->everyMinute();
     }
 
     /**

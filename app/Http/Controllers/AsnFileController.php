@@ -1223,106 +1223,51 @@ class AsnFileController extends Controller
         //? Method Post
 
         $PORefs = [
-            5991863,
-            5991867,
-            5991868,
-            5991869,
-            5991875,
-            5991885,
-            5991953,
-            5991954,
-            5991968,
-            5991999,
-            5992004,
-            5992010,
-            5992024,
-            5992062,
-            5992065,
-            5992068,
-            5992078,
-            5992091,
-            5992112,
-            5992116,
-            5992130,
-            5992157,
-            5992169,
-            5992171,
-            5992182,
-            5992241,
-            5992271,
-            5992275,
-            5992281,
-            5992282,
-            5992283,
-            5992286,
-            5992298,
-            5992329,
-            5992367,
-            5992392,
-            5992395,
-            5992398,
-            5992406,
-            5992418,
-            5992420,
-            5992421,
-            5992435,
-            5992441,
-            5985664,
-            5999244,
+            5811217,
+            5811467,
+            5809946,
+            5811987,
+            5810174,
+            5810264,
+            5810165,
+            5810120,
+            5810242,
+            5810166,
+            5810184,
+            5810263,
+            5810163,
+            5810214,
+            5811301,
+            5811222,
+            5811392,
+            5811311,
+            5831300,
+            5809987,
+            5753616,
+            5809991,
+            5810047,
+            5815073,
+            5831302,
+            5831304,
+            5831309,
+            5831297,
+            5831311,
+            5759610,
+            5818242,
+            5831322,
+            5831320,
+            5831319,
+            5831321,
+            5831318,
+            5831324,
+            5815075,
+            5831303,
+            5831305,
+            5831298,
+            5831295,
+            5831312
 
         ];
-
-        // $invNumbers = DB::table('inv_hdr')
-        //     ->whereIn('PORef', $PORefs)
-        //     ->pluck('InvNo')
-        //     ->toArray();
-
-        // $dataArray = [];
-
-        // foreach ($invNumbers as &$invNo) {
-        //     $invDetails = DB::table('inv_dtl')
-        //         ->where('InvNo', $invNo)
-        //         ->pluck('ItemCode')
-        //         ->toArray();
-
-        //     $invLots = DB::table('inv_lot')
-        //         ->where('InvNo', $invNo)
-        //         ->whereIn('ItemCode', $invDetails)
-        //         ->get();
-
-        //     foreach ($invLots as &$invLot) {
-        //         $invHdr = DB::table('inv_hdr')
-        //             ->where('InvNo', $invNo)
-        //             ->first();
-
-        //         $poRef = $invHdr->PORef;
-
-        //         $jp_POVNUM = DB::table('jda_pomhdr')
-        //             ->where('jp_PONUMB', $poRef)
-        //             ->value('jp_POVNUM');
-
-        //         $itemCode = $invLot->ItemCode;
-
-        //         $ji_INUMBR = DB::table('jda_invmst')
-        //             ->where('ji_IMFGNO', $itemCode)
-        //             ->orWhere('ji_IVVNDN', $itemCode)
-        //             ->value('ji_INUMBR');
-
-        //         $item = [
-        //             $jp_POVNUM,
-        //             $poRef,
-        //             $ji_INUMBR,
-        //             $invLot->Qty,
-        //             $invLot->LotNo,
-        //             $invLot->ExpiryMM . $invLot->ExpiryDD . $invLot->ExpiryYYYY,
-        //             // 'InvNo' => $invNo,
-        //             // 'itemCode' => $itemCode,
-        //         ];
-
-        //         $dataArray[] = $item;
-        //     }
-        // }
-
 
         //! Eager loaded
         $invNumbers = DB::table('inv_hdr')
