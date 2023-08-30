@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('tbl_exemption', function (Blueprint $table) {
             $table->id();
-            $table->string('e_logs', 255);
-            $table->string('e_vendor', 155);
-            $table->timestamp('e_time_stamp')->useCurrent();
+            $table->text('e_logs');
+            $table->string('e_vendor', 155)->index();
+            $table->timestamp('e_time_stamp')->useCurrent()->index();
         });
     }
 

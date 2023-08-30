@@ -69,6 +69,10 @@ class AsnFileController extends Controller
             ->first() ?? [];
 
 
+        $vendor = $data3['H_vendor'];
+
+        // return response()->json($vendor);
+
 
         $combinedArray = array_merge($data3, $data1, $data2);
 
@@ -148,11 +152,12 @@ class AsnFileController extends Controller
                     $errorMessages = $errors->all();
 
                     $failedItem = [
-                        $item,
                         array_map(function ($attribute, $error) use ($item) {
                             $attributeName = substr($attribute, 7);
                             return "$item[$attributeName]" . $error;
                         }, $failedAttributes, $errorMessages),
+                        $item,
+
                     ];
                     $failedItems[] = $failedItem;
                 } else {
@@ -178,11 +183,12 @@ class AsnFileController extends Controller
                     $errorMessages = $errors->all();
 
                     $failedItem = [
-                        $item,
                         array_map(function ($attribute, $error) use ($item) {
                             $attributeName = substr($attribute, 7);
                             return "$item[$attributeName]" . $error;
                         }, $failedAttributes, $errorMessages),
+                        $item,
+
                     ];
                     $failedItems[] = $failedItem;
                 } else {
@@ -211,11 +217,12 @@ class AsnFileController extends Controller
                     $errorMessages = $errors->all();
 
                     $failedItem = [
-                        $item,
                         array_map(function ($attribute, $error) use ($item) {
                             $attributeName = substr($attribute, 7);
                             return "$item[$attributeName]" . $error;
                         }, $failedAttributes, $errorMessages),
+                        $item,
+
                     ];
                     $failedItems[] = $failedItem;
                 } else {
@@ -391,11 +398,24 @@ class AsnFileController extends Controller
                 foreach (array_chunk($insertData_D, 1000) as &$data) {
                     DB::table('inv_dtl')->insertOrIgnore($data);
                 }
-                //Todo ($failedTtems) to be inserted to failed jobs table->
-                //Todo ($failedTtems) to be inserted to failed jobs table->
-                //Todo ($failedTtems) to be inserted to failed jobs table->
-                //Todo ($failedTtems) to be inserted to failed jobs table->
-                //Todo ($failedTtems) to be inserted to failed jobs table->
+                $insertErrData = [];
+                foreach ($failedItems as &$err_record) {
+                    // Convert the array to a string representation (using JSON in this case)
+                    $e_logs = isset($err_record) ? json_encode($err_record) : null;
+
+                    // Remove [ and ] characters as well as the \ character from the JSON string
+                    $e_logs = str_replace(['[', ']', '\\'], '', $e_logs);
+
+                    $insertErrData[] = [
+                        'e_logs' => $e_logs,
+                        'e_vendor' => $vendor,
+                    ];
+                }
+
+                // Use the query builder to insert the data and ignore duplicates
+                foreach (array_chunk($insertErrData, 1000) as $data) {
+                    DB::table('tbl_exemption')->insertOrIgnore($data);
+                }
                 $response = [
                     // 'passed_items' =>  array_values($passedItems),
                     'message' => "transaction successful but has failing records",
@@ -628,8 +648,9 @@ class AsnFileController extends Controller
                                 unset($failedItemData[4]);
 
                                 $failedItems_dd[] = [
-                                    array_values($failedItemData), // Original item data without H_InvNo, L_LotNo, and D_ItemCode
-                                    $itemErrors, // Error messages for this item
+                                    // Original item data without H_InvNo, L_LotNo, and D_ItemCode
+                                    $itemErrors,
+                                    array_values($failedItemData), // Error messages for this item
                                 ];
                             } else {
                                 // Fields exist, perform validation
@@ -678,8 +699,9 @@ class AsnFileController extends Controller
                                     unset($failedItemData[4]);
 
                                     $failedItems_dd[] = [
+                                        $itemErrors,
                                         array_values($failedItemData), // Original item data without H_InvNo, L_LotNo, and D_ItemCode
-                                        $itemErrors, // Error messages for this item
+                                        // Error messages for this item
                                     ];
                                 } else {
                                     $passedItems_dd[] = $item;
@@ -795,6 +817,26 @@ class AsnFileController extends Controller
                                 'message' => "transaction successful but has failing records",
                                 'failing_records' =>  $failedItems_dd
                             ];
+
+                            $insertErrData = [];
+                            foreach ($failedItems_dd as &$err_record) {
+                                // Convert the array to a string representation (using JSON in this case)
+                                $e_logs = isset($err_record) ? json_encode($err_record) : null;
+
+                                // Remove [ and ] characters as well as the \ character from the JSON string
+                                $e_logs = str_replace(['[', ']', '\\'], '', $e_logs);
+
+                                $insertErrData[] = [
+                                    'e_logs' => $e_logs,
+                                    'e_vendor' => $vendor,
+                                ];
+                            }
+
+                            // Use the query builder to insert the data and ignore duplicates
+                            foreach (array_chunk($insertErrData, 1000) as $data) {
+                                DB::table('tbl_exemption')->insertOrIgnore($data);
+                            }
+
                             return response()->json($response, 202);
                         } else {
                             $insertData_H = [];
@@ -942,8 +984,8 @@ class AsnFileController extends Controller
                         unset($failedItemData[4]);
 
                         $failedItems_ss[] = [
-                            array_values($failedItemData), // Original item data without H_InvNo, L_LotNo, and D_ItemCode
                             $itemErrors, // Error messages for this item
+                            array_values($failedItemData), // Original item data without H_InvNo, L_LotNo, and D_ItemCode
                         ];
                     } else {
                         // Fields exist, perform validation
@@ -1001,9 +1043,6 @@ class AsnFileController extends Controller
                     }
                 }
                 if ($failedItems_ss == !null) {
-                    //         //! Validations->
-                    //         //! New Additions>
-
                     $insertData_H = [];
 
 
@@ -1100,11 +1139,32 @@ class AsnFileController extends Controller
                         DB::table('inv_dtl')->insertOrIgnore($data);
                     }
 
+
+                    $insertErrData = [];
+                    foreach ($failedItems_ss as &$err_record) {
+                        // Convert the array to a string representation (using JSON in this case)
+                        $e_logs = isset($err_record) ? json_encode($err_record) : null;
+
+                        // Remove [ and ] characters as well as the \ character from the JSON string
+                        $e_logs = str_replace(['[', ']', '\\'], '', $e_logs);
+
+                        $insertErrData[] = [
+                            'e_logs' => $e_logs,
+                            'e_vendor' => $vendor,
+                        ];
+                    }
+
+                    // Use the query builder to insert the data and ignore duplicates
+                    foreach (array_chunk($insertErrData, 1000) as $data) {
+                        DB::table('tbl_exemption')->insertOrIgnore($data);
+                    }
+
                     $response = [
                         // 'passed_items' =>  array_values($passedItems),
                         'message' => "transaction successful but has failing records",
                         'failing_records' =>  $failedItems_ss
                     ];
+
                     return response()->json($response, 202);
                     // return response()->json($result, 200);
                 } else {
