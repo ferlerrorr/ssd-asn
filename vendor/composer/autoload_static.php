@@ -569,6 +569,7 @@ class ComposerStaticInit15131d1ff6119635cef8a50149ff156f
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AsnFileController' => __DIR__ . '/../..' . '/app/Http/Controllers/AsnFileController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\ErrLogsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ErrLogsController.php',
         'App\\Http\\Controllers\\JdaController' => __DIR__ . '/../..' . '/app/Http/Controllers/JdaController.php',
         'App\\Http\\Controllers\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/TestController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',

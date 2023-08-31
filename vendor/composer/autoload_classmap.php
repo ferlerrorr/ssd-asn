@@ -12,6 +12,7 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AsnFileController' => $baseDir . '/app/Http/Controllers/AsnFileController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\ErrLogsController' => $baseDir . '/app/Http/Controllers/ErrLogsController.php',
     'App\\Http\\Controllers\\JdaController' => $baseDir . '/app/Http/Controllers/JdaController.php',
     'App\\Http\\Controllers\\TestController' => $baseDir . '/app/Http/Controllers/TestController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

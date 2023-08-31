@@ -84,9 +84,19 @@ class ErrLogsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function searchErrlogs($date)
     {
-        //
+        $entries = DB::table('tbl_exemption')
+            ->where('e_time_stamp', 'like', '%' . $date . '%')
+            ->orderBy('e_time_stamp', 'desc')
+            ->get();
+
+        foreach ($entries as &$entry) {
+            unset($entry->id);
+            unset($entry->e_logs);
+        }
+
+        return response()->json($entries);
     }
 
     /**

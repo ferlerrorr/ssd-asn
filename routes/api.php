@@ -41,3 +41,8 @@ Route::get('/ssd/asn/jda/sku', 'App\Http\Controllers\JdaController@Sku');
 //?ASN Errlogs Routes
 Route::get('/ssd/asn/jda/errlogs/{datetime}/{vendor}', 'App\Http\Controllers\ErrLogsController@geterrlogs');
 Route::get('/ssd/asn/jda/loaderrlogs', 'App\Http\Controllers\ErrLogsController@loadErrlogs');
+Route::get('/ssd/asn/jda/searcherrlogs/{date}', 'App\Http\Controllers\ErrLogsController@searchErrlogs');
+
+
+//?Vendor Maintenance Routes
+Route::get('/ssd/asn/jda/vendor-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetup');

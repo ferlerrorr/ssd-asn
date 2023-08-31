@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
     {
         // Use the command's signature (e.g., jda:sku) instead of the command name.
         $schedule->command('jda:sku')->everyFiveMinutes();
-        // $schedule->command('jda:po')->everyMinute();
+        $schedule->command('jda:po')->everyMinute();
     }
 
     /**
