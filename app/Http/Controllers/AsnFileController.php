@@ -1277,57 +1277,13 @@ class AsnFileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function export()
+    public function export(Request $request)
     {
 
         //? Method Post
 
-        $PORefs = [
-            5811217,
-            5811467,
-            5809946,
-            5811987,
-            5810174,
-            5810264,
-            5810165,
-            5810120,
-            5810242,
-            5810166,
-            5810184,
-            5810263,
-            5810163,
-            5810214,
-            5811301,
-            5811222,
-            5811392,
-            5811311,
-            5831300,
-            5809987,
-            5753616,
-            5809991,
-            5810047,
-            5815073,
-            5831302,
-            5831304,
-            5831309,
-            5831297,
-            5831311,
-            5759610,
-            5818242,
-            5831322,
-            5831320,
-            5831319,
-            5831321,
-            5831318,
-            5831324,
-            5815075,
-            5831303,
-            5831305,
-            5831298,
-            5831295,
-            5831312
-
-        ];
+        // $PORefs = explode(",", $poref);
+        $PORefs = explode(",", $request);
 
         //! Eager loaded
         $invNumbers = DB::table('inv_hdr')

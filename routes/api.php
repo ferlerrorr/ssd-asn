@@ -29,7 +29,7 @@ Route::get('/ssd/asn', 'App\Http\Controllers\TestController@index');
 //?ASN Routes
 Route::get('/ssd/asn/vendors', 'App\Http\Controllers\AsnFileController@vendors');
 Route::post('/ssd/asn/upload/{vid}', 'App\Http\Controllers\AsnFileController@store');
-Route::get('/ssd/asn/export', 'App\Http\Controllers\AsnFileController@export');
+Route::post('/ssd/asn/export', 'App\Http\Controllers\AsnFileController@export');
 
 
 
