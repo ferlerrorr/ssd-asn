@@ -20,6 +20,8 @@ class ErrLogsController extends Controller
         $dateTimeObject = new Carbon($datetime);
         $named_dt = $dateTimeObject->format('Y-m-d');
 
+
+
         $err_logs = DB::table('tbl_exemption')
             ->where('e_time_stamp', $datetime)->where('e_vendor', $vendor)
             ->get()->toArray();
@@ -64,9 +66,12 @@ class ErrLogsController extends Controller
 
             if (!in_array($timestamp, $uniqueTimestamps)) {
                 $uniqueTimestamps[] = $timestamp;
+                $e_time_stamp = str_replace(' ', 'T', $entry->e_time_stamp); // Replace spaces with %
+
                 $filteredData[] = [
                     "e_vendor" => $entry->e_vendor,
                     "e_time_stamp" => $entry->e_time_stamp,
+                    "link" => "http://localhost:8800/api/ssd/asn/jda/errlogs/$e_time_stamp/$entry->e_vendor"
                 ];
             }
 
@@ -97,50 +102,5 @@ class ErrLogsController extends Controller
         }
 
         return response()->json($entries);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
