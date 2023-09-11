@@ -19,7 +19,18 @@ class VendorMaintenanceController extends Controller
             ->orderBy('v_vname')
             ->get(['v_vname', 'v_vid']);
 
-        return response()->json($vendors);
+        $filteredData = [];
+
+        foreach ($vendors as $vendor) {
+            $filteredData[] = [
+                "v_vname" => $vendor->v_vname,
+                "v_vid" => $vendor->v_vid,
+                "edit-link" => "http://localhost:8800/api/ssd/asn/jda/vsetupedit/$vendor->v_vid",
+                "delete-link" => "http://localhost:8800/api/ssd/asn/jda/vsetupdelete/$vendor->v_vid"
+            ];
+        }
+
+        return response()->json($filteredData);
     }
 
     /**

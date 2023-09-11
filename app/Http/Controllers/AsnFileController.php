@@ -1281,15 +1281,16 @@ class AsnFileController extends Controller
     {
 
         //? Method Post
-
-        // $PORefs = explode(",", $poref);
+        // Assuming $request contains a comma-separated string of values, you can explode it like this:
         $PORefs = explode(",", $request);
+
 
         //! Eager loaded
         $invNumbers = DB::table('inv_hdr')
             ->whereIn('PORef', $PORefs)
             ->pluck('InvNo')
             ->toArray();
+
 
         $invDetailsMap = [];
         $invLotsMap = [];
@@ -1360,9 +1361,9 @@ class AsnFileController extends Controller
                 $itemArray[] = $item;
             }
 
+            // Append itemArray to dataArray
             $dataArray = array_merge($dataArray, $itemArray);
         }
-        //!
 
 
         // $dd = count($dataArray);
