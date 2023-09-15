@@ -44,7 +44,7 @@ class VendorMaintenanceController extends Controller
     {
 
         $vendors = DB::table('h_column_setup')
-            ->orderBy('H_VendorName')
+            ->orderBy('H_Vendor')
             ->get();
 
         $filteredData = [];
@@ -152,14 +152,6 @@ class VendorMaintenanceController extends Controller
 
         return response()->json($filteredData);
     }
-
-
-
-
-
-
-
-
 
 
 
