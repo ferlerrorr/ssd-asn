@@ -45,7 +45,12 @@ Route::get('/ssd/asn/jda/searcherrlogs/{date}', 'App\Http\Controllers\ErrLogsCon
 
 
 //?Vendor Maintenance Routes
+//* Vendor Setup 
 Route::get('/ssd/asn/vendorid-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetup');
+Route::get('/ssd/asn/vendorid-setup-delete/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetupDelete');
+Route::put('/ssd/asn/vendorid-setup-update/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetupUpdate');
+Route::post('/ssd/asn/vendorid-setup-create', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetupCreate');
+//* Vendor Setup 
 Route::get('/ssd/asn/vendorhead-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsHeader');
 Route::get('/ssd/asn/vendordetail-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsDetails');
 Route::get('/ssd/asn/vendorlots-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsLots');

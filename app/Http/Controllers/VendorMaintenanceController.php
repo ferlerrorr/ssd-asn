@@ -34,6 +34,80 @@ class VendorMaintenanceController extends Controller
     }
 
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $vendor_id
+     * @return \Illuminate\Http\Response
+     */
+    public function vendorsSetupDelete($vendor_id)
+    {
+
+        // Use the DB facade to delete the record
+        DB::table('vdr_id_setup')->where('v_vid', $vendor_id)->delete();
+
+        $response = ["Vendor setup has been deleted"];
+
+        return response()->json($response);
+    }
+
+
+    public function vendorsSetupCreate(Request $request)
+    {
+        // Validate the incoming request data
+        $this->validate($request, [
+            'v_vname' => 'required|string|max:255',
+            'v_vid' => 'required|numeric',
+        ]);
+
+        // Create a new vendor setup record using query builder
+        DB::table('vdr_id_setup')->insert([
+            'v_vname' => $request->input('v_vname'),
+            'v_vid' => $request->input('v_vid'),
+        ]);
+
+
+
+        // Prepare the response
+        $res = [
+            'msg' => 'New Vendor Setup has been created',
+        ];
+
+        return response()->json($res, 201);
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $vendor_id
+     * @return \Illuminate\Http\Response
+     */
+    public function vendorsSetupUpdate($vendor_id, Request $request)
+    {
+
+        // Use the DB facade to delete the record
+        $data = DB::table('vdr_id_setup')->where('v_vid', $vendor_id);
+
+
+        $data->update([
+
+            'v_vname' =>  $request->v_vname,
+            'v_vid' =>  $request->v_vid,
+
+        ]);
+
+        $res = [
+
+            'msg' => ' Vendor Setup has been updated',
+
+        ];
+
+
+        return response()->json($res, 200);
+    }
+
 
     /**
      * Display a listing of the resource.
