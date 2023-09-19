@@ -186,6 +186,61 @@ class VendorMaintenanceController extends Controller
     }
 
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $vendor_id
+     * @return \Illuminate\Http\Response
+     */
+    public function headersSetupCreate(Request $request)
+    {
+
+
+        $v_name = $request->H_vendor;
+
+        $v_id = DB::table('vdr_id_setup')->where('v_vname', $v_name)->get('v_vid');
+
+        $data = [
+            "H_vendor" => $request->H_vendor,
+            "H_vid" =>  $v_id[0]->v_vid,
+            "H_file_type" => $request->H_file_type,
+            "H_InvNo" => $request->H_InvNo,
+            "H_InvDate" => $request->H_InvDate,
+            "H_InvAmt" => $request->H_InvAmt,
+            "H_DiscAmt" => $request->H_DiscAmt,
+            "H_StkFlag" => $request->H_StkFlag,
+            "H_VendorID" => $request->H_VendorID,
+            "H_VendorName" => $request->H_VendorName,
+            "H_PORef" => $request->H_PORef,
+            "H_SupCode" => $request->H_SupCode,
+        ];
+
+        DB::table('h_column_setup')->insert($data);
+
+        $res = [
+            'msg' => ' Header Setup has been created',
+        ];
+
+        return response()->json($res, 200);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $vendor_id
+     * @return \Illuminate\Http\Response
+     */
+    public function headersSetupDelete($vendor_id)
+    {
+
+        // Use the DB facade to delete the record
+        DB::table('h_column_setup')->where('H_vid', $vendor_id)->delete();
+
+        $response = ["Header setup has been deleted"];
+
+        return response()->json($response);
+    }
 
 
 
