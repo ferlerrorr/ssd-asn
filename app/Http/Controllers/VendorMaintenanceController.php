@@ -148,6 +148,45 @@ class VendorMaintenanceController extends Controller
 
         return response()->json($filteredData);
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $vendor_id
+     * @return \Illuminate\Http\Response
+     */
+    public function headersSetupUpdate($vendor_id, Request $request)
+    {
+
+        $data = DB::table('h_column_setup')->where('H_vid', $vendor_id);
+
+        $data->update([
+            "H_vendor" => $request->H_vendor,
+            "H_vid" => $vendor_id,
+            "H_file_type" => $request->H_file_type,
+            "H_InvNo" => $request->H_InvNo,
+            "H_InvDate" => $request->H_InvDate,
+            "H_InvAmt" => $request->H_InvAmt,
+            "H_DiscAmt" => $request->H_DiscAmt,
+            "H_StkFlag" => $request->H_StkFlag,
+            "H_VendorID" => $request->H_VendorID,
+            "H_VendorName" => $request->H_VendorName,
+            "H_PORef" => $request->H_PORef,
+            "H_SupCode" => $request->H_SupCode,
+
+        ]);
+
+        $res = [
+
+            'msg' => ' Header Setup has been updated',
+
+        ];
+
+
+        return response()->json($res, 200);
+    }
+
+
+
 
 
     /**

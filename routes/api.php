@@ -51,6 +51,9 @@ Route::get('/ssd/asn/vendorid-setup-delete/{vendor_id}', 'App\Http\Controllers\V
 Route::put('/ssd/asn/vendorid-setup-update/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetupUpdate');
 Route::post('/ssd/asn/vendorid-setup-create', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetupCreate');
 //* Vendor Setup 
+//* Vendor Headers
 Route::get('/ssd/asn/vendorhead-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsHeader');
+Route::put('/ssd/asn/vendorhead-setup-update/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@headersSetupUpdate');
+//* Vendor Headers
 Route::get('/ssd/asn/vendordetail-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsDetails');
 Route::get('/ssd/asn/vendorlots-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsLots');
