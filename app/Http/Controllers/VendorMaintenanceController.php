@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class VendorMaintenanceController extends Controller
 {
+
+    //!VID
+
     /**
      * Display a listing of the resource.
      *
@@ -109,6 +112,9 @@ class VendorMaintenanceController extends Controller
     }
 
 
+
+    //!VID
+    //!Header
     /**
      * Display a listing of the resource.
      *
@@ -242,7 +248,8 @@ class VendorMaintenanceController extends Controller
         return response()->json($response);
     }
 
-
+    //! Header    
+    //! Details
 
     /**
      * Display a listing of the resource.
@@ -285,6 +292,109 @@ class VendorMaintenanceController extends Controller
     }
 
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $vendor_id
+     * @return \Illuminate\Http\Response
+     */
+    public function detailsSetupUpdate($vendor_id, Request $request)
+    {
+
+        $data = DB::table('d_column_setup')->where('D_vid', $vendor_id);
+
+        $data->update([
+            "D_vendor" => $request->D_vendor,
+            "D_file_type" => $request->D_file_type,
+            "D_Prefix" => $request->D_Prefix,
+            "D_vid" => $vendor_id,
+            "D_InvNo" => $request->D_InvNo,
+            "D_ItemCode" => $request->D_ItemCode,
+            "D_ItemName" => $request->D_ItemName,
+            "D_ConvFact2" => $request->D_ConvFact2,
+            "D_UOM" => $request->D_UOM,
+            "D_UnitCost" => $request->D_UnitCost,
+            "D_QtyShip" => $request->D_QtyShip,
+            "D_QtyFree" => $request->D_QtyFree,
+            "D_GrossAmt" => $request->D_GrossAmt,
+            "D_PldAmt" => $request->D_PldAmt,
+            "D_NetAmt" => $request->D_NetAmt,
+            "D_SupCode" => $request->D_SupCode,
+        ]);
+
+        $res = [
+
+            'msg' => ' Details Setup has been updated',
+
+        ];
+
+
+        return response()->json($res, 200);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $vendor_id
+     * @return \Illuminate\Http\Response
+     */
+    public function detailsSetupCreate(Request $request)
+    {
+        $v_name = $request->D_vendor;
+
+        $v_id = DB::table('vdr_id_setup')->where('v_vname', $v_name)->get('v_vid');
+
+        $data = [
+            "D_vendor" => $request->D_vendor,
+            "D_file_type" => $request->D_file_type,
+            "D_Prefix" => $request->D_Prefix,
+            "D_vid" => $v_id[0]->v_vid,
+            "D_InvNo" => $request->D_InvNo,
+            "D_ItemCode" => $request->D_ItemCode,
+            "D_ItemName" => $request->D_ItemName,
+            "D_ConvFact2" => $request->D_ConvFact2,
+            "D_UOM" => $request->D_UOM,
+            "D_UnitCost" => $request->D_UnitCost,
+            "D_QtyShip" => $request->D_QtyShip,
+            "D_QtyFree" => $request->D_QtyFree,
+            "D_GrossAmt" => $request->D_GrossAmt,
+            "D_PldAmt" => $request->D_PldAmt,
+            "D_NetAmt" => $request->D_NetAmt,
+            "D_SupCode" => $request->D_SupCode,
+        ];
+
+        DB::table('d_column_setup')->insert($data);
+
+        $res = [
+            'msg' => ' details Setup has been created',
+        ];
+
+        return response()->json($res, 200);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $vendor_id
+     * @return \Illuminate\Http\Response
+     */
+    public function detailsSetupDelete($vendor_id)
+    {
+
+        // Use the DB facade to delete the record
+        DB::table('d_column_setup')->where('D_vid', $vendor_id)->delete();
+
+        $response = ["Details setup has been deleted"];
+
+        return response()->json($response);
+    }
+
+    //!Details
+    //!Lots
+
     /**
      * Display a listing of the resource.
      *
@@ -309,7 +419,7 @@ class VendorMaintenanceController extends Controller
                 "L_LotNo" => $vendor->L_LotNo,
                 "L_ExpiryMM" => $vendor->L_ExpiryMM,
                 "L_ExpiryDD" => $vendor->L_ExpiryDD,
-                "L_ExpiryYYYY" => $vendor->L_Expiry,
+                "L_ExpiryYYYY" => $vendor->L_ExpiryYYYY,
                 "L_Expiry" => $vendor->L_Expiry,
                 "L_Qty" => $vendor->L_Qty,
                 "L_SupCode" => $vendor->L_SupCode,
@@ -321,71 +431,77 @@ class VendorMaintenanceController extends Controller
         return response()->json($filteredData);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $vendor_id
+     * @return \Illuminate\Http\Response
+     */
+    public function lotsSetupCreate(Request $request)
+    {
+        $v_name = $request->L_vendor;
+
+        $v_id = DB::table('vdr_id_setup')->where('v_vname', $v_name)->get('v_vid');
+
+        $data = [
+            "L_vendor" => $request->L_vendor,
+            "L_file_type" => $request->L_file_type,
+            "L_InvNo" => $request->L_InvNo,
+            "L_vid" => $v_id[0]->v_vid,
+            "L_ItemCode" => $request->L_ItemCode,
+            "L_LotNo" => $request->L_LotNo,
+            "L_ExpiryMM" => $request->L_ExpiryMM,
+            "L_ExpiryDD" => $request->L_ExpiryDD,
+            "L_ExpiryYYYY" => $request->L_ExpiryYYYY,
+            "L_Qty" => $request->L_Qty,
+            "L_SupCode" => $request->L_SupCode,
+        ];
+
+        DB::table('l_column_setup')->insert($data);
+
+        $res = [
+            'msg' => 'Lots Setup has been created',
+        ];
+
+        return response()->json($res, 200);
+    }
 
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
+     * @param  int  $vendor_id
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function lotsSetupUpdate($vendor_id, Request $request)
     {
-        //
+
+        $data = DB::table('l_column_setup')->where('L_vid', $vendor_id);
+
+        $data->update([
+            "L_vendor" => $request->L_vendor,
+            "L_file_type" => $request->L_file_type,
+            "L_InvNo" => $request->L_InvNo,
+            "L_vid" => $vendor_id,
+            "L_ItemCode" => $request->L_ItemCode,
+            "L_LotNo" => $request->L_LotNo,
+            "L_ExpiryMM" => $request->L_ExpiryMM,
+            "L_ExpiryDD" => $request->L_ExpiryDD,
+            "L_ExpiryYYYY" => $request->L_ExpiryYYYY,
+            "L_Qty" => $request->L_Qty,
+            "L_SupCode" => $request->L_SupCode,
+        ]);
+
+        $res = [
+
+            'msg' => 'Lots Setup has been updated',
+
+        ];
+
+
+        return response()->json($res, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    //!Lots
 }
