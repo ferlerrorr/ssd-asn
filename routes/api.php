@@ -67,3 +67,4 @@ Route::get('/ssd/asn/vendordetail-setup-delete/{vendor_id}', 'App\Http\Controlle
 Route::get('/ssd/asn/vendorlots-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsLots');
 Route::post('/ssd/asn/vendorlots-setup-create', 'App\Http\Controllers\VendorMaintenanceController@lotsSetupCreate');
 Route::put('/ssd/asn/vendorlots-setup-update/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@lotsSetupUpdate');
+Route::get('/ssd/asn/vendorlots-setup-delete/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@lotsSetupDelete');

@@ -502,6 +502,21 @@ class VendorMaintenanceController extends Controller
         return response()->json($res, 200);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int  $vendor_id
+     * @return \Illuminate\Http\Response
+     */
+    public function lotsSetupDelete($vendor_id)
+    {
+        // Use the DB facade to delete the record
+        DB::table('l_column_setup')->where('L_vid', $vendor_id)->delete();
+
+        $response = ["Lots setup has been deleted"];
+
+        return response()->json($response);
+    }
 
     //!Lots
 }
