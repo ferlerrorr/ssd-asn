@@ -280,7 +280,13 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body delete-msg" 
+					style="
+					text-align: center;
+					padding: 25px;
+					font-size: 16px;
+					letter-spacing: 1.25px;
+					font-weight: 600;">
 						Are you sure you want to delete this vendor?
 					</div>
 					<div class="modal-footer">
@@ -511,7 +517,12 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body">
+							<div class="modal-body delete-msg" style="
+							text-align: center;
+							padding: 25px;
+							font-size: 16px;
+							letter-spacing: 1.25px;
+							font-weight: 600;">
 								Are you sure you want to delete this entry?
 							</div>
 							<div class="modal-footer">
@@ -761,7 +772,12 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body">
+							<div class="modal-body delete-msg"style="
+							text-align: center;
+							padding: 25px;
+							font-size: 16px;
+							letter-spacing: 1.25px;
+							font-weight: 600;">
 								Are you sure you want to delete this entry?
 							</div>
 							<div class="modal-footer">
@@ -938,7 +954,12 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body delete-msg"style="
+					text-align: center;
+					padding: 25px;
+					font-size: 16px;
+					letter-spacing: 1.25px;
+					font-weight: 600;">
 						Are you sure you want to delete this entry?
 					</div>
 					<div class="modal-footer">
