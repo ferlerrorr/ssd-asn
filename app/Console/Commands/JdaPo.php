@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Support\Facades\File;
 use Illuminate\Console\Command;
 use Illuminate\Support\Env;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class JdaPo extends Command
 {
@@ -29,6 +31,54 @@ class JdaPo extends Command
      */
     public function handle()
     {
+        $date = Carbon::now()->subDays(30)->toDateString('Y-m-d');
+        $modifiedDate = substr(str_replace("-", "", $date), 2);
+
+        //Delimiter for PO
+        // string varDate = DateTime.Now.AddDays(-60).ToString("yyMMdd");
+
+        $data = DB::connection(env('DB2_CONNECTION'))
+            ->table('MM770SSL.POMHDR')
+            ->select('PONUMB', 'POSTAT', 'PONOT1', 'POVNUM', 'POEDAT')
+            ->where('POEDAT', '>=', $modifiedDate)
+            ->orderByDesc('PONUMB')
+            ->get();
+
+
+        $data = $data->map(function ($item) {
+            return (array) $item;
+        });
+
+        $rowCount = $data->count();
+
+        $data->transform(function ($row) {
+            foreach ($row as &$value) {
+                $value = trim($value);
+                if ($value === '') {
+                    $value = null;
+                }
+            }
+            return $row;
+        });
+
+
+        // Prepare the data for mass insertion
+        $insertData = [];
+        foreach ($data as &$data_record) {
+            $insertData[] = [
+                'jp_POSTAT' => $data_record["postat"],
+                'jp_PONOT1' => $data_record["ponot1"],
+                'jp_POVNUM' => $data_record["povnum"],
+                'jp_PONUMB' => $data_record["ponumb"],
+                // If needed, add more columns and their corresponding values here
+            ];
+        }
+
+        // Use the query builder to insert the data and ignore duplicates
+        foreach (array_chunk($insertData, 1000) as &$data) {
+            DB::table('jda_pomhdr')->upsert($data, ['jp_PONUMB']);
+        }
+
         // Get the current value of ENVCRON
         $currentValue = Env::get('ENVCRON');
         $incrementedValue = intval($currentValue) + 1;

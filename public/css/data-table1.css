@@ -1203,7 +1203,7 @@ select {
         opacity: 1;
     }
 }
-#delete-msg {
+.delete-msg {
     text-align: center;
     padding: 25px;
     font-size: 16px;

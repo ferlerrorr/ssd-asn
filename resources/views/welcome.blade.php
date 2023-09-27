@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/x-icon" href="{{ asset('img/fav.png') }}">
-		<script src="{{ asset('js/jquery.js') }}"></script>
-		<script src="{{ asset('js/datables.js') }}"></script>
+        <link rel="icon" type="image/x-icon" href="{{URL::asset('img/fav.png') }}">
+		<script src="{{URL::asset('js/jquery.js') }}"></script>
+		<script src="{{URL::asset('js/datables.js') }}"></script>
 		<script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js' defer></script>
 		<script src="https://kit.fontawesome.com/a5b3b870d7.js" crossorigin="anonymous" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" defer></script>
@@ -15,14 +15,14 @@
         <title>Advance Shipping Notice</title>
     </head>
     <body style="display: flex; flex-direction:row;">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/data-table.css') }}">
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/form.css') }}">
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/sidenav.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{URL::asset('css/data-table1.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/form.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/sidenav1.css')}}">
 	<div class="sidenav">
 		<link rel="stylesheet"style="display: none;">
 
 		<div class="logo-container">
-			<img class="ssd-logo to-home" src="{{ asset('img/ssd-logo-white.png') }}"alt="ssd-logo" style="width: 250px; height:44px;">
+			<img class="ssd-logo to-home" src="{{URL::asset('img/ssd-logo-white.png') }}"alt="ssd-logo" style="width: 250px; height:44px;">
 		</div>
 		<aside class="sidebar">
 			<div id="leftside-navigation">
@@ -79,7 +79,7 @@
 				</ul>
 			</div>
 		</aside>
-		<script src="{{ asset('js/sidenav.js') }}"></script>
+		<script src="{{URL::asset('js/sidenav1.4.js') }}"></script>
 	</div>
 
 	<!-- partial:Page ASN.html -->
@@ -101,8 +101,8 @@
 			<h1>
 				Advance Shipping Notice
 			</h1>
-			<script src="{{ asset('js/form.js') }}"></script>
-            <script src="{{ asset('js/vendor.js') }}"></script>
+			<script src="{{URL::asset('js/form.js') }}"></script>
+            <script src="{{URL::asset('js/vendor.js') }}"></script>
 		</div>
 
 
@@ -123,7 +123,7 @@
 			<h1>
 				Export
 			</h1>
-            <script src="{{ asset('js/export.js') }}"></script>
+            <script src="{{URL::asset('js/export.js') }}"></script>
 		</div>
 		<!-- partial:data-table.partial.html -->
 		<div class="table-reponsive box" style="display: flex; flex-direction: column; gap: 36px; padding-top:32px; ">
@@ -142,9 +142,9 @@
 		<h1>
 			Error logs
 		</h1>
-        <script src="{{ asset('js/errorlogs.js') }}"></script>
+        <script src="{{URL::asset('js/errorlogs.js') }}"></script>
 	</div>
-	<div style="margin: 40px;">
+	<div style="margin: 40px 75px 40px 75px;">
 		<table id="error-log" class="table table-striped table-bordered">
 
 			<thead class="table-header">
@@ -280,13 +280,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body delete-msg" 
-					style="
-					text-align: center;
-					padding: 25px;
-					font-size: 16px;
-					letter-spacing: 1.25px;
-					font-weight: 600;">
+					<div class="modal-body delete-msg">
 						Are you sure you want to delete this vendor?
 					</div>
 					<div class="modal-footer">
@@ -298,7 +292,7 @@
 				</div>
 			</div>
 		</div>
-		<script src="{{ asset('js/vid.js') }}"></script>
+		<script src="{{URL::asset('js/vid.js') }}"></script>
 	</div>
 	<!--! partial:Page Vid.html -->
 
@@ -430,7 +424,7 @@
 
 				<div class="colSetup modal fade" id="colSetupheaders-editModal" tabindex="-1" role="dialog"
 					aria-labelledby="editModalLabel" aria-hidden="true">
-					<script src="{{ asset('js/colSetup.js') }}"></script>
+					<script src="{{URL::asset('js/colSetup.js') }}"></script>
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -517,12 +511,7 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body delete-msg" style="
-							text-align: center;
-							padding: 25px;
-							font-size: 16px;
-							letter-spacing: 1.25px;
-							font-weight: 600;">
+							<div class="modal-body delete-msg">
 								Are you sure you want to delete this entry?
 							</div>
 							<div class="modal-footer">
@@ -772,12 +761,7 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body delete-msg"style="
-							text-align: center;
-							padding: 25px;
-							font-size: 16px;
-							letter-spacing: 1.25px;
-							font-weight: 600;">
+							<div class="modal-body delete-msg">
 								Are you sure you want to delete this entry?
 							</div>
 							<div class="modal-footer">
@@ -954,12 +938,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body delete-msg"style="
-					text-align: center;
-					padding: 25px;
-					font-size: 16px;
-					letter-spacing: 1.25px;
-					font-weight: 600;">
+					<div class="modal-body delete-msg">
 						Are you sure you want to delete this entry?
 					</div>
 					<div class="modal-footer">

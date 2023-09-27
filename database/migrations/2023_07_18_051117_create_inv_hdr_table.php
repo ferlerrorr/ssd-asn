@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('Duplicate_PO', 50)->nullable();
             $table->string('SupCode', 50)->nullable();
             $table->timestamp('tStamp')->useCurrent();
+            // Add an index on 'D_vendor' column
+            $table->index('PORef');
         });
     }
 

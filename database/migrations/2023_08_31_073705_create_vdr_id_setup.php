@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('vdr_id_setup', function (Blueprint $table) {
-            $table->id('v_id');
-            $table->string('v_vname', 155);
-            $table->string('v_vid', 155);
+            $table->id('v_id')->index();
+            $table->string('v_vname', 155)->index();
+            $table->string('v_vid', 155)->index();
         });
     }
 

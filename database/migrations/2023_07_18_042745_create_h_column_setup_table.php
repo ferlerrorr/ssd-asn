@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('H_VendorName', 155)->nullable();
             $table->string('H_PORef', 155)->nullable();
             $table->string('H_SupCode', 155)->nullable();
+            $table->index('H_vid');
         });
     }
 
