@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Env;
 
 class JdaController extends Controller
 {
@@ -63,6 +65,16 @@ class JdaController extends Controller
             DB::table('jda_pomhdr')->upsert($data, ['jp_PONUMB']);
         }
 
+
+        $currentValue = Env::get('ENVCRON');
+        $incrementedValue = intval($currentValue) + 1;
+
+        // Update the ENVCRON variable with the incremented value
+        $newContent = File::get(base_path('.env'));
+        $newContent = preg_replace('/(ENVCRON=)(.*)/', 'ENVCRON=' . $incrementedValue, $newContent);
+
+        // Write the updated content back to the .env file
+        File::put(base_path('.env'), $newContent);
 
         return response()->json([
             'count' => $rowCount,
@@ -129,7 +141,6 @@ class JdaController extends Controller
         });
 
 
-
         // Prepare the data for mass insertion
         $insertData = [];
         foreach ($data as &$data_record) {
@@ -145,6 +156,17 @@ class JdaController extends Controller
         foreach (array_chunk($insertData, 1000) as &$data) {
             DB::table('jda_invmst')->upsert($data, ['ji_INUMBR']);
         }
+
+
+        $currentValue = Env::get('ENVCRON');
+        $incrementedValue = intval($currentValue) + 1;
+
+        // Update the ENVCRON variable with the incremented value
+        $newContent = File::get(base_path('.env'));
+        $newContent = preg_replace('/(ENVCRON=)(.*)/', 'ENVCRON=' . $incrementedValue, $newContent);
+
+        // Write the updated content back to the .env file
+        File::put(base_path('.env'), $newContent);
 
 
         return response()->json([

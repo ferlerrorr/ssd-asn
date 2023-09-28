@@ -353,3 +353,7 @@ ul > li > a {
     background-color: #00000055;
     transition: background-color 0.2s ease-in-out;
 }
+
+#ssd-logo {
+    cursor: pointer;
+}

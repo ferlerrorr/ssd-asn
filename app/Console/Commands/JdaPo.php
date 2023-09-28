@@ -34,9 +34,6 @@ class JdaPo extends Command
         $date = Carbon::now()->subDays(30)->toDateString('Y-m-d');
         $modifiedDate = substr(str_replace("-", "", $date), 2);
 
-        //Delimiter for PO
-        // string varDate = DateTime.Now.AddDays(-60).ToString("yyMMdd");
-
         $data = DB::connection(env('DB2_CONNECTION'))
             ->table('MM770SSL.POMHDR')
             ->select('PONUMB', 'POSTAT', 'PONOT1', 'POVNUM', 'POEDAT')
@@ -74,20 +71,61 @@ class JdaPo extends Command
             ];
         }
 
-        // Use the query builder to insert the data and ignore duplicates
-        foreach (array_chunk($insertData, 1000) as &$data) {
-            DB::table('jda_pomhdr')->upsert($data, ['jp_PONUMB']);
+        try {
+            // Your existing code here...
+
+            // Use the query builder to insert the data and ignore duplicates
+            foreach (array_chunk($insertData, 1000) as $dataChunk) {
+                DB::table('jda_pomhdr')->upsert($dataChunk, ['jp_PONUMB']);
+            }
+
+            $currentValue = Env::get('ENVCRON');
+            $incrementedValue = intval($currentValue) + 1;
+
+            // Update the ENVCRON variable with the incremented value
+            $newContent = File::get(base_path('.env'));
+            $newContent = preg_replace('/(ENVCRON=)(.*)/', 'ENVCRON=' . $incrementedValue, $newContent);
+
+            // Write the updated content back to the .env file
+            File::put(base_path('.env'), $newContent);
+
+            $this->info('Command executed successfully.');
+            $this->info('Rows processed: ' . $rowCount);
+        } catch (\Exception $e) {
+            // Handle any exceptions and log the error
+            $this->error('An error occurred: ' . $e->getMessage());
+            // You can log the error using Laravel's Log::error() or other methods.
+            return 1; // Return a non-zero exit code to indicate failure
         }
 
-        // Get the current value of ENVCRON
-        $currentValue = Env::get('ENVCRON');
-        $incrementedValue = intval($currentValue) + 1;
-
-        // Update the ENVCRON variable with the incremented value
-        $newContent = File::get(base_path('.env'));
-        $newContent = preg_replace('/(ENVCRON=)(.*)/', 'ENVCRON=' . $incrementedValue, $newContent);
-
-        // Write the updated content back to the .env file
-        File::put(base_path('.env'), $newContent);
+        return 0; // Return a zero exit code to indicate success
     }
+
+
+
+
+
+
+
+
+    // // Use the query builder to insert the data and ignore duplicates
+    // foreach (array_chunk($insertData, 1000) as &$data) {
+    //     DB::table('jda_pomhdr')->upsert($data, ['jp_PONUMB']);
+    //
+
+
+    // $currentValue = Env::get('ENVCRON');
+    // $incrementedValue = intval($currentValue) + 1;
+
+    // // Update the ENVCRON variable with the incremented value
+    // $newContent = File::get(base_path('.env'));
+    // $newContent = preg_replace('/(ENVCRON=)(.*)/', 'ENVCRON=' . $incrementedValue, $newContent);
+
+    // // Write the updated content back to the .env file
+    // File::put(base_path('.env'), $newContent);
+
+    // return response()->json([
+    //     'count' => $rowCount,
+    //     'data' => $data,
+    // ], 200);
 }

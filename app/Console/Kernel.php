@@ -21,8 +21,17 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Use the command's signature (e.g., jda:sku) instead of the command name.
-        $schedule->command('jda:sku')->everyFiveMinutes();
-        $schedule->command('jda:po')->everyMinute();
+        // $schedule->command('jda:sku')->dailyAt('6:02');
+        //$schedule->command('jda:po')->dailyAt('6:00');
+
+        $schedule->call(function () {
+            // Make a GET request to your custom endpoint URL
+            file_get_contents('http://10.91.100.145:8800/api/ssd/asn/jda/po');
+        })->dailyAt('6:00');
+        $schedule->call(function () {
+            // Make a GET request to your custom endpoint URL
+            file_get_contents('http://10.91.100.145:8800/api/ssd/asn/jda/sku');
+        })->dailyAt('6:02');
     }
 
     /**

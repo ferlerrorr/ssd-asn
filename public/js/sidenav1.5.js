@@ -45,6 +45,13 @@ $("#leftside-navigation .parent > a").click(function (e) {
             $("#asnExport").removeClass("view-visible").addClass("view-hidden"),
             $("#asnVid").removeClass("view-visible").addClass("view-hidden");
     }),
+    $("#ssd-logo").click(function (e) {
+        $("#colSetup").removeClass("view-visible").addClass("view-hidden"),
+            $("#errorlogs").removeClass("view-visible").addClass("view-hidden"),
+            $("#asnView").removeClass("view-hidden").addClass("view-visible"),
+            $("#asnExport").removeClass("view-visible").addClass("view-hidden"),
+            $("#asnVid").removeClass("view-visible").addClass("view-hidden");
+    }),
     $("#navExport").click(function (e) {
         $("#colSetup").removeClass("view-visible").addClass("view-hidden"),
             $("#errorlogs").removeClass("view-visible").addClass("view-hidden"),

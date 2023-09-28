@@ -17,12 +17,12 @@
     <body style="display: flex; flex-direction:row;">
         <link rel="stylesheet" type="text/css" href="{{URL::asset('css/data-table1.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/form.css') }}">
-		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/sidenav1.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/sidenav1.1.css')}}">
 	<div class="sidenav">
 		<link rel="stylesheet"style="display: none;">
 
 		<div class="logo-container">
-			<img class="ssd-logo to-home" src="{{URL::asset('img/ssd-logo-white.png') }}"alt="ssd-logo" style="width: 250px; height:44px;">
+			<img class="ssd-logo to-home" id="ssd-logo" src="{{URL::asset('img/ssd-logo-white.png') }}"alt="ssd-logo" style="width: 250px; height:44px;">
 		</div>
 		<aside class="sidebar">
 			<div id="leftside-navigation">
@@ -79,7 +79,7 @@
 				</ul>
 			</div>
 		</aside>
-		<script src="{{URL::asset('js/sidenav1.4.js') }}"></script>
+		<script src="{{URL::asset('js/sidenav1.5.js') }}"></script>
 	</div>
 
 	<!-- partial:Page ASN.html -->
