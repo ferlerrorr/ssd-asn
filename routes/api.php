@@ -19,18 +19,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/ssd/asn', 'App\Http\Controllers\TestController@index');
-
-
-// Route::get('/ssd/po-number', 'App\Http\Controllers\TestController@Po');
-// Route::get('/ssd/sku-number', 'App\Http\Controllers\TestController@Sku');
-// Route::get('/ssd/asn/headers', 'App\Http\Controllers\AsnFileController@headers');
-
 //?ASN Routes
 Route::get('/ssd/asn/vendors', 'App\Http\Controllers\AsnFileController@vendors');
 Route::post('/ssd/asn/upload/{vid}', 'App\Http\Controllers\AsnFileController@store');
 Route::post('/ssd/asn/export', 'App\Http\Controllers\AsnFileController@export');
-
 
 
 //?JDA Routes
@@ -44,26 +36,33 @@ Route::get('/ssd/asn/jda/loaderrlogs', 'App\Http\Controllers\ErrLogsController@l
 Route::get('/ssd/asn/jda/searcherrlogs/{date}', 'App\Http\Controllers\ErrLogsController@searchErrlogs');
 
 
-//?Vendor Maintenance Routes
-//* Vendor Setup 
+
+//? DuplicatePO
+Route::get('/ssd/asn/duplicate-po-update', 'App\Http\Controllers\DuplicatePoController@duplicateUpdate');
+Route::get('/ssd/asn/duplicate-po-export/{date}', 'App\Http\Controllers\DuplicatePoController@duplicateExport');
+
+
+//!Vendor Maintenance Routes
+
+//? Vendor Setup 
 Route::get('/ssd/asn/vendorid-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetup');
 Route::get('/ssd/asn/vendorid-setup-delete/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetupDelete');
 Route::put('/ssd/asn/vendorid-setup-update/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetupUpdate');
 Route::post('/ssd/asn/vendorid-setup-create', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetupCreate');
-//* Vendor Setup 
-//* Vendor Headers
+
+//? Vendor Headers
 Route::get('/ssd/asn/vendorhead-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsHeader');
 Route::put('/ssd/asn/vendorhead-setup-update/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@headersSetupUpdate');
 Route::post('/ssd/asn/vendorhead-setup-create', 'App\Http\Controllers\VendorMaintenanceController@headersSetupCreate');
 Route::get('/ssd/asn/vendorhead-setup-delete/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@headersSetupDelete');
-//* Vendor Headers
-//* Vendor Details
+
+//? Vendor Details
 Route::get('/ssd/asn/vendordetail-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsDetails');
 Route::put('/ssd/asn/vendordetail-setup-update/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@detailsSetupUpdate');
 Route::post('/ssd/asn/vendordetail-setup-create', 'App\Http\Controllers\VendorMaintenanceController@detailsSetupCreate');
 Route::get('/ssd/asn/vendordetail-setup-delete/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@detailsSetupDelete');
-//* Vendor Details
-//*Vendor Lots
+
+//? Vendor Lots
 Route::get('/ssd/asn/vendorlots-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsLots');
 Route::post('/ssd/asn/vendorlots-setup-create', 'App\Http\Controllers\VendorMaintenanceController@lotsSetupCreate');
 Route::put('/ssd/asn/vendorlots-setup-update/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@lotsSetupUpdate');
