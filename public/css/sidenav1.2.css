@@ -119,6 +119,10 @@ ul > li > a {
     display: none;
     overflow-y: visible;
 }
+.Duplogs {
+    display: none;
+    overflow-y: visible;
+}
 .view-hidden {
     display: none !important;
     opacity: 0;

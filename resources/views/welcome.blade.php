@@ -17,7 +17,7 @@
     <body style="display: flex; flex-direction:row;">
         <link rel="stylesheet" type="text/css" href="{{URL::asset('css/data-table1.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/form.css') }}">
-		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/sidenav1.1.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/sidenav1.2.css')}}">
 	<div class="sidenav">
 		<link rel="stylesheet"style="display: none;">
 
@@ -43,21 +43,6 @@
 						</ul>
 					</li>
 					<li class="parent" style="border-bottom: 1.2px solid rgba(255, 255, 255, 0.09);">
-						<a href="#"><span>Duplicate PO</span><i class="arrow fa fa-angle-right"></i></a>
-						<ul class="level-1">
-							<li class="parent" id="link">
-								<a href="#" id=""><span>Scan Duplicate PO's</span>
-								</a>
-
-							</li>
-							<li class="parent" id="link">
-								<a href="#" id=""><span>Export Duplicate PO's</span>
-								</a>
-
-							</li>
-						</ul>
-					</li>
-					<li class="parent" style="border-bottom: 1.2px solid rgba(255, 255, 255, 0.09);">
 						<a href="#"><span>Vendor Maintenance</span><i class="arrow fa fa-angle-right"></i></a>
 						<ul class="level-1">
 							<li class="parent" id="link">
@@ -74,12 +59,18 @@
 						</ul>
 					</li>
 					<li class="parent" id="link">
+						<a href="#" id="navDuplogs"><span>Duplicate PO</span>
+						</a>
+
+					</li>
+				
+					<li class="parent" id="link">
 						<a href="#" id="navErrlogs"><span>Error Logs</span></a>
 					</li>
 				</ul>
 			</div>
 		</aside>
-		<script src="{{URL::asset('js/sidenav1.5.js') }}"></script>
+		<script src="{{URL::asset('js/sidenav1.8.js') }}"></script>
 	</div>
 
 	<!-- partial:Page ASN.html -->
@@ -167,6 +158,46 @@
 	</div>
 	</div>
 	<!-- partial:Page Export.html -->
+
+
+<!-- partial:Page dup  logs .html -->
+<div class="page-content Duplogs" id="duplogs" ">
+	<div class=" view-header">
+	<h1>
+		Duplicate logs
+	</h1>
+	{{-- <script src="{{URL::asset('js/errorlogs.js') }}"></script> --}}
+</div>
+<div style="margin: 40px 75px 40px 75px;">
+	<table id="dup-log" class="table table-striped table-bordered">
+
+		<thead class="table-header">
+			<tr>
+				<th>Duplicate PO</th>
+				<th>Datetime</th>
+				<th>Download Duplicate PO</th>
+			</tr>
+		</thead>
+
+		<tbody class="table-body" id="tb-body">
+
+
+			<!-- 
+				Data - Tr and Td Dyanamically Generated
+			-->
+
+		</tbody>
+	</table>
+</div>
+</div>
+<!-- partial:Page Export.html -->
+
+
+
+
+
+
+
 
 
 	<!-- partial:Page Vid.html -->
@@ -950,11 +981,11 @@
 		</div>
 		<!-- Todo Tab 3 Content lots -->
     </body>
-	<script type="text/javascript">
+	{{-- <script type="text/javascript">
 		(function(c,l,a,r,i,t,y){
 			c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
 			t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
 			y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 		})(window, document, "clarity", "script", "j0m5rtds4l");
-	</script>
+	</script> --}}
 </html>

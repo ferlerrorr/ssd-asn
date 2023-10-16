@@ -43,37 +43,49 @@ class DuplicatePoController extends Controller
         return response()->json($updatedTable);
     }
 
-
     /**
-     * Display the specified resource.
+     * Load the first 50 unique duplicate logs from the 'jda_pomhdr' table.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function duplicateExport($date)
-    // {
-    //     $po = DB::table('jda_pomhdr')
-    //         ->where('jp_remarks', 'like', '%' . $date . '%')
-    //         ->select('jp_PONUMB', 'jp_PONOT1')
-    //         ->get();
+    public function loadDuplicatesLogs()
+    {
+        $uniqueTimestamps = [];
+        $filteredData = [];
 
-    //     $duplicatePo = $po->toArray();
+        $entries = DB::table('jda_pomhdr')
+            ->select('jp_remarks')
+            ->where(function ($query) {
+                $query->whereNotNull('jp_remarks')
+                    ->orWhere('jp_remarks', '!=', '');
+            })
+            ->orderBy('jp_remarks', 'desc')
+            ->distinct()
+            ->take(50)
+            ->get();
 
-    //     // Create an array to store the InvNo values
-    //     $invNumbers = [];
 
-    //     foreach ($duplicatePo as $poItem) {
-    //         $invNumbersForPo = DB::table('inv_hdr')
-    //             ->where('PORef', $poItem->jp_PONUMB)
-    //             ->pluck('InvNo')
-    //             ->toArray();
+        foreach ($entries as $entry) {
+            $timestamp = $entry->jp_remarks;
 
-    //         // Merge the InvNo values for the current PO into the result array
-    //         $invNumbers = array_merge($invNumbers, $invNumbersForPo);
-    //     }
+            // Check if the timestamp is not null and not an empty string
+            if ($timestamp !== null && trim($timestamp) !== '') {
+                // Check if the timestamp is not already in the uniqueTimestamps array
+                if (!in_array($timestamp, $uniqueTimestamps)) {
+                    $filteredData[] = [
+                        "placeholder" => "Duplicate PO",
+                        "e_time_stamp" => $timestamp,
+                        "link" => "http://localhost:8800/api/ssd/asn/duplicate-po-export/$timestamp"
+                    ];
 
-    //     return response()->json($invNumbers);
-    // }
+                    // Add the timestamp to the uniqueTimestamps array to track duplicates
+                    $uniqueTimestamps[] = $timestamp;
+                }
+            }
+        }
+
+        return response()->json($filteredData);
+    }
     public function duplicateExport($date)
     {
         $po = DB::table('jda_pomhdr')

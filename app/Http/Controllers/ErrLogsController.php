@@ -59,6 +59,8 @@ class ErrLogsController extends Controller
 
         $entries = DB::table('tbl_exemption')
             ->orderBy('e_time_stamp', 'desc')
+            ->distinct()
+            ->take(50)
             ->get();
 
         foreach ($entries as $entry) {
@@ -73,10 +75,6 @@ class ErrLogsController extends Controller
                     "e_time_stamp" => $entry->e_time_stamp,
                     "link" => "http://localhost:8800/api/ssd/asn/jda/errlogs/$e_time_stamp/$entry->e_vendor"
                 ];
-            }
-
-            if (count($filteredData) >= 50) {
-                break; // Stop after collecting 50 unique entries
             }
         }
 

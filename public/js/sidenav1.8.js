@@ -43,6 +43,7 @@ $("#leftside-navigation .parent > a").click(function (e) {
             $("#errorlogs").removeClass("view-visible").addClass("view-hidden"),
             $("#asnView").removeClass("view-hidden").addClass("view-visible"),
             $("#asnExport").removeClass("view-visible").addClass("view-hidden"),
+            $("#duplogs").removeClass("view-visible").addClass("view-hidden"),
             $("#asnVid").removeClass("view-visible").addClass("view-hidden");
     }),
     $("#ssd-logo").click(function (e) {
@@ -50,6 +51,7 @@ $("#leftside-navigation .parent > a").click(function (e) {
             $("#errorlogs").removeClass("view-visible").addClass("view-hidden"),
             $("#asnView").removeClass("view-hidden").addClass("view-visible"),
             $("#asnExport").removeClass("view-visible").addClass("view-hidden"),
+            $("#duplogs").removeClass("view-visible").addClass("view-hidden"),
             $("#asnVid").removeClass("view-visible").addClass("view-hidden");
     }),
     $("#navExport").click(function (e) {
@@ -57,6 +59,7 @@ $("#leftside-navigation .parent > a").click(function (e) {
             $("#errorlogs").removeClass("view-visible").addClass("view-hidden"),
             $("#asnView").removeClass("view-visible").addClass("view-hidden"),
             $("#asnExport").removeClass("view-hidden").addClass("view-visible"),
+            $("#duplogs").removeClass("view-visible").addClass("view-hidden"),
             $("#asnVid").removeClass("view-visible").addClass("view-hidden");
     }),
     $("#navErrlogs").click(function (e) {
@@ -64,16 +67,28 @@ $("#leftside-navigation .parent > a").click(function (e) {
             $("#asnView").removeClass("view-visible").addClass("view-hidden"),
             $("#asnExport").removeClass("view-visible").addClass("view-hidden"),
             $("#errorlogs").removeClass("view-hidden").addClass("view-visible"),
+            $("#duplogs").removeClass("view-visible").addClass("view-hidden"),
             $("#asnVid").removeClass("view-visible").addClass("view-hidden");
 
         // Call the function to fetch and populate error logs
         fetchAndPopulateErrorLogs();
+    }),
+    $("#navDuplogs").click(function (e) {
+        $("#colSetup").removeClass("view-visible").addClass("view-hidden"),
+            $("#asnView").removeClass("view-visible").addClass("view-hidden"),
+            $("#asnExport").removeClass("view-visible").addClass("view-hidden"),
+            $("#errorlogs").removeClass("view-visible").addClass("view-hidden"),
+            $("#asnVid").removeClass("view-visible").addClass("view-hidden"),
+            $("#duplogs").removeClass("view-hidden").addClass("view-visible");
+        // Call the function to fetch and populate duplicate logs
+        fetchAndDupLogs();
     }),
     $("#navVid").click(function (e) {
         $("#asnView").removeClass("view-visible").addClass("view-hidden"),
             $("#colSetup").removeClass("view-visible").addClass("view-hidden"),
             $("#asnExport").removeClass("view-visible").addClass("view-hidden"),
             $("#errorlogs").removeClass("view-visible").addClass("view-hidden"),
+            $("#duplogs").removeClass("view-visible").addClass("view-hidden"),
             $("#asnVid").removeClass("view-hidden").addClass("view-visible"),
             $("#vsetupVendorTable").DataTable().destroy(),
             initializeVendorTable();
@@ -101,6 +116,60 @@ function fetchAndPopulateErrorLogs() {
                 try {
                     let logData = data.map((item) => [
                         item.e_vendor,
+                        item.e_time_stamp,
+                        item.link,
+                    ]);
+
+                    // Clear existing rows from the table
+                    dataTable.clear();
+
+                    // Add updated data to the table
+                    logData.forEach(function (log) {
+                        let rowData = [
+                            log[0],
+                            log[1],
+                            '<a href="' +
+                                log[2] +
+                                '" class="logs-btn" target="_blank">Export</a>',
+                        ];
+                        dataTable.row.add(rowData);
+                    });
+
+                    dataTable.draw();
+                } catch (error) {
+                    console.error("Error parsing JSON:", error);
+                }
+            })
+            .fail(function (xhr, status, error) {
+                console.error("Ajax request failed:", error);
+            });
+
+        $(this).fadeIn(480);
+    });
+}
+
+function fetchAndDupLogs() {
+    $("#dup-log").fadeOut(420, function () {
+        if ($.fn.DataTable.isDataTable("#dup-log")) {
+            // Destroy the existing DataTable
+            $("#dup-log").DataTable().destroy();
+        }
+
+        // Initialize DataTable with ordering set to false
+        let dataTable = $("#dup-log").DataTable({ ordering: false });
+
+        // Your existing code here
+        $.ajax({
+            async: true,
+            crossDomain: true,
+            url: "http://localhost:8800/api/ssd/asn/duplicate-po-load/loadduplogs",
+            method: "GET",
+            headers: { Accept: "*/*" },
+        })
+            .done(function (data) {
+                try {
+                    let logData = data.map((item) => [
+                        item.placeholder,
                         item.e_time_stamp,
                         item.link,
                     ]);

@@ -40,7 +40,7 @@ Route::get('/ssd/asn/jda/searcherrlogs/{date}', 'App\Http\Controllers\ErrLogsCon
 //? DuplicatePO
 Route::get('/ssd/asn/duplicate-po-update', 'App\Http\Controllers\DuplicatePoController@duplicateUpdate');
 Route::get('/ssd/asn/duplicate-po-export/{date}', 'App\Http\Controllers\DuplicatePoController@duplicateExport');
-
+Route::get('/ssd/asn/duplicate-po-load/loadduplogs', 'App\Http\Controllers\DuplicatePoController@loadDuplicatesLogs');
 
 //!Vendor Maintenance Routes
 
