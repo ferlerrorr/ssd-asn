@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('StkFlag', 50)->nullable();
             $table->string('VendorID', 50)->nullable();
             $table->string('VendorName', 50)->nullable();
-            $table->string('PORef', 50)->index();
+            $table->string('PORef', 50);
             $table->string('Duplicate_PO', 50)->nullable();
             $table->string('SupCode', 50)->nullable();
             $table->timestamp('tStamp')->useCurrent();

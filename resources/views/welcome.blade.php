@@ -15,9 +15,9 @@
         <title>Advance Shipping Notice</title>
     </head>
     <body style="display: flex; flex-direction:row;">
-        <link rel="stylesheet" type="text/css" href="{{URL::asset('css/data-table1.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{URL::asset('css/data-table.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/form.css') }}">
-		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/sidenav1.2.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/sidenav.css')}}">
 	<div class="sidenav">
 		<link rel="stylesheet"style="display: none;">
 
@@ -70,7 +70,7 @@
 				</ul>
 			</div>
 		</aside>
-		<script src="{{URL::asset('js/sidenav1.8.js') }}"></script>
+		<script src="{{URL::asset('js/sidenav.js') }}"></script>
 	</div>
 
 	<!-- partial:Page ASN.html -->

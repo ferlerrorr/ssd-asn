@@ -154,7 +154,9 @@ $(document).ready(function () {
             $("#asnExport").removeClass("view-visible").addClass("view-hidden"),
             $("#errorlogs").removeClass("view-visible").addClass("view-hidden"),
             $("#asnVid").removeClass("view-visible").addClass("view-hidden"),
+            $("#duplogs").removeClass("view-visible").addClass("view-hidden"),
             $("#colSetup").removeClass("view-hidden").addClass("view-visible"),
+            $("#duplogs").removeClass("view-visible").addClass("view-hidden"),
             u(),
             r(),
             s();
@@ -488,7 +490,7 @@ $(document).ready(function () {
                     async: !0,
                     crossDomain: !0,
                     url:
-                        "http://localhost:8800/api/ssd/asn/vendordetail-setup-delete/" +
+                        "http://10.91.100.145:8800/api/ssd/asn/vendordetail-setup-delete/" +
                         e,
                     method: "GET",
                     headers: { Accept: "*/*" },

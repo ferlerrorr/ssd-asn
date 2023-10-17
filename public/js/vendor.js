@@ -1,7 +1,7 @@
 var vendors = document.getElementById("vendors");
 async function fetchVendors() {
     let e = await (
-        await fetch("http://localhost:8800/api/ssd/asn/vendors", {
+        await fetch(" http://localhost:8800/api/ssd/asn/vendors", {
             method: "GET",
             headers: Object.assign({}, ...[{ Accept: "*/*" }]),
         })

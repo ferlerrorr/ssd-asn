@@ -2,7 +2,7 @@ $(document).ready(function () {
     function a() {
         $("#vsetupVendorTable").DataTable({
             ajax: {
-                url: "http://localhost:8800/api/ssd/asn/vendorid-setup",
+                url: "http://localhost.145:8800/api/ssd/asn/vendorid-setup",
                 dataSrc: "",
             },
             columns: [

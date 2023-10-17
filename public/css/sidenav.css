@@ -118,10 +118,12 @@ ul > li > a {
 .Errorlogs {
     display: none;
     overflow-y: visible;
+    animation: 0.7s fadeInOut;
 }
 .Duplogs {
     display: none;
     overflow-y: visible;
+    animation: 0.7s fadeInOut;
 }
 .view-hidden {
     display: none !important;
@@ -360,4 +362,8 @@ ul > li > a {
 
 #ssd-logo {
     cursor: pointer;
+}
+
+#error-log_wrapper {
+    height: 100vh;
 }

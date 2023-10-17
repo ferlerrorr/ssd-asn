@@ -94,15 +94,13 @@ $("#leftside-navigation .parent > a").click(function (e) {
             initializeVendorTable();
     }), //! // Call the function to initialize the vendor table
     initializeVendorTable();
+
 function fetchAndPopulateErrorLogs() {
     $("#error-log").fadeOut(420, function () {
-        if ($.fn.DataTable.isDataTable("#error-log")) {
-            // Destroy the existing DataTable
-            $("#error-log").DataTable().destroy();
-        }
-
-        // Initialize DataTable with ordering set to false
-        let dataTable = $("#error-log").DataTable({ ordering: false });
+        // Get the DataTable instance or initialize if it doesn't exist
+        let dataTable = $.fn.DataTable.isDataTable("#error-log")
+            ? $("#error-log").DataTable()
+            : $("#error-log").DataTable({ ordering: false });
 
         // Your existing code here
         $.ajax({
@@ -150,13 +148,10 @@ function fetchAndPopulateErrorLogs() {
 
 function fetchAndDupLogs() {
     $("#dup-log").fadeOut(420, function () {
-        if ($.fn.DataTable.isDataTable("#dup-log")) {
-            // Destroy the existing DataTable
-            $("#dup-log").DataTable().destroy();
-        }
-
-        // Initialize DataTable with ordering set to false
-        let dataTable = $("#dup-log").DataTable({ ordering: false });
+        // Get the DataTable instance or initialize if it doesn't exist
+        let dataTable = $.fn.DataTable.isDataTable("#dup-log")
+            ? $("#dup-log").DataTable()
+            : $("#dup-log").DataTable({ ordering: false });
 
         // Your existing code here
         $.ajax({
@@ -201,3 +196,7 @@ function fetchAndDupLogs() {
         $(this).fadeIn(480);
     });
 }
+
+$(document).ready(function () {
+    fetchAndDupLogs();
+});
