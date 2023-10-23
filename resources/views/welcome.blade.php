@@ -114,14 +114,20 @@
 			<h1>
 				Export
 			</h1>
-            <script src="{{URL::asset('js/export.js') }}"></script>
+            <script src="{{URL::asset('js/export1.js') }}"></script>
 		</div>
 		<!-- partial:data-table.partial.html -->
-		<div class="table-reponsive box" style="display: flex; flex-direction: column; gap: 36px; padding-top:32px; ">
+		<div class="table-reponsive box" style="display: flex; flex-direction: column; gap:17px; padding-top:32px; ">
 			<textarea class="dataiframe" id="exportcsv"
 				style="width: 30vw; height: 35vh;  border: 1px solid #ced4daee;"></textarea>
-			<input type="submit" name="export-asn" id="export-asn" class="btn btn-primary-asn up" value="Export" style="width: 8em
-			; height: 2.9em;" />
+			<div style="display: flex;
+			gap: 20px;
+			align-items: baseline;"><input type="submit" name="export-asn" id="export-asn" class="btn btn-primary-asn up" value="Export" style="width: 8em
+				; height: 2.9em;" />
+			<p style="margin: 8px 0 0 0;
+			letter-spacing: 2px;
+			font-weight: 600; display:none; " id="export-notif">Notification</p></div>
+
 		</div>
 		<!-- partial:data-table.partial.html -->
 	</div>

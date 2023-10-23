@@ -43,11 +43,18 @@ $(document).ready(function () {
                         window.URL.revokeObjectURL(t),
                         $("#export-asn").prop("disabled", !1),
                         $("#export-asn").val("Export"),
-                        $("#export-asn").removeClass("uploading");
+                        $("#export-asn").removeClass("uploading"),
+                        $("#exportcsv").val(""),
+                        $("#export-notif").css("color", "green"),
+                        $("#export-notif").css("display", "block"),
+                        $("#export-notif").text("Export Successful.");
                 } else console.error("Network response was not ok");
             },
             error: function (e, r, o) {
-                console.error("Error exporting data:", o);
+                console.error("Error exporting data:", o),
+                    $("#export-notif").css("color", "red"),
+                    $("#export-notif").css("display", "block"),
+                    $("#export-notif").text("Error exporting data:", o);
             },
         });
     });
