@@ -76,7 +76,7 @@ $(document).ready(function () {
                     $("#clear-asn").prop("disabled", false);
                     $("#import-asn").removeClass("uploading");
                     stopInterval();
-                    $("#ld-neumen").text(tresp);
+                    $("#ld-neumen").text(tresp + " Files Imported");
                     $("#ld-denom").text(rlpercent + "%");
                     console.log(t);
                 },
@@ -102,6 +102,7 @@ $(document).ready(function () {
             var result = Total - Total * 0.02;
             let incrementAmount = Math.round(Total * 0.02); // 2% of Total
             total += incrementAmount;
+            Math.floor(result);
             percent += Math.round((incrementAmount / Total) * 100);
             $("#ld-denom").text(percent + "%");
             $("#ld-neumen").text(total);

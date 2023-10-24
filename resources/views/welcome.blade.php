@@ -80,7 +80,7 @@
 			<div class="form-container">
 				
 				<div class="vnd-cont"><select name="vendors" id="vendors" form="vendors"> 
-				</select><div class="ld-count-cont" id="ld-count-cont"><p id="ld-neumen"></p><p id="ld-denom"></p></div></div>
+				</select><div class="ld-count-cont" id="ld-count-cont"><p class="form-stats">Status</p><p id="ld-neumen"></p><p id="ld-denom"></p></div></div>
 		
 				<form method="post" id="import_asn" enctype="multipart/form-data">
 					<input type="file" id="upload-asn" class="custom-file-input up" name="import_asn">
@@ -93,7 +93,7 @@
 			<h1>
 				Advance Shipping Notice
 			</h1>
-			<script src="{{URL::asset('js/form4.js') }}"></script>
+			<script src="{{URL::asset('js/form5.js') }}"></script>
             <script src="{{URL::asset('js/vendor.js') }}"></script>
 		</div>
 
