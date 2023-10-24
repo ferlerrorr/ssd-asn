@@ -416,11 +416,20 @@ class AsnFileController extends Controller
                 foreach (array_chunk($insertErrData, 1000) as $data) {
                     DB::table('tbl_exemption')->insertOrIgnore($data);
                 }
+                $mergedArray = [];
+
+                // Merge only at the first level
+                foreach ($passedItems  as $subArray) {
+                    $mergedArray = array_merge($mergedArray, $subArray);
+                }
+
+                $resArrcount = count($mergedArray);
                 $response = [
-                    // 'passed_items' =>  array_values($passedItems),
+                    'passed_items' =>  $resArrcount,
                     'message' => "transaction successful but has failing records",
                     'failing_records' => $failedItems
                 ];
+
                 return response()->json($response, 202);
             } else {
 
@@ -580,10 +589,23 @@ class AsnFileController extends Controller
                 foreach (array_chunk($insertData_D, 1000) as &$data) {
                     DB::table('inv_dtl')->insertOrIgnore($data);
                 }
+
+
+                $mergedArray = [];
+
+                // Merge only at the first level
+                foreach ($passedItems as $subArray) {
+                    $mergedArray = array_merge($mergedArray, $subArray);
+                }
+
+                $resArrcount = count($mergedArray);
+
                 $response = [
-                    // 'passed_items' =>  array_values($passedItems),
-                    'message' => "transaction successful",
+                    'passed_items' =>  $resArrcount,
+                    'message' => "Transaction successful",
                 ];
+
+
                 return response()->json($response, 200);
             }
         } else {
@@ -812,8 +834,11 @@ class AsnFileController extends Controller
                                 DB::table('inv_dtl')->insertOrIgnore($data);
                             }
 
+
+                            $resArrcount = count($passedItems_dd);
+
                             $response = [
-                                // 'passed_items' =>  array_values($passedItems),
+                                'passed_items' =>   $resArrcount,
                                 'message' => "transaction successful but has failing records",
                                 'failing_records' =>  $failedItems_dd
                             ];
@@ -941,7 +966,10 @@ class AsnFileController extends Controller
                                 DB::table('inv_dtl')->insertOrIgnore($data);
                             }
 
+
+                            $resArrcount = count($passedItems_dd);
                             $response = [
+                                'passed_items' =>   $resArrcount,
                                 'message' => "transaction successful",
                             ];
                             return response()->json($response, 200);
@@ -1159,8 +1187,9 @@ class AsnFileController extends Controller
                         DB::table('tbl_exemption')->insertOrIgnore($data);
                     }
 
+                    $resArrcount = count($passedItems_ss);
                     $response = [
-                        // 'passed_items' =>  array_values($passedItems),
+                        'passed_items' =>  $resArrcount,
                         'message' => "transaction successful but has failing records",
                         'failing_records' =>  $failedItems_ss
                     ];
@@ -1262,7 +1291,13 @@ class AsnFileController extends Controller
                         DB::table('inv_dtl')->insertOrIgnore($data);
                     }
 
+
+
+                    $resArrcount = count($passedItems_ss);
+
+
                     $response = [
+                        'passed_items' =>  $resArrcount,
                         'message' => "transaction successful",
                     ];
                     return response()->json($response, 200);

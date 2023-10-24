@@ -16,7 +16,7 @@
     </head>
     <body style="display: flex; flex-direction:row;">
         <link rel="stylesheet" type="text/css" href="{{URL::asset('css/data-table.css')}}">
-		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/form.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/form3.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{URL::asset('css/sidenav.css')}}">
 	<div class="sidenav">
 		<link rel="stylesheet"style="display: none;">
@@ -78,21 +78,22 @@
 
 		<div class="view-header">
 			<div class="form-container">
-				<select name="vendors" id="vendors" form="vendors">
-				</select>
+				
+				<div class="vnd-cont"><select name="vendors" id="vendors" form="vendors"> 
+				</select><div class="ld-count-cont" id="ld-count-cont"><p id="ld-neumen"></p><p id="ld-denom"></p></div></div>
+		
 				<form method="post" id="import_asn" enctype="multipart/form-data">
 					<input type="file" id="upload-asn" class="custom-file-input up" name="import_asn">
 					<input type="submit" name="import-asn" id="import-asn" class="btn btn-primary-asn up"
 						value="Upload" />
 					<input type="button" class="btn btn-clear-asn up" value="Clear" id="clear" />
 				</form>
-				<!-- <p class="message" id="message-ms"></p> -->
 			</div>
 
 			<h1>
 				Advance Shipping Notice
 			</h1>
-			<script src="{{URL::asset('js/form.js') }}"></script>
+			<script src="{{URL::asset('js/form4.js') }}"></script>
             <script src="{{URL::asset('js/vendor.js') }}"></script>
 		</div>
 
