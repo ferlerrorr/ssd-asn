@@ -82,9 +82,6 @@ class JdaController extends Controller
         ], 200);
     }
 
-
-
-
     /**
      * Display a listing of the resource.
      *
@@ -93,87 +90,33 @@ class JdaController extends Controller
     public function Sku()
     {
 
-        $data = DB::connection(env('DB2_CONNECTION'))
-            ->table('MM770SSL.INVMST AS M')
-            ->select('M.INUMBR', 'M.IVNDPN', 'V.IVVNDN')
-            ->leftJoin('MM770SSL.INVVEN AS V', 'M.INUMBR', '=', 'V.INUMBR')
-            ->distinct()
-            ->get();
+     $data = DB::connection(env('DB2_CONNECTION'))
+        ->table('MM770SSL..INVMST AS M')
+        ->select('M.INUMBR', 'M.IVNDPN', 'V.IVVNDN')
+        ->leftJoin('MM770QAL.INVVEN AS V', 'M.INUMBR', '=', 'V.INUMBR')
+        ->get();
 
+   // return response($data);
 
-
-        $rowCount = $data->count();
-
-        //!->>
-
-        // Count the occurrences of each value
-        $valueCounts = array_count_values($data->pluck('inumbr')->toArray());
-
-        // Filter values that are duplicated
-        $duplicates = array_filter($valueCounts, function ($count) {
-            return $count > 1;
-        });
-
-        // Create an array to store duplicated values and their counts
-        $duplicatedArray = [];
-
-        foreach ($duplicates as $value => $count) {
-            $duplicatedArray[] = [
-                'sku' => $value,
-                'count' => $count
-            ];
-        }
-
-        //!->>
-
-        $data = $data->map(function ($item) {
-            return (array) $item;
-        });
-
-        $data->transform(function ($row) {
-            foreach ($row as &$value) {
-                $value = trim($value);
-                if ($value === '') {
-                    $value = null;
-                }
-            }
-            return $row;
-        });
-
-
-        // Prepare the data for mass insertion
-        $insertData = [];
-        foreach ($data as &$data_record) {
-            $insertData[] = [
-                'ji_INUMBR' => $data_record["inumbr"],
-                'ji_IMFGNO' => $data_record["ivndpn"],
-                'ji_IVVNDN' => $data_record["ivvndn"],
-                // If needed, add more columns and their corresponding values here
-            ];
-        }
-
-        // Use the upsert method with the ignore option to achieve upsert-or-ignore behavior
-        foreach (array_chunk($insertData, 1000) as &$data) {
-            DB::table('jda_invmst')->upsert($data, ['ji_INUMBR']);
-        }
-
-
-        $currentValue = Env::get('ENVCRON');
-        $incrementedValue = intval($currentValue) + 1;
-
-        // Update the ENVCRON variable with the incremented value
-        $newContent = File::get(base_path('.env'));
-        $newContent = preg_replace('/(ENVCRON=)(.*)/', 'ENVCRON=' . $incrementedValue, $newContent);
-
-        // Write the updated content back to the .env file
-        File::put(base_path('.env'), $newContent);
-
-
-        return response()->json([
-            'count' => $rowCount,
-            'duplicated_sku' => $duplicatedArray,
-            'data' => $data,
-
-        ], 200);
+    // Prepare the data for mass insertion
+    $insertData = [];
+    foreach ($data as $data_record) {
+        $insertData[] = [
+            'ji_INUMBR' => trim($data_record->inumbr),
+			'ji_IMFGNO' => trim($data_record->ivndpn),
+			'ji_IVVNDN' => trim($data_record->ivvndn),
+			'TransactionCode' => trim($data_record->inumbr). trim($data_record->ivndpn) . trim($data_record->ivvndn),
+            // If needed, add more columns and their corresponding values here
+        ];
     }
+
+    // Use the insertOrIgnore method to achieve insert-ignore behavior
+    foreach (array_chunk($insertData, 1000) as $chunk) {
+     DB::table('jda_invmst')->insertOrIgnore($chunk);
+    }
+
+    return response()->json([
+        'data' =>  $insertData,
+    ], 200);
+	}
 }

@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('jda_invmst', function (Blueprint $table) {
             $table->id('ji_id');
-            $table->string('ji_INUMBR', 155)->unique();
+            $table->string('ji_INUMBR', 155);
             $table->string('ji_IMFGNO', 155)->nullable();
             $table->string('ji_IVVNDN', 155)->nullable();
+			$table->string('TransactionCode', 50)->unique();
         });
     }
 
