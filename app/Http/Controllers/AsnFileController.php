@@ -50,7 +50,7 @@ class AsnFileController extends Controller
 
 
 
-        //Todo data Validations -- 
+        //Todo data Validations --
 
         // Todo  Remove Unilab Qty().) to right onli (UNILAB)
 
@@ -98,7 +98,7 @@ class AsnFileController extends Controller
 
         if ($vid == "200") {
 
-            //Todo data Validations --  
+            //Todo data Validations --
             // Loop through each item in the $data[] array
             // Check if the first index of the item is equal to "H", "D", or "L"
             // If it matches, add the item to the respective $data_h, $data_d, or $data_l array
@@ -127,7 +127,7 @@ class AsnFileController extends Controller
                 $data_l,
             ];
 
-
+			$validate = array_values($validate);
             // return response()->json($validate);
 
             //! working line
@@ -169,10 +169,11 @@ class AsnFileController extends Controller
             foreach ($validate[1] as $index => $item) {
                 $itemValidator = Validator::make(['item_1' => $item], [
                     'item_1.1' => 'max:20|required',
-                    'item_1.8' => 'max:10|required',
+					'item_1.3' => 'max:15|required',
+					// 'item_1.8' => 'max:10|required',
                 ], [
                     'item_1.1.max' => " Invoice Number must not exceed :max characters.",
-                    'item_1.3.max' => " Item Code must not exceed 10 characters.",
+                    'item_1.3.max' => " Item Code must not exceed :max characters.",
                     'item_1.1.required' => " Invoice Number must not be Null or Missing.",
                     'item_1.3.required' => " Item Code must not be Null or Missing.",
                 ]);
@@ -196,20 +197,32 @@ class AsnFileController extends Controller
                 }
             }
 
+			$validate[2] = $validate[2];
 
+			//return response($validate[2]);
             foreach ($validate[2] as $index => $item) {
                 $itemValidator = Validator::make(['item_2' => $item], [
-                    'item_2.1' => 'max:20|required',
-                    'item_2.3' => 'max:10|required',
-                    'item_2.4' => 'max:20|required',
-                ], [
-                    'item_2.1.max' => " Invoice Number must not exceed :max characters.",
-                    'item_2.3.max' => " Item Code must not exceed 10 characters.",
-                    'item_2.4.max' => " Lot Number must not exceed :max characters.",
-                    'item_2.1.required' => " Invoice Number must not be Null or Missing.",
-                    'item_2.3.required' => " Item Code must not be Null or Missing.",
-                    'item_2.4.required' => " Lot Number must not be Null or Missing.",
-                ]);
+					'item_2.1' => 'max:20|required',
+					'item_2.3' => 'max:10|required',
+					'item_2.4' => 'max:20|required',
+					'item_2.5' => 'required|max:2', // this seems not working for max.
+					'item_2.6' => 'max:4|required',
+					'item_2.7' => 'max:5|required',
+				], [
+					'item_2.1.max' => " Invoice Number must not exceed :max characters.",
+					'item_2.3.max' => " Item Code must not exceed :max characters.",
+					'item_2.4.max' => " Lot Number must not exceed :max characters.",
+					'item_2.7.max' => " Quantity must not exceed :max characters.",
+					'item_2.6.max' => " Expiry must not exceed  8 characters or the value is too long.",
+					'item_2.5.max' => " Expiry must not exceed  8 characters or the value is too long.",
+					'item_2.1.required' => " Invoice Number must not be Null or Missing.",
+					'item_2.3.required' => " Item Code must not be Null or Missing.",
+					'item_2.4.required' => " Lot Number must not be Null or Missing.",
+					'item_2.6.required' => " Expiry must not be Null or Missing.",
+					'item_2.5.required' => " Expiry must not be Null or Missing.",
+					'item_2.7.required' => " Quantity must not be Null or Missing.",
+
+				]);
 
                 if ($itemValidator->fails()) {
                     $errors = $itemValidator->errors();
@@ -229,6 +242,7 @@ class AsnFileController extends Controller
                     $passedItems[2][] = $item;
                 }
             }
+
 
 
 
@@ -633,6 +647,8 @@ class AsnFileController extends Controller
             //! New Additions>
             if ($vid == 442 || 9470) {
 
+				//return response($result);
+
                 foreach ($result as $element) {
                     // Check if the element has more than three properties
                     if (count($element) <= 3) {
@@ -640,6 +656,7 @@ class AsnFileController extends Controller
                     } else {
                         $passedItems_dd = [];
                         $failedItems_dd = [];
+
 
                         foreach ($result as $item) {
                             $itemErrors = []; // Initialize error messages for each item
@@ -682,15 +699,20 @@ class AsnFileController extends Controller
                                     'L_LotNo' => $item['L_LotNo'],
                                     'L_Qty' => $item['L_Qty'],
                                     'D_ItemCode' => $item['D_ItemCode'],
+									'L_ExpiryYYYY' => $item['L_ExpiryYYYY'],
                                 ], [
                                     'H_InvNo' => 'max:20|required|min:1|not_in:0',
                                     'H_PORef' => 'required|min:1|max:10|not_in:0',
-                                    'L_Qty' => 'required|min:1|not_in:0',
+                                    'L_Qty' => 'max:5|required|min:1|not_in:0',
                                     'L_LotNo' => 'max:20|required|min:1',
-                                    'D_ItemCode' => 'max:20|required|min:1',
+                                    'D_ItemCode' => 'max:15|required|min:1',
+									'L_ExpiryYYYY' => 'max:8|min:1',
+
                                 ], [
-                                    'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
-                                    'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 20 characters.",
+
+									'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
+									'L_Qty.max' => "{$item['L_Qty']} Quantity must not exceed :max characters.",
+                                    'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']} Expiry must not exceed 8 characters.",
                                     'H_PORef.max' => "{$item['H_PORef']} PORef must not exceed 10 characters.",
                                     'D_ItemCode.max' => "{$item['D_ItemCode']} Item Code must not exceed :max characters.",
                                     'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number is required.",
@@ -704,6 +726,7 @@ class AsnFileController extends Controller
                                     'H_PORef.not_in' => "{$item['H_PORef']} PORef must not be empty or 0 .",
                                     'H_InvNo.not_in' => "{$item['H_InvNo']} Invoice Number must not be empty or 0.",
                                     'L_Qty.not_in' => "{$item['L_Qty']} Quantity must not be empty or 0.",
+
                                 ]);
 
                                 if ($itemValidator->fails()) {
@@ -1023,16 +1046,20 @@ class AsnFileController extends Controller
                             'L_LotNo' => $item['L_LotNo'],
                             'L_Qty' => $item['L_Qty'],
                             'D_ItemCode' => $item['D_ItemCode'],
+							'L_ExpiryYYYY' => $item['L_ExpiryYYYY'],
                         ], [
                             'H_InvNo' => 'max:20|required|min:1|not_in:0',
                             'H_PORef' => 'required|min:1|max:10|not_in:0',
-                            'L_Qty' => 'required|min:1|not_in:0',
+                            'L_Qty' => 'required|max:5|min:1|not_in:0',
                             'L_LotNo' => 'max:20|required|min:1',
-                            'D_ItemCode' => 'max:20|required|min:1',
+                            'D_ItemCode' => 'max:15|required|min:1',
+							'L_ExpiryYYYY' => 'max:8|min:1',
                         ], [
                             'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
                             'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 20 characters.",
                             'H_PORef.max' => "{$item['H_PORef']} PORef must not exceed 10 characters.",
+							'L_Qty.max' => "{$item['L_Qty']} Quantity must not exceed :max characters.",
+							'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']} PORef must not exceed 10 characters.",
                             'D_ItemCode.max' => "{$item['D_ItemCode']} Item Code must not exceed :max characters.",
                             'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number is required.",
                             'H_PORef.required' => "{$item['H_PORef']} PORef is required.",
