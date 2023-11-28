@@ -75,7 +75,7 @@ class DuplicatePoController extends Controller
                     $filteredData[] = [
                         "placeholder" => "Duplicate PO",
                         "e_time_stamp" => $timestamp,
-                        "link" => "http://localhost:8800/api/ssd/asn/duplicate-po-export/$timestamp"
+                        "link" => "http://10.91.100.145:8800/api/ssd/asn/duplicate-po-export/$timestamp"
                     ];
 
                     // Add the timestamp to the uniqueTimestamps array to track duplicates
@@ -100,7 +100,7 @@ class DuplicatePoController extends Controller
 
         foreach ($duplicatePo as $poItem) {
             $invNumbersForPo = DB::table('inv_hdr')
-                ->where('PORef', $poItem->jp_PONUMB)
+                ->where('PORef', $poItem->jp_PONOT1)
                 ->pluck('InvNo')
                 ->toArray();
 
@@ -148,6 +148,8 @@ class DuplicatePoController extends Controller
             $invDetails = $invDetailsMap[$invNo];
             $invHdr = $invHdrsMap[$invNo];
             $poRef = $invHdr->PORef;
+            $poRef2 = $poItem->jp_PONUMB;
+
 
             if (!isset($jp_POVNUMMap[$poRef])) {
                 $jp_POVNUMMap[$poRef] = DB::table('jda_pomhdr')
@@ -173,7 +175,7 @@ class DuplicatePoController extends Controller
 
                 $item = [
                     $jp_POVNUM,
-                    $poRef,
+                    $poRef2,
                     $ji_INUMBR,
                     $invLot->Qty,
                     $invLot->LotNo,
