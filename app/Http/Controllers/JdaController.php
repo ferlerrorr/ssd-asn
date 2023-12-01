@@ -24,7 +24,8 @@ class JdaController extends Controller
         // string varDate = DateTime.Now.AddDays(-60).ToString("yyMMdd");
 
         $data = DB::connection(env('DB2_CONNECTION'))
-            ->table('MM770SSL.POMHDR')
+            // ->table('MM770SSL.POMHDR')
+            ->table('MM770QAL.POMHDR')
             ->select('PONUMB', 'POSTAT', 'PONOT1', 'POVNUM', 'POEDAT')
             ->where('POEDAT', '>=', $modifiedDate)
             ->orderByDesc('PONUMB')
@@ -82,6 +83,9 @@ class JdaController extends Controller
         ], 200);
     }
 
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -90,33 +94,33 @@ class JdaController extends Controller
     public function Sku()
     {
 
-     $data = DB::connection(env('DB2_CONNECTION'))
-        ->table('MM770SSL..INVMST AS M')
-        ->select('M.INUMBR', 'M.IVNDPN', 'V.IVVNDN')
-        ->leftJoin('MM770QAL.INVVEN AS V', 'M.INUMBR', '=', 'V.INUMBR')
-        ->get();
+        $data = DB::connection(env('DB2_CONNECTION'))
+            ->table('MM770QAL.INVMST AS M')
+            ->select('M.INUMBR', 'M.IVNDPN', 'V.IVVNDN')
+            ->leftJoin('MM770QAL.INVVEN AS V', 'M.INUMBR', '=', 'V.INUMBR')
+            ->get();
 
-   // return response($data);
+        // return response($data);
 
-    // Prepare the data for mass insertion
-    $insertData = [];
-    foreach ($data as $data_record) {
-        $insertData[] = [
-            'ji_INUMBR' => trim($data_record->inumbr),
-			'ji_IMFGNO' => trim($data_record->ivndpn),
-			'ji_IVVNDN' => trim($data_record->ivvndn),
-			'TransactionCode' => trim($data_record->inumbr). trim($data_record->ivndpn) . trim($data_record->ivvndn),
-            // If needed, add more columns and their corresponding values here
-        ];
+        // Prepare the data for mass insertion
+        $insertData = [];
+        foreach ($data as $data_record) {
+            $insertData[] = [
+                'ji_INUMBR' => trim($data_record->inumbr),
+                'ji_IMFGNO' => trim($data_record->ivndpn),
+                'ji_IVVNDN' => trim($data_record->ivvndn),
+                'TransactionCode' => trim($data_record->inumbr) . trim($data_record->ivndpn) . trim($data_record->ivvndn),
+                // If needed, add more columns and their corresponding values here
+            ];
+        }
+
+        // Use the insertOrIgnore method to achieve insert-ignore behavior
+        foreach (array_chunk($insertData, 1000) as $chunk) {
+            DB::table('jda_invmst')->insertOrIgnore($chunk);
+        }
+
+        return response()->json([
+            'data' =>  $insertData,
+        ], 200);
     }
-
-    // Use the insertOrIgnore method to achieve insert-ignore behavior
-    foreach (array_chunk($insertData, 1000) as $chunk) {
-     DB::table('jda_invmst')->insertOrIgnore($chunk);
-    }
-
-    return response()->json([
-        'data' =>  $insertData,
-    ], 200);
-	}
 }

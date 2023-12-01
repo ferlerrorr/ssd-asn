@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/ASN', function () {
+Route::get('/asn', function () {
     return view('welcome');
 });

@@ -9,6 +9,12 @@ RUN usermod -u 1000 www-data
 
 RUN apt-get update -y
 RUN apt-get install -y unzip git zip libpq-dev libcurl4-gnutls-dev nginx libzip-dev
+
+# Install IBM i Access ODBC driver
+RUN curl https://public.dhe.ibm.com/software/ibmi/products/odbc/debs/dists/1.1.0/ibmi-acs-1.1.0.list | tee /etc/apt/sources.list.d/ibmi-acs-1.1.0.list
+RUN apt-get update
+RUN apt-get install -y ibm-iaccess
+
 RUN docker-php-ext-install pdo pdo_mysql bcmath curl opcache zip
 
 # Install mbstring dependencies

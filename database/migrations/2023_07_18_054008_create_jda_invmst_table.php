@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('ji_INUMBR', 155);
             $table->string('ji_IMFGNO', 155)->nullable();
             $table->string('ji_IVVNDN', 155)->nullable();
-			$table->string('TransactionCode', 50)->unique();
+            $table->string('TransactionCode', 50)->unique();
         });
     }
 
