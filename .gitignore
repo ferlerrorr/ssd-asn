@@ -7,3 +7,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+ssd-asn-php
+phpmyadmin5.2.0-apache
+mysql8.0
