@@ -24,8 +24,7 @@ class JdaController extends Controller
         // string varDate = DateTime.Now.AddDays(-60).ToString("yyMMdd");
 
         $data = DB::connection(env('DB2_CONNECTION'))
-            // ->table('MM770SSL.POMHDR')
-            ->table('MM770QAL.POMHDR')
+            ->table('MM770SSL.POMHDR')
             ->select('PONUMB', 'POSTAT', 'PONOT1', 'POVNUM', 'POEDAT')
             ->where('POEDAT', '>=', $modifiedDate)
             ->orderByDesc('PONUMB')
@@ -95,9 +94,11 @@ class JdaController extends Controller
     {
 
         $data = DB::connection(env('DB2_CONNECTION'))
-            ->table('MM770QAL.INVMST AS M')
+            ->table('MM770SSL.INVMST AS M')
             ->select('M.INUMBR', 'M.IVNDPN', 'V.IVVNDN')
-            ->leftJoin('MM770QAL.INVVEN AS V', 'M.INUMBR', '=', 'V.INUMBR')
+            ->leftJoin('MM770SSL
+
+            .INVVEN AS V', 'M.INUMBR', '=', 'V.INUMBR')
             ->get();
 
         // return response($data);
