@@ -199,32 +199,20 @@ class AsnFileController extends Controller
 
             $validate[2] = $validate[2];
 
-            Validator::extend('contains_char', function ($attribute, $value, $parameters, $validator) {
-                return strpos($value, $parameters[0]) !== false;
-            });
-
-
             //return response($validate[2]);
             foreach ($validate[2] as $index => $item) {
                 $itemValidator = Validator::make(['item_2' => $item], [
                     'item_2.1' => 'max:20|required',
                     'item_2.3' => 'max:10|required',
                     'item_2.4' => 'max:20|required',
-                    'item_2.5' => 'required|max:5', // this seems not working for max.
+                    'item_2.5' => 'required|max:2', // this seems not working for max.
                     'item_2.6' => 'max:4|required',
-                    'item_2.7' => [
-                        'required',
-                        function ($attribute, $value, $fail) {
-                            if (strpos($value, '.') !== false) {
-                                $fail(' Quantity must not have a decimal value.');
-                            }
-                        },
-                    ],
+                    'item_2.7' => 'required',
                 ], [
                     'item_2.1.max' => " Invoice Number must not exceed :max characters.",
                     'item_2.3.max' => " Item Code must not exceed :max characters.",
                     'item_2.4.max' => " Lot Number must not exceed :max characters.",
-                    //'item_2.7.max' => " Quantity must not exceed :max characters.",
+                    // 'item_2.7.max' => " Quantity must not exceed :max characters.",
                     'item_2.6.max' => " Expiry must not exceed  8 characters or the value is too long.",
                     'item_2.5.max' => " Expiry must not exceed  8 characters or the value is too long.",
                     'item_2.1.required' => " Invoice Number must not be Null or Missing.",
@@ -233,10 +221,8 @@ class AsnFileController extends Controller
                     'item_2.6.required' => " Expiry must not be Null or Missing.",
                     'item_2.5.required' => " Expiry must not be Null or Missing.",
                     'item_2.7.required' => " Quantity must not be Null or Missing.",
-                    'item_2.7.contains_char' => " Quantity must not have a decimal value.",
 
                 ]);
-
 
                 if ($itemValidator->fails()) {
                     $errors = $itemValidator->errors();
@@ -717,7 +703,7 @@ class AsnFileController extends Controller
                                 ], [
                                     'H_InvNo' => 'max:20|required|min:1|not_in:0',
                                     'H_PORef' => 'required|min:1|max:10|not_in:0',
-                                    'L_Qty' => 'integer|required|min:1|not_in:0',
+                                    'L_Qty' => 'required|min:1|not_in:0',
                                     'L_LotNo' => 'max:20|required|min:1',
                                     'D_ItemCode' => 'max:15|required|min:1',
                                     'L_ExpiryYYYY' => 'max:8|min:1',
@@ -725,7 +711,7 @@ class AsnFileController extends Controller
                                 ], [
 
                                     'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
-                                    'L_Qty.integer' => "{$item['L_Qty']} Quantity must not have decimals.",
+                                    // 'L_Qty.max' => "{$item['L_Qty']} Quantity must not exceed :max characters.",
                                     'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']} Expiry must not exceed 8 characters.",
                                     'H_PORef.max' => "{$item['H_PORef']} PORef must not exceed 10 characters.",
                                     'D_ItemCode.max' => "{$item['D_ItemCode']} Item Code must not exceed :max characters.",
@@ -1064,7 +1050,7 @@ class AsnFileController extends Controller
                         ], [
                             'H_InvNo' => 'max:20|required|min:1|not_in:0',
                             'H_PORef' => 'required|min:1|max:10|not_in:0',
-                            'L_Qty' => 'required|integer|min:1|not_in:0',
+                            'L_Qty' => 'required|min:1|not_in:0',
                             'L_LotNo' => 'max:20|required|min:1',
                             'D_ItemCode' => 'max:15|required|min:1',
                             'L_ExpiryYYYY' => 'max:8|min:1',
@@ -1072,7 +1058,7 @@ class AsnFileController extends Controller
                             'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
                             'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 20 characters.",
                             'H_PORef.max' => "{$item['H_PORef']} PORef must not exceed 10 characters.",
-                            'L_Qty.integer' => "{$item['L_Qty']} Quantity must not have decimals.",
+                            // 'L_Qty.max' => "{$item['L_Qty']} Quantity must not exceed :max characters.",
                             'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']} PORef must not exceed 10 characters.",
                             'D_ItemCode.max' => "{$item['D_ItemCode']} Item Code must not exceed :max characters.",
                             'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number is required.",
