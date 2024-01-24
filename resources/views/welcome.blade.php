@@ -10,7 +10,7 @@
 		<script src="https://kit.fontawesome.com/a5b3b870d7.js" crossorigin="anonymous" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" defer></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer></script>
-		
+
 
         <title>Advance Shipping Notice</title>
     </head>
@@ -63,7 +63,7 @@
 						</a>
 
 					</li>
-				
+
 					<li class="parent" id="link">
 						<a href="#" id="navErrlogs"><span>Error Logs</span></a>
 					</li>
@@ -78,10 +78,10 @@
 
 		<div class="view-header">
 			<div class="form-container">
-				
-				<div class="vnd-cont"><select name="vendors" id="vendors" form="vendors"> 
+
+				<div class="vnd-cont"><select name="vendors" id="vendors" form="vendors">
 				</select><div class="ld-count-cont" id="ld-count-cont"><p class="form-stats">Status</p><p id="ld-neumen"></p><p id="ld-denom"></p></div></div>
-		
+
 				<form method="post" id="import_asn" enctype="multipart/form-data">
 					<input type="file" id="upload-asn" class="custom-file-input up" name="import_asn">
 					<input type="submit" name="import-asn" id="import-asn" class="btn btn-primary-asn up"
@@ -93,7 +93,7 @@
 			<h1>
 				Advance Shipping Notice
 			</h1>
-			<script src="{{URL::asset('js/form5.js') }}"></script>
+			<script src="{{URL::asset('js/formv5.js') }}"></script>
             <script src="{{URL::asset('js/vendor.js') }}"></script>
 		</div>
 
@@ -156,7 +156,7 @@
 			<tbody class="table-body" id="tb-body">
 
 
-				<!-- 
+				<!--
 					Data - Tr and Td Dyanamically Generated
 				-->
 
@@ -189,7 +189,7 @@
 		<tbody class="table-body" id="tb-body">
 
 
-			<!-- 
+			<!--
 				Data - Tr and Td Dyanamically Generated
 			-->
 

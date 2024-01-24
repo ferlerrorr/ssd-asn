@@ -128,7 +128,6 @@ class AsnFileController extends Controller
             ];
 
             $validate = array_values($validate);
-            // return response()->json($validate);
 
             //! working line
 
@@ -646,8 +645,6 @@ class AsnFileController extends Controller
 
             //! New Additions>
             if ($vid == 442 || 9470) {
-
-                //return response($result);
 
                 foreach ($result as $element) {
                     // Check if the element has more than three properties
@@ -1222,7 +1219,6 @@ class AsnFileController extends Controller
                     ];
 
                     return response()->json($response, 202);
-                    // return response()->json($result, 200);
                 } else {
                     $insertData_H = [];
                     foreach ($result as &$data_record) {

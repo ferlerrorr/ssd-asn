@@ -175,8 +175,8 @@ $(document).ready(function () {
                 if ("C" !== t[0][0]) {
                     $("#notif").text(
                         "File is not for Zuellig or Metro vendor Upload"
-                    ),
-                        (a.value = ""),
+                    );
+                    (a.value = ""),
                         (e = ""),
                         $("#upload-asn").val(null),
                         $("#import-asn").prop("disabled", !0),
@@ -185,47 +185,97 @@ $(document).ready(function () {
                         $("#import-asn").val("Upload");
                     return;
                 }
-                {
-                    var d = /DRUG\d*,?/g,
-                        u = t.replace(d, (l) => l.replace(",", ""));
-                    let f = u.split("\n"),
-                        c = f.map((l) => {
-                            let a = l.split(",");
-                            return a;
-                        });
-                    e = JSON.stringify(c, null, 2);
-                    let s = c.length;
-                    // $("#ld-denom").text(s);
-                    Total = s - 1;
-                    console.log(Total);
+
+                var drugPattern = /(SOUTH STAR DRUG INC\.)|SOUTH STAR DRUG/;
+
+                let f = t.split("\n"),
+                    c = f.map((l) => l.split(","));
+
+                // Modify the content at index 6 for each element in array c
+                c.forEach((row) => {
+                    if (row.length > 6) {
+                        let index6Content = row[6].trim();
+                        let match = index6Content.match(drugPattern);
+
+                        if (match) {
+                            // If there is a second part (INC.), move it to index 7
+                            if (
+                                index6Content.toUpperCase().includes(' INC."')
+                            ) {
+                                let remainingText = index6Content
+                                    .substring(match[0].length)
+                                    .trim();
+                                if (remainingText !== "") {
+                                    row[6] = match[0]; // Set index 6 to the matched pattern
+                                    row[7] = remainingText; // Set index 7 to the remaining text
+                                }
+                            }
+                        }
+                    }
+                });
+
+                for (let i = 0; i < c.length; i++) {
+                    // Check if the value of the 7th index is ' INC.'
+                    if (
+                        c[i].length > 7 &&
+                        c[i][7] &&
+                        c[i][7].toUpperCase() === ' INC."'
+                    ) {
+                        // Remove it if it is ' INC.'
+                        c[i].splice(7, 1);
+                    }
                 }
+
+                // console.log(c);
+
+                e = JSON.stringify(c, null, 2); // Move this line outside the loop
+
+                let s = c.length;
+                // $("#ld-denom").text(s);
+                Total = s - 1;
+                console.log(Total);
             } else {
                 let m = t.replace(/"/g, "");
+
                 if ("I" !== m[0][0]) {
-                    $("#notif").text("File not for chosen vendor upload"),
-                        (a.value = ""),
-                        (e = ""),
-                        $("#upload-asn").val(null),
-                        $("#import-asn").prop("disabled", !0),
-                        $("#ld-denom").css("visibility", "hidden"),
-                        $("#ld-neumen").css("visibility", "hidden"),
-                        $("#import-asn").val("Upload");
+                    $("#notif").text("File not for chosen vendor upload");
+                    a.value = "";
+                    e = "";
+                    $("#upload-asn").val(null);
+                    $("#import-asn").prop("disabled", !0);
+                    $("#ld-denom").css("visibility", "hidden");
+                    $("#ld-neumen").css("visibility", "hidden");
+                    $("#import-asn").val("Upload");
                     return;
                 }
+
                 var d = /DRUG\d*,?/g,
                     u = t.replace(d, (l) => l.replace(",", ""));
                 let v = u.split("\n"),
                     g = v.map((l) => {
                         let a = l.split(",");
+
+                        // Check if index 7 exists and contains "DRUG"
+                        if (a[7] && a[7].includes("DRUG")) {
+                            let vendorInfo = a[7].match(/(.+?)(\d+)$/);
+                            if (vendorInfo) {
+                                a[7] = vendorInfo[1];
+                                a.splice(8, 0, vendorInfo[2]);
+                            }
+                        }
+
                         return a;
                     });
+
+                console.log(g);
                 e = JSON.stringify(g, null, 2);
                 let s = g.length;
                 // $("#ld-denom").text(s);
                 Total = s;
                 console.log(Total);
+
+                $("#notif").text("File is ready for upload");
             }
-            $("#notif").text("File is ready for upload");
         }),
             n.readAsText(t);
     });
