@@ -169,6 +169,7 @@ $(document).ready(function () {
                     // console.log("Total items in jsonData: " + s);
                     // $("#ld-denom").text(s);
                     Total = s;
+                    $("#notif").text("File is ready for upload");
                     console.log(Total);
                 }
             } else if ("442" === o || "9470" === o) {
@@ -233,6 +234,8 @@ $(document).ready(function () {
                 let s = c.length;
                 // $("#ld-denom").text(s);
                 Total = s - 1;
+
+                $("#notif").text("File is ready for upload");
                 console.log(Total);
             } else {
                 let m = t.replace(/"/g, "");
@@ -261,6 +264,42 @@ $(document).ready(function () {
                             if (vendorInfo) {
                                 a[7] = vendorInfo[1];
                                 a.splice(8, 0, vendorInfo[2]);
+                            }
+                        }
+
+                        if (o === "185") {
+                            if (a.length > 17) {
+                                if (a[5] && a[6]) {
+                                    // Join the 5th and 6th elements
+                                    a[5] = a[5] + a[6];
+                                    // Remove the 6th element
+                                    a.splice(6, 1);
+                                }
+                            }
+                        }
+
+                        if (o === "8587") {
+                            if (a.length > 17) {
+                                // Check if indices 7 and 8 exist in the array
+                                if (a[7] !== undefined && a[8] !== undefined) {
+                                    // Add the value of index 8 to index 7
+                                    a[7] += a[8];
+                                    // Splice the element at index 8
+                                    a.splice(8, 1);
+                                }
+                            }
+                        }
+
+                        if (o === "8088") {
+                            if (a[5] && a[5].includes("DRUG")) {
+                                // Split the string based on "DRUG"
+                                let parts = a[5].split("DRUG");
+
+                                // Update the 5th index with the part before "DRUG"
+                                a[5] = parts[0].trim() + " DRUG";
+
+                                // Insert the second part into the 6th index
+                                a.splice(6, 0, parts[1].trim());
                             }
                         }
 

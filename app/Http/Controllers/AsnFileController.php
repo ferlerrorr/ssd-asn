@@ -38,12 +38,9 @@ class AsnFileController extends Controller
      */
     public function store(Request $request, $vid)
     {
-
-
+        ini_set('memory_limit', '10G');
         $vid = $vid;
-
         $data = $request->toArray();
-
         $data = array_values(array_filter($data, function ($subArray) {
             return count(array_filter($subArray, fn ($item) => $item !== null)) > 0;
         }));
