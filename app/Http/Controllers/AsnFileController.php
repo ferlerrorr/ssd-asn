@@ -39,8 +39,11 @@ class AsnFileController extends Controller
     public function store(Request $request, $vid)
     {
         ini_set('memory_limit', '10G');
+
         $vid = $vid;
+
         $data = $request->toArray();
+
         $data = array_values(array_filter($data, function ($subArray) {
             return count(array_filter($subArray, fn ($item) => $item !== null)) > 0;
         }));
@@ -700,13 +703,14 @@ class AsnFileController extends Controller
                                     'L_Qty' => 'required|min:1|not_in:0',
                                     'L_LotNo' => 'max:20|required|min:1',
                                     'D_ItemCode' => 'max:15|required|min:1',
-                                    'L_ExpiryYYYY' => 'max:8|min:1',
+                                    'L_ExpiryYYYY' => 'max:8|min:8',
 
                                 ], [
 
                                     'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
                                     // 'L_Qty.max' => "{$item['L_Qty']} Quantity must not exceed :max characters.",
-                                    'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']} Expiry must not exceed 8 characters.",
+                                    'L_ExpiryYYYY.min' => "{$item['L_ExpiryYYYY']} Expiry must not be below 8 characters.",
+                                    'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']}  Expiry must not exceed 8 characters.",
                                     'H_PORef.max' => "{$item['H_PORef']} PORef must not exceed 10 characters.",
                                     'D_ItemCode.max' => "{$item['D_ItemCode']} Item Code must not exceed :max characters.",
                                     'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number is required.",
@@ -1047,13 +1051,14 @@ class AsnFileController extends Controller
                             'L_Qty' => 'required|min:1|not_in:0',
                             'L_LotNo' => 'max:20|required|min:1',
                             'D_ItemCode' => 'max:15|required|min:1',
-                            'L_ExpiryYYYY' => 'max:8|min:1',
+                            'L_ExpiryYYYY' => 'max:8|min:8',
                         ], [
                             'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
                             'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 20 characters.",
                             'H_PORef.max' => "{$item['H_PORef']} PORef must not exceed 10 characters.",
                             // 'L_Qty.max' => "{$item['L_Qty']} Quantity must not exceed :max characters.",
-                            'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']} PORef must not exceed 10 characters.",
+                            'L_ExpiryYYYY.min' => "{$item['L_ExpiryYYYY']} Expiry must not be below 8 characters.",
+                            'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']}  Expiry must not exceed 8 characters.",
                             'D_ItemCode.max' => "{$item['D_ItemCode']} Item Code must not exceed :max characters.",
                             'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number is required.",
                             'H_PORef.required' => "{$item['H_PORef']} PORef is required.",
