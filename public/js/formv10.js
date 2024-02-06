@@ -278,7 +278,7 @@ $(document).ready(function () {
                             }
                         }
 
-                        if (o == "8587" || o == "10377") {
+                        if (o == "8587" || o == "10377" || o == "10003") {
                             if (a.length > 17) {
                                 // Check if indices 7 and 8 exist in the array
                                 if (a[7] !== undefined && a[8] !== undefined) {
