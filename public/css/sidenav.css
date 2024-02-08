@@ -135,6 +135,7 @@ ul > li > a {
     opacity: 1;
     animation: 0.9s fadeInOut;
     overflow-y: auto !important;
+    width: 100% !important;
 }
 .dataTables_wrapper {
     animation: 10ms fadeInOut;
@@ -365,5 +366,5 @@ ul > li > a {
 }
 
 #error-log_wrapper {
-    height: 100vh;
+    height: 75vh;
 }
