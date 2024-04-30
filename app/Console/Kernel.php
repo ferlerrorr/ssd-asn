@@ -4,10 +4,10 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
-
     /**
      * Define the application's command schedule.
      *
@@ -16,21 +16,48 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $context = stream_context_create(['http' => ['timeout' => 60 * 60 * 5]]);
 
-        $schedule->call(function () {
-            // Make a GET request to your custom endpoint URL
-            file_get_contents('http://10.91.100.145:8800/api/ssd/asn/jda/po');
-        })->dailyAt('6:00');
-        $schedule->call(function () {
-            // Make a GET request to your custom endpoint URL
-            file_get_contents('http://10.91.100.145:8800/api/ssd/asn/jda/sku');
-        })->dailyAt('6:02');
+        $schedule->call(function () use ($context) {
+            try {
+                file_get_contents('http://10.60.14.57:8800/api/ssd/asn/jda/po', false, $context);
 
-        $schedule->call(function () {
-            // Make a GET request to your custom endpoint URL
-            file_get_contents('http://10.91.100.145:8800/api/ssd/asn/duplicate-po-update');
-        })->dailyAt('6:03');
+                // Process the response or handle success
+                // ...
+            } catch (\Exception $e) {
+                // Log any errors
+                Log::error('Error during scheduled task: ' . $e->getMessage());
+            }
+        })->dailyAt('06:00'); // Time - 04:30 am
+
+
+        $schedule->call(function () use ($context) {
+            try {
+                file_get_contents('http://10.60.14.57:8800/api/ssd/asn/jda/sku', false, $context);
+
+                // Process the response or handle success
+                // ...
+            } catch (\Exception $e) {
+                // Log any errors
+                Log::error('Error during scheduled task: ' . $e->getMessage());
+            }
+        })->dailyAt('06:02'); //Time - 06:30 am
+        //everyTwoHours(); - For Usage in Upscaling
+        //
+
+        $schedule->call(function () use ($context) {
+            try {
+                file_get_contents('http://10.60.14.57:8800/api/ssd/asn/duplicate-po-update', false, $context);
+
+                // Process the response or handle success
+                // ...
+            } catch (\Exception $e) {
+                // Log any errors
+                Log::error('Error during scheduled task: ' . $e->getMessage());
+            }
+        })->dailyAt('06:04'); //Time - 07:30 am to 09:00 am
     }
+
 
     /**
      * Register the commands for the application.
