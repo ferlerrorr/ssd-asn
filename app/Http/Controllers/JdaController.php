@@ -96,9 +96,7 @@ class JdaController extends Controller
         $data = DB::connection(env('DB2_CONNECTION'))
             ->table('MM770SSL.INVMST AS M')
             ->select('M.INUMBR', 'M.IVNDPN', 'V.IVVNDN')
-            ->leftJoin('MM770SSL
-
-            .INVVEN AS V', 'M.INUMBR', '=', 'V.INUMBR')
+            ->leftJoin('MM770SSL.INVVEN AS V', 'M.INUMBR', '=', 'V.INUMBR')
             ->get();
 
         // return response($data);

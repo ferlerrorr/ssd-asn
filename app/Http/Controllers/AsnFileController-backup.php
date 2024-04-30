@@ -38,7 +38,7 @@ class AsnFileController extends Controller
      */
     public function store(Request $request, $vid)
     {
-
+        ini_set('memory_limit', '10G');
 
         $vid = $vid;
 
@@ -107,6 +107,14 @@ class AsnFileController extends Controller
             $data_h = array(); // Array to store items with index 0 equal to "H"
             $data_d = array(); // Array to store items with index 0 equal to "D"
             $data_l = array(); // Array to store items with index 0 equal to "L"
+
+            $validate = [];
+
+            // Add $data_h, $data_d, and $data_l
+            $validate[] = $data_h;
+            $validate[] = $data_d;
+            $validate[] = $data_l;
+
 
             // Loop through the original data and categorize items based on index 0 value
             foreach ($data as $item) {
@@ -196,31 +204,35 @@ class AsnFileController extends Controller
                 }
             }
 
-            $validate[2] = $validate[2];
+            $vd = $validate[2];
 
-            //return response($validate[2]);
-            foreach ($validate[2] as $index => $item) {
+            foreach ($vd as $index => $item) {
                 $itemValidator = Validator::make(['item_2' => $item], [
                     'item_2.1' => 'max:20|required',
                     'item_2.3' => 'max:10|required',
                     'item_2.4' => 'max:20|required',
-                    'item_2.5' => 'required|max:2', // this seems not working for max.
-                    'item_2.6' => 'max:4|required',
-                    'item_2.7' => 'required',
+                    'item_2.5' => 'required|max:2',
+                    'item_2.6' => 'max:8|required',
+                    'item_2.7' => [
+                        'required',
+                        function ($attribute, $value, $fail) {
+                            if (strpos($value, '.') !== false) {
+                                $fail("Quantity field cannot contain decimal value.");
+                            }
+                        },
+                    ],
                 ], [
-                    'item_2.1.max' => " Invoice Number must not exceed :max characters.",
-                    'item_2.3.max' => " Item Code must not exceed :max characters.",
-                    'item_2.4.max' => " Lot Number must not exceed :max characters.",
-                    // 'item_2.7.max' => " Quantity must not exceed :max characters.",
-                    'item_2.6.max' => " Expiry must not exceed  8 characters or the value is too long.",
-                    'item_2.5.max' => " Expiry must not exceed  8 characters or the value is too long.",
-                    'item_2.1.required' => " Invoice Number must not be Null or Missing.",
-                    'item_2.3.required' => " Item Code must not be Null or Missing.",
-                    'item_2.4.required' => " Lot Number must not be Null or Missing.",
-                    'item_2.6.required' => " Expiry must not be Null or Missing.",
-                    'item_2.5.required' => " Expiry must not be Null or Missing.",
-                    'item_2.7.required' => " Quantity must not be Null or Missing.",
-
+                    'item_2.1.max' => "Invoice Number must not exceed :max characters.",
+                    'item_2.3.max' => "Item Code must not exceed :max characters.",
+                    'item_2.4.max' => "Lot Number must not exceed :max characters.",
+                    'item_2.6.max' => "Expiry must not exceed 8 characters.",
+                    'item_2.5.max' => "Expiry must not exceed 2 characters.",
+                    'item_2.1.required' => "Invoice Number must not be null or missing.",
+                    'item_2.3.required' => "Item Code must not be null or missing.",
+                    'item_2.4.required' => "Lot Number must not be null or missing.",
+                    'item_2.6.required' => "Expiry must not be null or missing.",
+                    'item_2.5.required' => "Expiry must not be null or missing.",
+                    'item_2.7.required' => "Quantity must not be null or missing.",
                 ]);
 
                 if ($itemValidator->fails()) {
@@ -231,10 +243,9 @@ class AsnFileController extends Controller
                     $failedItem = [
                         array_map(function ($attribute, $error) use ($item) {
                             $attributeName = substr($attribute, 7);
-                            return "$item[$attributeName]" . $error;
+                            return "$item[$attributeName] $error";
                         }, $failedAttributes, $errorMessages),
                         $item,
-
                     ];
                     $failedItems[] = $failedItem;
                 } else {
@@ -247,10 +258,27 @@ class AsnFileController extends Controller
 
             if ($failedItems == !null) {
 
-                // Initialize arrays to store items based on index 0 values
-                $data_h = array_values($passedItems[0]); // Array to store items with index 0 equal to "H"
-                $data_d = array_values($passedItems[1]); // Array to store items with index 0 equal to "D"
-                $data_l = array_values($passedItems[2]); // Array to store items with index 0 equal to "L"
+                $data_h = [];
+                $data_d = [];
+                $data_l = [];
+
+                if ($passedItems !== null) {
+                    // Array to store items with index 0 equal to "H"
+                    if (isset($passedItems[0])) {
+                        $data_h = array_values($passedItems[0]);
+                    }
+
+                    // Array to store items with index 0 equal to "D"
+                    if (isset($passedItems[1])) {
+                        $data_d = array_values($passedItems[1]);
+                    }
+
+                    // Array to store items with index 0
+                    if (isset($passedItems[2])) {
+                        $data_l = array_values($passedItems[2]);
+                    }
+                }
+                //Array to store items with index 0 equal to "L"
 
 
 
@@ -689,7 +717,6 @@ class AsnFileController extends Controller
                                     array_values($failedItemData), // Error messages for this item
                                 ];
                             } else {
-                                // Fields exist, perform validation
                                 $itemValidator = Validator::make([
                                     'H_InvNo' => $item['H_InvNo'],
                                     'H_PORef' => $item['H_PORef'],
@@ -700,16 +727,22 @@ class AsnFileController extends Controller
                                 ], [
                                     'H_InvNo' => 'max:20|required|min:1|not_in:0',
                                     'H_PORef' => 'required|min:1|max:10|not_in:0',
-                                    'L_Qty' => 'required|min:1|not_in:0',
+                                    'L_Qty' => [
+                                        'required',
+                                        'min:1',
+                                        'not_in:0',
+                                        function ($attribute, $value, $fail) {
+                                            if (strpos($value, '.') !== false) {
+                                                $fail("Quantity field cannot contain Decimal value.");
+                                            }
+                                        },
+                                    ],
                                     'L_LotNo' => 'max:20|required|min:1',
                                     'D_ItemCode' => 'max:15|required|min:1',
-                                    'L_ExpiryYYYY' => 'max:8|min:1',
-
+                                    'L_ExpiryYYYY' => 'max:8|required',
                                 ], [
-
                                     'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
-                                    // 'L_Qty.max' => "{$item['L_Qty']} Quantity must not exceed :max characters.",
-                                    'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']} Expiry must not exceed 8 characters.",
+                                    'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']}  Expiry must not exceed 8 characters.",
                                     'H_PORef.max' => "{$item['H_PORef']} PORef must not exceed 10 characters.",
                                     'D_ItemCode.max' => "{$item['D_ItemCode']} Item Code must not exceed :max characters.",
                                     'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number is required.",
@@ -723,7 +756,6 @@ class AsnFileController extends Controller
                                     'H_PORef.not_in' => "{$item['H_PORef']} PORef must not be empty or 0 .",
                                     'H_InvNo.not_in' => "{$item['H_InvNo']} Invoice Number must not be empty or 0.",
                                     'L_Qty.not_in' => "{$item['L_Qty']} Quantity must not be empty or 0.",
-
                                 ]);
 
                                 if ($itemValidator->fails()) {
@@ -1047,16 +1079,26 @@ class AsnFileController extends Controller
                         ], [
                             'H_InvNo' => 'max:20|required|min:1|not_in:0',
                             'H_PORef' => 'required|min:1|max:10|not_in:0',
-                            'L_Qty' => 'required|min:1|not_in:0',
+                            'L_Qty' => [
+                                'required',
+                                'min:1',
+                                'not_in:0',
+                                function ($attribute, $value, $fail) {
+                                    if (strpos($value, '.') !== false) {
+                                        $fail("Quantity field cannot contain Decimal value.");
+                                    }
+                                },
+                            ],
                             'L_LotNo' => 'max:20|required|min:1',
                             'D_ItemCode' => 'max:15|required|min:1',
-                            'L_ExpiryYYYY' => 'max:8|min:1',
+                            'L_ExpiryYYYY' => 'max:8|required',
                         ], [
                             'H_InvNo.max' => "{$item['H_InvNo']} Invoice Number must not exceed :max characters.",
                             'L_LotNo.max' => "{$item['L_LotNo']} Lot Number must not exceed 20 characters.",
                             'H_PORef.max' => "{$item['H_PORef']} PORef must not exceed 10 characters.",
                             // 'L_Qty.max' => "{$item['L_Qty']} Quantity must not exceed :max characters.",
-                            'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']} PORef must not exceed 10 characters.",
+                            //'L_ExpiryYYYY.min' => "{$item['L_ExpiryYYYY']} Expiry must not be below 8 characters.",
+                            'L_ExpiryYYYY.max' => "{$item['L_ExpiryYYYY']}  Expiry must not exceed 8 characters.",
                             'D_ItemCode.max' => "{$item['D_ItemCode']} Item Code must not exceed :max characters.",
                             'H_InvNo.required' => "{$item['H_InvNo']} Invoice Number is required.",
                             'H_PORef.required' => "{$item['H_PORef']} PORef is required.",

@@ -267,7 +267,7 @@ $(document).ready(function () {
                             }
                         }
 
-                        if (o === "185") {
+                        if (o === "185" || o === "10190") {
                             if (a.length > 17) {
                                 if (a[5] && a[6]) {
                                     // Join the 5th and 6th elements
@@ -282,7 +282,8 @@ $(document).ready(function () {
                             o == "8587" ||
                             o == "10377" ||
                             o == "10003" ||
-                            o == "10220"
+                            o == "10220" ||
+                            o == "8705"
                         ) {
                             if (a.length > 17) {
                                 // Check if indices 7 and 8 exist in the array

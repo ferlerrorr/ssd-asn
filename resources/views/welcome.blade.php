@@ -93,7 +93,7 @@
 			<h1>
 				Advance Shipping Notice
 			</h1>
-			<script src="{{URL::asset('js/formv11.js') }}"></script>
+			<script src="{{URL::asset('js/formv13.js') }}"></script>
             <script src="{{URL::asset('js/vendor.js') }}"></script>
 		</div>
 
