@@ -213,15 +213,6 @@ class AsnFileController extends Controller
                     'item_2.4' => 'max:20|required',
                     'item_2.5' => 'required|max:2',
                     'item_2.6' => 'max:8|required',
-                    'item_2.7' => [
-                        'required',
-                        function ($attribute, $value, $fail) {
-                            if (strpos($value, '.') !== false) {
-                                $fail("Quantity field cannot contain decimal value.");
-                            }
-                        },
-                    ],
-                ], [
                     'item_2.1.max' => "Invoice Number must not exceed :max characters.",
                     'item_2.3.max' => "Item Code must not exceed :max characters.",
                     'item_2.4.max' => "Lot Number must not exceed :max characters.",
@@ -727,16 +718,6 @@ class AsnFileController extends Controller
                                 ], [
                                     'H_InvNo' => 'max:20|required|min:1|not_in:0',
                                     'H_PORef' => 'required|min:1|max:10|not_in:0',
-                                    'L_Qty' => [
-                                        'required',
-                                        'min:1',
-                                        'not_in:0',
-                                        function ($attribute, $value, $fail) {
-                                            if (strpos($value, '.') !== false) {
-                                                $fail("Quantity field cannot contain Decimal value.");
-                                            }
-                                        },
-                                    ],
                                     'L_LotNo' => 'max:20|required|min:1',
                                     'D_ItemCode' => 'max:15|required|min:1',
                                     'L_ExpiryYYYY' => 'max:8|required',
@@ -1079,16 +1060,6 @@ class AsnFileController extends Controller
                         ], [
                             'H_InvNo' => 'max:20|required|min:1|not_in:0',
                             'H_PORef' => 'required|min:1|max:10|not_in:0',
-                            'L_Qty' => [
-                                'required',
-                                'min:1',
-                                'not_in:0',
-                                function ($attribute, $value, $fail) {
-                                    if (strpos($value, '.') !== false) {
-                                        $fail("Quantity field cannot contain Decimal value.");
-                                    }
-                                },
-                            ],
                             'L_LotNo' => 'max:20|required|min:1',
                             'D_ItemCode' => 'max:15|required|min:1',
                             'L_ExpiryYYYY' => 'max:8|required',

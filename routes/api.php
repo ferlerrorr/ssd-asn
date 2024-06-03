@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/ssd/asn/vendors', 'App\Http\Controllers\AsnFileController@vendors');
 Route::post('/ssd/asn/upload/{vid}', 'App\Http\Controllers\AsnFileController@store');
 Route::post('/ssd/asn/export', 'App\Http\Controllers\AsnFileController@export');
-
+Route::get('/ssd/asn/jda/poref', 'App\Http\Controllers\JdaController@POrefCheck');
 
 //?JDA Routes
 Route::get('/ssd/asn/jda/po', 'App\Http\Controllers\JdaController@Po');
@@ -44,7 +44,7 @@ Route::get('/ssd/asn/duplicate-po-load/loadduplogs', 'App\Http\Controllers\Dupli
 
 //!Vendor Maintenance Routes
 
-//? Vendor Setup 
+//? Vendor Setup
 Route::get('/ssd/asn/vendorid-setup', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetup');
 Route::get('/ssd/asn/vendorid-setup-delete/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetupDelete');
 Route::put('/ssd/asn/vendorid-setup-update/{vendor_id}', 'App\Http\Controllers\VendorMaintenanceController@vendorsSetupUpdate');
