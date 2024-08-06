@@ -28,8 +28,8 @@ class VendorMaintenanceController extends Controller
             $filteredData[] = [
                 "v_vname" => $vendor->v_vname,
                 "v_vid" => $vendor->v_vid,
-                "edit-link" => "http://localhost:8800/api/ssd/asn/jda/vsetupedit/$vendor->v_vid",
-                "delete-link" => "http://localhost:8800/api/ssd/asn/jda/vsetupdelete/$vendor->v_vid"
+                "edit-link" => "http://10.91.100.145:8800/api/ssd/asn/jda/vsetupedit/$vendor->v_vid",
+                "delete-link" => "http://10.91.100.145:8800/api/ssd/asn/jda/vsetupdelete/$vendor->v_vid"
             ];
         }
 

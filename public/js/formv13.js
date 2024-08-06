@@ -23,7 +23,7 @@ $(document).ready(function () {
                 return;
             }
             $.ajax({
-                url: "http://localhost:8800/api/ssd/asn/upload/" + l.value,
+                url: "http://10.91.100.145:8800/api/ssd/asn/upload/" + l.value,
                 method: "POST",
                 data: e,
                 contentType: "application/json",
@@ -267,7 +267,7 @@ $(document).ready(function () {
                             }
                         }
 
-                        if (o === "185" || o === "10190") {
+                        if (o === "185" || o === "10190" || o === "8088") {
                             if (a.length > 17) {
                                 if (a[5] && a[6]) {
                                     // Join the 5th and 6th elements
@@ -293,19 +293,6 @@ $(document).ready(function () {
                                     // Splice the element at index 8
                                     a.splice(8, 1);
                                 }
-                            }
-                        }
-
-                        if (o === "8088") {
-                            if (a[5] && a[5].includes("DRUG")) {
-                                // Split the string based on "DRUG"
-                                let parts = a[5].split("DRUG");
-
-                                // Update the 5th index with the part before "DRUG"
-                                a[5] = parts[0].trim() + " DRUG";
-
-                                // Insert the second part into the 6th index
-                                a.splice(6, 0, parts[1].trim());
                             }
                         }
 

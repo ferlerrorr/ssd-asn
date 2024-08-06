@@ -20,7 +20,7 @@ $(document).ready(function () {
             return;
         }
         $.ajax({
-            url: "http://localhost:8800/api/ssd/asn/export",
+            url: "http://10.91.100.145:8800/api/ssd/asn/export",
             method: "POST",
             data: e,
             processData: !1,

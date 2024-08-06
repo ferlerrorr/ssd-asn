@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Env;
+use Illuminate\Support\Facades\Log;
 
 class JdaController extends Controller
 {
@@ -17,13 +18,14 @@ class JdaController extends Controller
      */
     public function Po()
     {
-        $date = Carbon::now()->subDays(30)->toDateString('Y-m-d');
+        $date = Carbon::now()->subDays(60)->toDateString('Y-m-d');
         $modifiedDate = substr(str_replace("-", "", $date), 2);
 
         //Delimiter for PO
         // string varDate = DateTime.Now.AddDays(-60).ToString("yyMMdd");
 
         $data = DB::connection(env('DB2_CONNECTION'))
+            // ->table('MM770SSL.POMHDR')
             ->table('MM770SSL.POMHDR')
             ->select('PONUMB', 'POSTAT', 'PONOT1', 'POVNUM', 'POEDAT')
             ->where('POEDAT', '>=', $modifiedDate)
@@ -75,14 +77,12 @@ class JdaController extends Controller
 
         // Write the updated content back to the .env file
         File::put(base_path('.env'), $newContent);
-
+        Log::info('Tiggered scheduled task: Task PO');
         return response()->json([
             'count' => $rowCount,
             'data' => $data,
         ], 200);
     }
-
-
 
 
     /**
@@ -98,6 +98,12 @@ class JdaController extends Controller
             ->select('M.INUMBR', 'M.IVNDPN', 'V.IVVNDN')
             ->leftJoin('MM770SSL.INVVEN AS V', 'M.INUMBR', '=', 'V.INUMBR')
             ->get();
+
+
+        // $data = DB::connection(env('DB2_CONNECTION'))
+        //     ->table('MM770SSL.INVMST')
+        //     ->select('INUMBR', 'IVNDPN')
+        //     ->get();
 
         // return response($data);
 
@@ -118,8 +124,65 @@ class JdaController extends Controller
             DB::table('jda_invmst')->insertOrIgnore($chunk);
         }
 
+        $currentValue = Env::get('ENVCRON');
+        $incrementedValue = intval($currentValue) + 1;
+
+        // Update the ENVCRON variable with the incremented value
+        $newContent = File::get(base_path('.env'));
+        $newContent = preg_replace('/(ENVCRON=)(.*)/', 'ENVCRON=' . $incrementedValue, $newContent);
+
+        // Write the updated content back to the .env file
+        File::put(base_path('.env'), $newContent);
+
+        Log::info('Tiggered scheduled task: Task SKU');
+
         return response()->json([
             'data' =>  $insertData,
+        ], 200);
+    }
+
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function POrefCheck()
+    {
+
+        $porefs = DB::table('inv_hdr')
+            ->where(function ($query) {
+                $query->where('PORef', 'LIKE', '0%')
+                    ->orWhere('PORef', 'LIKE', '00%')
+                    ->orWhere('PORef', 'LIKE', '000%')
+                    ->orWhere('PORef', 'LIKE', '0000%')
+                    ->orWhere('PORef', 'LIKE', '00000%');
+            })
+            ->pluck('idi', 'PORef')
+            ->toArray();
+
+
+        // Trim prefixes from keys
+        $porefs = array_combine(
+            array_map(function ($key) {
+                return ltrim($key, '0');
+            }, array_keys($porefs)),
+            array_values($porefs)
+        );
+
+
+        // Iterate over the result and update the PORef values
+        foreach ($porefs as $poRef => $idi) {
+            DB::table('inv_hdr')
+                ->where('idi', $idi)
+                ->update(['PORef' => $poRef]);
+        }
+
+
+        return response()->json([
+            $porefs
         ], 200);
     }
 }
