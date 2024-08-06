@@ -1,35 +1,51 @@
+<p align="center"><a href="https://southstardrug.com.ph/" target="_blank"><img src="img\ssd_logo.avif" width="400"></a></p>
 
-## Laravel Docker Nginx PHP-FPM OP_CACHE
+<p align="center"> 
+<!-- <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a> -->
+ <!-- <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>  -->
+</p> 
 
-Laravel Docker Nginx build using PHP-FPM and OP_CACHE. 
+## About SouthStar Drug
 
-This build delivers top performance.
+Southstar Drug is a chain of drugstores in the Philippines. Established in 1937 as a small business venture engaged in the retail of Chinese herbal medicines which was located in Naga City, Philippines.
 
-By using nginx, php-fpm and op_cache, were able to reduce our request response times and serve requests in `5ms`!
 
-## How to use?
 
-Step 1: Create a new Laravel project
+<em>"To become a drugstore of choice in - Service, Trust, Accessibility and Responsibility"</em>
 
-Step 2: Run `git init`
 
-Step 3: Pull this repo `git pull https://github.com/ferlerrorr/laravel-nginx-php-fpm-opcache.git`
+<!-- - [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcastin.g) -->
 
-Step 4: Adjust your env variables. Make sure you set your database env vars. Add any values as the database will be created per your env var values.
-```
-# Example Values
-DB_CONNECTION=mysql
-DB_HOST=database <----------- This is important. Set this value.
-DB_PORT=3306
-DB_DATABASE=laravel
-DB_USERNAME=homestead
-DB_PASSWORD=secret
+<!-- Laravel is accessible, powerful, and provides tools required for large, robust applications. -->
 
-```
-Step 5: Run `chmod  755 docker/entrypoint.sh `
+## About the Application
 
-Step 6: Run `docker compose build  && docker compose up --force-recreate -d`
+The application is an API (Application Program Interface) for [Shopify](https://www.shopify.com/) Store ordering and search for [Southstardurg.com.ph](https://southstardrug.com.ph/), that is build in [Laravel Framework](https://laravel.com/).
 
-Default PHP port is 8000. Connect via `http://127.0.0.1:8000` or `http://localhost:8000`
+The application is intended for service with third party partners to use, and be integrated in thie'r own systems. 
 
-Default DB port is 3306.
+## Application Dependency
+
+- **[Laravel 9](https://laravel.com/)**
+- **[IBM i Access ODBC](https://ibmi-oss-docs.readthedocs.io/en/latest/odbc/installation.html)**
+
+## Contributing
+
+- [Romeo B. Panes](romeo.panes@southstardrug.com.ph) (Senior Lead Developer)
+- [Ferl John D. Javier](https://github.com/ferlerrorr/) (Web Developer)
+
+## Privacy Policy
+
+In order to ensure that the Southstar drug community is welcoming to all, please review and abide by the [Privacy Policy](https://southstardrug.com.ph/policies/privacy-policy).
+
+## License
+
+The SSD-ASN is a software application licensed under the [Southstar Drug](#).
