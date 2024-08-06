@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () use ($context) {
             try {
-                file_get_contents('http://10.60.14.57:8800/api/ssd/asn/jda/po', false, $context);
+                file_get_contents('http://10.91.100.145:8800/api/ssd/asn/jda/po', false, $context);
 
                 // Process the response or handle success
                 // ...
@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () use ($context) {
             try {
-                file_get_contents('http://10.60.14.57:8800/api/ssd/asn/jda/sku', false, $context);
+                file_get_contents('http://10.91.100.145:8800/api/ssd/asn/jda/sku', false, $context);
 
                 // Process the response or handle success
                 // ...
@@ -47,7 +47,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () use ($context) {
             try {
-                file_get_contents('http://10.60.14.57:8800/api/ssd/asn/duplicate-po-update', false, $context);
+                file_get_contents('http://10.91.100.145:8800/api/ssd/asn/duplicate-po-update', false, $context);
 
                 // Process the response or handle success
                 // ...
@@ -56,6 +56,20 @@ class Kernel extends ConsoleKernel
                 Log::error('Error during scheduled task: ' . $e->getMessage());
             }
         })->dailyAt('06:04'); //Time - 07:30 am to 09:00 am
+
+
+        $schedule->call(function () use ($context) {
+            try {
+                file_get_contents('http://10.91.100.145:8800/api/ssd/asn/jda/poref', false, $context);
+
+                // Process the response or handle success
+                // ...
+            } catch (\Exception $e) {
+                // Log any errors
+                Log::error('Error during scheduled task: ' . $e->getMessage());
+            }
+        })->everyFiveMinutes(); //Time - 07:30 am to 09:00 am
+
     }
 
 
